@@ -1,0 +1,25 @@
+<tal:defines define="term view/term;
+                     category view/category;
+                     widget python: view.widget;
+                     wid python:widget.data.getId();">
+          <li tal:define="
+            term_id python:term.token;
+            term_label python:term.title[0];
+            term_label python:widget.translate(term_label);
+            redirect_to python:term.title[1];
+            default_class python:term_id == view.selected_term and 'faceted-tag-selected' or '';"
+            tal:attributes="
+            class python: not category and default_class + ' no-category-tag' or default_class;
+            value python:term_id;
+            title term_label;
+            id string:${wid}${term_id};
+            data-kept-criteria python:widget.kept_criteria_as_json(term_id);">
+               <a href="#"
+                  tal:attributes="href python: redirect_to and redirect_to or '{0}&{1}={2}'.format(widget.base_url, wid, term_id)">
+                  <span class="term-label" tal:content="term_label" />
+                  <span tal:condition="view/display_number_of_items">
+                     [<span class="term-count" tal:content="view/number_of_items" />]
+                  </span>
+              </a>
+          </li>
+</tal:defines>

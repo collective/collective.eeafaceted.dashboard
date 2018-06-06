@@ -1,0 +1,19 @@
+<dl class="portlet portletWidgetCollection"
+    tal:condition="view/available">
+    <dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <a href="#"
+           class="tile"
+           tal:attributes="href python: view._criteriaHolder.absolute_url()"
+           i18n:domain="eea"
+           i18n:translate=""
+           tal:content="view/getPortletTitle">
+           Collections</a>
+        <span class="portletTopRight"></span>
+    </dt>
+    <dd class="portletItem odd">
+      <div class="widget-portlet">
+        <tal:block replace="structure view/widget_render" />
+      </div>
+    </dd>
+</dl>

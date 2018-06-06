@@ -1,0 +1,47 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="imio.dashboard">
+
+    <include package="Products.GenericSetup" file="meta.zcml" />
+
+    <genericsetup:upgradeStep
+        title="Add imiodashboard_js_variables.js"
+        description=""
+        source="1"
+        destination="2"
+        handler="imio.dashboard.upgrades.upgrade_to_2.migrate"
+        profile="imio.dashboard:default" />
+
+    <genericsetup:upgradeSteps
+        source="2"
+        destination="3"
+        profile="imio.dashboard:default">
+        <genericsetup:upgradeDepends
+            title="Reapply imio.dashboard.js in portal_javascripts"
+            description="Enable merging and caching"
+            import_steps="jsregistry" />
+    </genericsetup:upgradeSteps>
+
+    <genericsetup:upgradeSteps
+        source="3"
+        destination="4"
+        profile="imio.dashboard:default">
+        <genericsetup:upgradeDepends
+            title="Installs collective.eeafaceted.batchactions"
+            description="Installs new dependency collective.eeafaceted.batchactions"
+            import_profile="collective.eeafaceted.batchactions:default"
+            run_deps="True" />
+    </genericsetup:upgradeSteps>
+
+    <genericsetup:upgradeSteps
+        source="4"
+        destination="5"
+        profile="imio.dashboard:default">
+        <genericsetup:upgradeDepends
+            title="Remove imiodashboard_js_variables.js from portal_javascripts"
+            description="Relevant content was moved to collective.eeafaceted.batchactions"
+            import_steps="jsregistry" />
+    </genericsetup:upgradeSteps>
+
+</configure>

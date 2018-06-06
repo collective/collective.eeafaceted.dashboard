@@ -1,0 +1,86 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2017-12-01 12:26+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: imio.dashboard\n"
+
+#: ./profiles/default/types/DashboardPODTemplate.xml
+msgid "A document to generate on a dashboard."
+msgstr ""
+
+#: ./browser/facetedcollectionportlet.py:113
+msgid "Add Collection Criteria Portlet"
+msgstr ""
+
+#: ./content/pod_template.py:38
+msgid "Allowed dashboard collections"
+msgstr ""
+
+#. Default: "Collection used in dashboard"
+msgid "Collection used in imio.dashboard"
+msgstr ""
+
+#: ./profiles/default/types/DashboardPODTemplate.xml
+msgid "DashboardPODTemplate"
+msgstr ""
+
+#: ./browser/facetedcollectionportlet.py:122
+msgid "Edit Collection Criteria Portlet"
+msgstr ""
+
+#: ./content/pod_template.py:30
+msgid "If selelected, receive awoken objects wrapped into their  helper view rather than brains as generation context"
+msgstr ""
+
+#: ./configure.zcml:45
+msgid "Installs the demo of two tables of imio.dashboard add-on."
+msgstr ""
+
+#: ./configure.zcml:37
+msgid "Installs the imio.dashboard add-on."
+msgstr ""
+
+#: ./content/pod_template.py:39
+msgid "Select for which dashboard collections the template will be available. If nothing is selected, the template will be available on every dashboards."
+msgstr ""
+
+#: ./content/dashboardcollection.py:24
+msgid "Show number of items in filter"
+msgstr ""
+
+#: ./testing.zcml:15
+msgid "Steps to ease tests of imio.dashboard"
+msgstr ""
+
+#: ./browser/facetedcollectionportlet.py:114
+msgid "This portlet shows controls for faceted with collections."
+msgstr ""
+
+#: ./content/pod_template.py:29
+msgid "Use objects as generation context"
+msgstr ""
+
+#: ./configure.zcml:37
+msgid "imio.dashboard"
+msgstr ""
+
+#: ./configure.zcml:45
+msgid "imio.dashboard demo of two tables"
+msgstr ""
+
+#: ./testing.zcml:15
+msgid "imio.dashboard tests"
+msgstr ""

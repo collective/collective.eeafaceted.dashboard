@@ -1,0 +1,31 @@
+<div class="faceted-widget"
+     tal:define="wid python:view.data.getId();
+                 base_url string:${view/base_url};
+                 grouped_vocabulary view/grouped_vocabulary;"
+     i18n:domain="eea">
+  <ul>
+    <li tal:condition="python: not view.data.hidealloption or not grouped_vocabulary"
+        tal:attributes="
+        value string:'';
+        data-kept-criteria python:view.kept_criteria_as_json('all');
+        title string:All;
+        id string:${wid}all;"
+        class="no-category-tag"
+        i18n:attributes="title">
+        <a href="#"
+           tal:attributes="href string:${base_url}&${wid}=all;"
+           tal:content="string:All" i18n:translate="">All</a>
+    </li>
+    <tal:categories repeat="grouped_element python:grouped_vocabulary.items()">
+      <tal:category define="category python:grouped_element[0];
+                            category_term python:grouped_element[1].get('term', None) ;
+                            collection_terms python:grouped_element[1]['collections'];">
+        <tal:renderCategory condition="category"
+            replace="structure python: category_term.value.restrictedTraverse('@@render_collection_widget_category')(widget=view)" />
+        <tal:items repeat="term collection_terms">
+          <tal:renderTerm replace="structure python: term.value.restrictedTraverse('@@render_collection_widget_term_portlet')(term, category, widget=view)" />
+        </tal:items>
+      </tal:category>
+    </tal:categories>
+  </ul>
+</div>

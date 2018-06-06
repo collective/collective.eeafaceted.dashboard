@@ -1,0 +1,12 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="imio.dashboard">
+
+    <!-- collective.documentgenerator -->
+    <adapter
+      for="imio.dashboard.content.pod_template.IDashboardPODTemplate
+           zope.interface.Interface"
+      factory=".pod_template.DashboardPODTemplateCondition"
+    />
+
+</configure>

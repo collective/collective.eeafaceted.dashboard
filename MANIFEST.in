@@ -1,0 +1,14 @@
+graft src/collective
+graft docs
+include *.cfg *.rst *.in
+include *.py
+include .coveragerc
+include .travis.yml
+include Makefile
+exclude .installed.cfg
+exclude .mr.developer.cfg
+exclude buildout.d
+recursive-exclude buildout.d *.cfg
+recursive-include docs *.GPL
+recursive-include docs *.rst
+global-exclude *.pyc

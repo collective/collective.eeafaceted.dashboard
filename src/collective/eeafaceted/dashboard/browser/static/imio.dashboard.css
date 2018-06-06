@@ -1,0 +1,158 @@
+/* make advanced search widget displayed next to each other */
+div#top---advanced---widgets,
+div#center---default---widgets {
+    display: inline-block;
+    width: 100%;
+}
+div#top---advanced---widgets {
+    padding-left: 0.5em;
+    padding-top: 1em;
+    border-radius: 5px;
+}
+
+div#top---advanced---widgets div.faceted-widget,
+div#center---default---widgets div.faceted-widget {
+    float: left;
+}
+
+#faceted-form fieldset.widget-fieldset {
+    margin-top: 0em;
+    margin-right: 0.5em;
+}
+
+/* reduce spacing between checkboxes in a widget */
+#faceted-form li {
+    line-height: 1em;
+}
+
+/* reduce margin and use height and overflow so checkbox lists are displayed with a scrollbar */
+#content fieldset.widget-fieldset ul {
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+}
+#content div#top---advanced---widgets .widget-fieldset > form {
+    height: 100px;
+    overflow-x: hidden;
+}
+
+/* limit spacing in faceted widget under the fieldset legend */
+.widget-fieldset legend {
+    margin-bottom: 0em;
+}
+
+/* remove margin left so shown widget in center---default---widgets are aligned with tablde displaying results */
+#faceted-form div#center---default---widgets fieldset {
+    margin-left: 0em;
+}
+
+/* limit space on the top */
+div#faceted-form {
+   padding-top: 0em;
+}
+/* limit space on top, make 'more filters' link take less place */
+#faceted-form .faceted-sections-buttons {
+    position: absolute;
+    padding-top: 0.5em;
+    font-weight: bold;
+}
+
+/* add some padding inside the portlet widget collection */
+dl.portlet.portletWidgetCollection div.widget-portlet {
+    padding-left: 0.5em;
+    padding-top: 0.3em;
+}
+
+/* limit spacing between elements displayed in the portlet */
+dl.portlet.portletWidgetCollection div.widget-portlet li {
+    line-height: 1em;
+    margin-bottom: 0.3em;
+}
+dl.portlet.portletWidgetCollection div.widget-portlet div.title {
+    margin-bottom: 0.3em;
+}
+/* when portlet is displayed outside the faceted navigation, reestablish left padding
+ * because the class '' is no more there and collective.eeafaceted.collectionwidget skin this class... */
+dl.portletWidgetCollection li a {
+    margin-left: 0.5em;
+}
+dl.portletWidgetCollection li.no-category-tag a {
+    margin-left: 0em;
+}
+
+/* do not increase size of selected element */
+.faceted-tag-selected {
+    font-size: 100%;
+}
+
+/* manage the div.listingBar so buttons are displayed all together */
+div.listingBar,
+div.listingBar span.next {
+    float: right;
+    margin-left: 0.25em;
+    margin-top: 0em;
+    margin-bottom: 0.5em;
+}
+
+/* place "number of results" beside the listingBar */
+.table_faceted_results_number,
+.table_faceted_no_results,
+.table_faceted_results {
+    float: left;
+    margin: 1em;
+    margin-top: 0em;
+    margin-bottom: 0.5em;
+}
+
+/* skin sentence "no results" */
+.table_faceted_no_results {
+    font-style: italic;
+}
+
+/* icon for DashboardCollection */
+.icons-on .contenttype-dashboardcollection {
+    display: inline-block;
+    line-height: 2em;
+    padding-left: 20px !important;
+    background: url("++resource++imio.dashboard/dashboardcollection.png") no-repeat 0 transparent;
+}
+
+/* align icons and pretty link correctly */
+a.pretty_link span.pretty_link_icons,
+div.pretty_link span.pretty_link_icons,
+a.pretty_link span.pretty_link_content,
+div.pretty_link span.pretty_link_content {
+    padding-right: 0.2em;
+    vertical-align: bottom;
+}
+
+#content table.listing th a.sort_arrow_disabled {
+    color: #8CACBB;
+    padding: 0;
+    vertical-align: middle;
+}
+
+#content table.listing th a.sort_arrow_enabled {
+    vertical-align: middle;
+}
+
+/* some padding under a portalMessage displayed when the faceted page is reloaded */
+#faceted-form dl.portalMessage {
+    margin-bottom: 1em;
+    margin-top: 0em;
+}
+
+/* limit width of the checkbox column.  If used, default name is 'check_box_item' */
+table.listing th.th_header_check_box_item {
+    width: 1%;
+}
+/* center checkbox in it's cell */
+.select_item_checkbox {
+    text-align: center;
+    width: 1%;
+}
+
+body.template-facetednavigation_view.portaltype-folder div#faceted-results div#doc-generation-view {
+    margin-top: -28px;
+    position: absolute;
+    right: 0.5em;
+}

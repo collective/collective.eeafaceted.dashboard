@@ -1,0 +1,101 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="imio.dashboard">
+
+    <!-- Publish static files -->
+    <browser:resourceDirectory
+        name="imio.dashboard"
+        directory="static"
+    />
+
+    <include package="plone.app.portlets" />
+
+    <!-- Register the portlet -->
+    <plone:portlet
+        name="imio.dashboard.FacetedCollectionPortlet"
+        interface=".facetedcollectionportlet.IFacetedCollectionPortlet"
+        assignment=".facetedcollectionportlet.Assignment"
+        renderer=".facetedcollectionportlet.Renderer"
+        addview=".facetedcollectionportlet.AddForm"
+        editview=".facetedcollectionportlet.EditForm"
+    />
+
+    <browser:page
+        for="*"
+        name="json_collections_count"
+        class=".views.JSONCollectionsCount"
+        layer="imio.dashboard.interfaces.IImioDashboardLayer"
+        permission="zope2.View"
+        />
+
+    <!-- collective.eeafaceted.z3ctable -->
+    <configure package="collective.eeafaceted.z3ctable">
+        <browser:view
+            for="Products.ATContentTypes.interfaces.folder.IATFolder"
+            name="faceted-table-view"
+            class="imio.dashboard.browser.overrides.IDFacetedTableView"
+            permission="zope2.View"
+        />
+        <browser:view
+            for="plone.app.collection.interfaces.ICollection"
+            name="faceted-table-view"
+            class="imio.dashboard.browser.overrides.IDFacetedTableView"
+            permission="zope2.View"
+        />
+        <browser:view
+            for="plone.dexterity.interfaces.IDexterityContainer"
+            name="faceted-table-view"
+            class="imio.dashboard.browser.overrides.IDFacetedTableView"
+            permission="zope2.View"
+        />
+    </configure>
+
+    <!-- collective.eeafaceted.collectionwidget -->
+    <browser:page
+        for="*"
+        name="render_collection_widget_term_portlet"
+        class=".views.RenderTermPortletView"
+        template="templates/term.pt"
+        layer="imio.dashboard.interfaces.IImioDashboardLayer"
+        permission="zope2.View"
+        />
+
+    <browser:page
+        for="*"
+        name="render_collection_widget_term"
+        class=".views.RenderTermView"
+        layer="imio.dashboard.interfaces.IImioDashboardLayer"
+        permission="zope2.View"
+        />
+
+    <browser:page
+        for="eea.facetednavigation.interfaces.IFacetedNavigable"
+        name="two_tables"
+        template="templates/two_tables.pt"
+        class="eea.facetednavigation.browser.app.view.FacetedContainerView"
+        layer="imio.dashboard.interfaces.IImioDashboardLayer"
+        permission="zope2.View"
+        />
+
+
+    <!-- collective.documentgenerator -->
+    <browser:page
+        for="OFS.interfaces.IItem"
+        name="document-generation"
+        class="imio.dashboard.browser.overrides.IDDocumentGenerationView"
+        layer="imio.dashboard.interfaces.IImioDashboardLayer"
+        permission="zope2.View"
+        />
+    <browser:viewlet
+        for="OFS.interfaces.IItem"
+        name="dashboard-document-generation-link"
+        manager="collective.eeafaceted.z3ctable.interfaces.ITopAboveNavManager"
+        class="imio.dashboard.browser.overrides.IDDashboardDocumentGeneratorLinksViewlet"
+        template="templates/generationlinks.pt"
+        layer="imio.dashboard.interfaces.IImioDashboardLayer"
+        permission="zope2.View"
+        />
+
+</configure>

@@ -14,12 +14,8 @@
     <include package="collective.behavior.talcondition"/>
     <include package="collective.compoundcriterion"/>
     <include package="collective.documentgenerator"/>
-    <include package="collective.eeafaceted.batchactions"/>
     <include package="collective.eeafaceted.collectionwidget"/>
     <include package="collective.eeafaceted.z3ctable"/>
-    <include package="collective.js.iframeresizer"/>
-    <include package="imio.actionspanel"/>
-    <include package="imio.prettylink"/>
 
     <include package=".behaviors" />
     <include package=".browser" />

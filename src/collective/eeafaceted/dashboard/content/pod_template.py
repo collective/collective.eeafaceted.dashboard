@@ -59,8 +59,8 @@ class DashboardPODTemplateCondition(ConfigurablePODTemplateCondition):
     def evaluate(self):
         """
         Check:
-        - Previous conditions.
-        - That we are on an allowed dashboard collection (if any defined).
+        - That we are on an allowed dashboard collection (if any defined);
+        - Original ConfigurablePODTemplateCondition conditions.
         """
         try:
             current_collection = getCurrentCollection(self.context)

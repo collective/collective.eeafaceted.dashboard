@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 
+from plone.app.contenttypes.interfaces import ICollection
 from zope.interface import Interface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 
-class IImioDashboardLayer(IDefaultBrowserLayer):
+class IDashboardCollection(ICollection):
+    """ """
+
+
+class IFacetedDashboardLayer(IDefaultBrowserLayer):
     """Marker interface that defines a browser layer."""
-
-
-class IDashboardCollection(Interface):
-    """DashboardCollection marker interface"""
 
 
 class ICustomViewFieldsVocabulary(Interface):

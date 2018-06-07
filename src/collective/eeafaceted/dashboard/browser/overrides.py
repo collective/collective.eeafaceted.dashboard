@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
 from plone import api
-from plone.app.collection.interfaces import ICollection
+from plone.app.contenttypes.interfaces import ICollection
 from eea.facetednavigation.interfaces import IFacetedNavigable
 
 from collective.documentgenerator.browser.generation_view import DocumentGenerationView
@@ -9,16 +9,16 @@ from collective.documentgenerator.viewlets.generationlinks import DocumentGenera
 from collective.eeafaceted.collectionwidget.widgets.widget import CollectionWidget
 from collective.eeafaceted.z3ctable.browser.views import FacetedTableView
 
-from imio.dashboard.content.pod_template import IDashboardPODTemplate
-from imio.dashboard.utils import getDashboardQueryResult
+from collective.eeafaceted.dashboard.content.pod_template import IDashboardPODTemplate
+from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
 
 
-class IDFacetedTableView(FacetedTableView):
+class DashboardFacetedTableView(FacetedTableView):
 
     ignoreColumnWeight = True
 
     def __init__(self, context, request):
-        super(IDFacetedTableView, self).__init__(context, request)
+        super(DashboardFacetedTableView, self).__init__(context, request)
         self.collection = self._set_collection()
 
     def _set_collection(self):
@@ -46,10 +46,10 @@ class IDFacetedTableView(FacetedTableView):
             return self.collection.getCustomViewFields()
 
         # else get default column names
-        return super(IDFacetedTableView, self)._getViewFields()
+        return super(DashboardFacetedTableView, self)._getViewFields()
 
 
-class IDDocumentGenerationView(DocumentGenerationView):
+class DashboardDocumentGenerationView(DocumentGenerationView):
     """Override the 'get_generation_context' properly so 'get_base_generation_context'
        is available for sub-packages that want to extend the template generation context."""
 
@@ -57,7 +57,7 @@ class IDDocumentGenerationView(DocumentGenerationView):
         """ """
         # if we are in base viewlet (not dashboard), return the base context
         if 'facetedQuery' not in self.request.form:
-            return super(IDDocumentGenerationView, self)._get_generation_context(helper_view, pod_template)
+            return super(DashboardDocumentGenerationView, self)._get_generation_context(helper_view, pod_template)
 
         generation_context = {'brains': [],
                               'uids': []}
@@ -79,12 +79,13 @@ class IDDocumentGenerationView(DocumentGenerationView):
             else:
                 generation_context['uids'] = [brain.UID for brain in brains]
 
-        generation_context.update(super(IDDocumentGenerationView, self)._get_generation_context(helper_view,
-                                                                                                pod_template))
+        generation_context.update(
+            super(DashboardDocumentGenerationView, self)._get_generation_context(
+                helper_view, pod_template))
         return generation_context
 
 
-class IDDashboardDocumentGeneratorLinksViewlet(DocumentGeneratorLinksViewlet):
+class DashboardDocumentGeneratorLinksViewlet(DocumentGeneratorLinksViewlet):
     """For displaying on dashboards."""
 
     def get_all_pod_templates(self):

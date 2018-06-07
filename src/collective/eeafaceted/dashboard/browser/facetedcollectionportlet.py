@@ -16,8 +16,8 @@ from collective.eeafaceted.collectionwidget.interfaces import NoFacetedViewDefin
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.collectionwidget.widgets.widget import CollectionWidget
 
-from imio.dashboard import ImioDashboardMessageFactory as _
-from imio.dashboard.config import DEFAULT_PORTLET_TITLE
+from collective.eeafaceted.dashboard import FacetedDashboardMessageFactory as _
+from collective.eeafaceted.dashboard.config import DEFAULT_PORTLET_TITLE
 
 
 class IFacetedCollectionPortlet(IPortletDataProvider):

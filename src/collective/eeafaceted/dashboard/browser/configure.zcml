@@ -2,11 +2,11 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="imio.dashboard">
+    i18n_domain="collective.eeafaceted.dashboard">
 
     <!-- Publish static files -->
     <browser:resourceDirectory
-        name="imio.dashboard"
+        name="collective.eeafaceted.dashboard"
         directory="static"
     />
 
@@ -14,7 +14,7 @@
 
     <!-- Register the portlet -->
     <plone:portlet
-        name="imio.dashboard.FacetedCollectionPortlet"
+        name="FacetedCollectionPortlet"
         interface=".facetedcollectionportlet.IFacetedCollectionPortlet"
         assignment=".facetedcollectionportlet.Assignment"
         renderer=".facetedcollectionportlet.Renderer"
@@ -26,7 +26,7 @@
         for="*"
         name="json_collections_count"
         class=".views.JSONCollectionsCount"
-        layer="imio.dashboard.interfaces.IImioDashboardLayer"
+        layer="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
         permission="zope2.View"
         />
 
@@ -35,19 +35,19 @@
         <browser:view
             for="Products.ATContentTypes.interfaces.folder.IATFolder"
             name="faceted-table-view"
-            class="imio.dashboard.browser.overrides.IDFacetedTableView"
+            class="collective.eeafaceted.dashboard.browser.overrides.DashboardFacetedTableView"
             permission="zope2.View"
         />
         <browser:view
-            for="plone.app.collection.interfaces.ICollection"
+            for="plone.app.contenttypes.interfaces.ICollection"
             name="faceted-table-view"
-            class="imio.dashboard.browser.overrides.IDFacetedTableView"
+            class="collective.eeafaceted.dashboard.browser.overrides.DashboardFacetedTableView"
             permission="zope2.View"
         />
         <browser:view
             for="plone.dexterity.interfaces.IDexterityContainer"
             name="faceted-table-view"
-            class="imio.dashboard.browser.overrides.IDFacetedTableView"
+            class="collective.eeafaceted.dashboard.browser.overrides.DashboardFacetedTableView"
             permission="zope2.View"
         />
     </configure>
@@ -58,7 +58,7 @@
         name="render_collection_widget_term_portlet"
         class=".views.RenderTermPortletView"
         template="templates/term.pt"
-        layer="imio.dashboard.interfaces.IImioDashboardLayer"
+        layer="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
         permission="zope2.View"
         />
 
@@ -66,35 +66,25 @@
         for="*"
         name="render_collection_widget_term"
         class=".views.RenderTermView"
-        layer="imio.dashboard.interfaces.IImioDashboardLayer"
+        layer="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
         permission="zope2.View"
         />
-
-    <browser:page
-        for="eea.facetednavigation.interfaces.IFacetedNavigable"
-        name="two_tables"
-        template="templates/two_tables.pt"
-        class="eea.facetednavigation.browser.app.view.FacetedContainerView"
-        layer="imio.dashboard.interfaces.IImioDashboardLayer"
-        permission="zope2.View"
-        />
-
 
     <!-- collective.documentgenerator -->
     <browser:page
         for="OFS.interfaces.IItem"
         name="document-generation"
-        class="imio.dashboard.browser.overrides.IDDocumentGenerationView"
-        layer="imio.dashboard.interfaces.IImioDashboardLayer"
+        class="collective.eeafaceted.dashboard.browser.overrides.DashboardDocumentGenerationView"
+        layer="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
         permission="zope2.View"
         />
     <browser:viewlet
         for="OFS.interfaces.IItem"
         name="dashboard-document-generation-link"
         manager="collective.eeafaceted.z3ctable.interfaces.ITopAboveNavManager"
-        class="imio.dashboard.browser.overrides.IDDashboardDocumentGeneratorLinksViewlet"
+        class="collective.eeafaceted.dashboard.browser.overrides.DashboardDocumentGeneratorLinksViewlet"
         template="templates/generationlinks.pt"
-        layer="imio.dashboard.interfaces.IImioDashboardLayer"
+        layer="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
         permission="zope2.View"
         />
 

@@ -21,6 +21,7 @@
     <include package="imio.actionspanel"/>
     <include package="imio.prettylink"/>
 
+    <include package=".behaviors" />
     <include package=".browser" />
     <include package=".content" />
 
@@ -51,8 +52,6 @@
     <!-- Vocabularies -->
     <utility component=".vocabulary.ConditionAwareCollectionVocabularyFactory"
              name="imio.dashboard.conditionawarecollectionvocabulary" />
-    <utility component=".vocabulary.CreatorsVocabularyFactory"
-             name="imio.dashboard.creatorsvocabulary" />
     <utility component=".vocabulary.DashboardCategoryCollectionsVocabularyFactory"
              name="imio.dashboard.collectionsvocabulary" />
 

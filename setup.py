@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Installer for the imio.dashboard package."""
+"""Installer for the collective.eeafaceted.dashboard package."""
 
 from setuptools import find_packages
 from setuptools import setup
 
 
 long_description = (
-    open('README.rst').read() + '\n' + 'Contributors\n============\n' + '\n' +
-    open('CONTRIBUTORS.rst').read() + '\n' + open('CHANGES.rst').read() + '\n')
+    open('README.rst').read() + '\n' + open('CHANGES.rst').read() + '\n')
 
 
 setup(
@@ -32,7 +31,7 @@ setup(
     url='http://pypi.python.org/pypi/collective.eeafaceted.dashboard',
     license='GPL V2',
     packages=find_packages('src', exclude=['ez_setup']),
-    namespace_packages=['imio'],
+    namespace_packages=['collective', 'collective.eeafaceted'],
     package_dir={'': 'src'},
     include_package_data=True,
     zip_safe=False,

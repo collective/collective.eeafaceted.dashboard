@@ -3,4 +3,4 @@
 
 from zope.i18nmessageid import MessageFactory
 
-ImioDashboardMessageFactory = MessageFactory('imio.dashboard')
+FacetedDashboardMessageFactory = MessageFactory('collective.eeafaceted.dashboard')

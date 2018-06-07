@@ -1,14 +1,11 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>5</version>
+  <version>1</version>
   <dependencies>
     <dependency>profile-collective.behavior.talcondition:default</dependency>
     <dependency>profile-collective.compoundcriterion:default</dependency>
     <dependency>profile-collective.documentgenerator:default</dependency>
-    <dependency>profile-collective.eeafaceted.batchactions:default</dependency>
     <dependency>profile-collective.eeafaceted.collectionwidget:default</dependency>
     <dependency>profile-collective.eeafaceted.z3ctable:default</dependency>
-    <dependency>profile-imio.actionspanel:default</dependency>
-    <dependency>profile-plone.app.collection:default</dependency>
   </dependencies>
 </metadata>

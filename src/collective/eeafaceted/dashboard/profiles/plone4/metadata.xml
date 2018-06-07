@@ -2,5 +2,6 @@
 <metadata>
   <version>1</version>
   <dependencies>
+    <dependency>profile-collective.eeafaceted.dashboard:universal</dependency>
   </dependencies>
 </metadata>

@@ -113,7 +113,7 @@ div.listingBar span.next {
     display: inline-block;
     line-height: 2em;
     padding-left: 20px !important;
-    background: url("++resource++imio.dashboard/dashboardcollection.png") no-repeat 0 transparent;
+    background: url("++resource++collective.eeafaceted.dashboard/dashboardcollection.png") no-repeat 0 transparent;
 }
 
 /* align icons and pretty link correctly */

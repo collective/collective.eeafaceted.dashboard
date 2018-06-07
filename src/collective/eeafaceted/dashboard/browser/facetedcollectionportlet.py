@@ -2,11 +2,9 @@
 
 from Acquisition import aq_inner, aq_parent
 
-from zope.formlib import form
 from zope.interface import implements
-
-from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
+from plone.app.portlets.portlets import base
 
 from Products.CMFPlone.utils import base_hasattr
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -113,7 +111,7 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.AddForm):
-    form_fields = form.Fields(IFacetedCollectionPortlet)
+    schema = IFacetedCollectionPortlet
     label = _(u"Add Collection Criteria Portlet")
     description = _(u"This portlet shows controls for faceted with collections.")
 
@@ -122,6 +120,6 @@ class AddForm(base.AddForm):
 
 
 class EditForm(base.EditForm):
-    form_fields = form.Fields(IFacetedCollectionPortlet)
+    schema = IFacetedCollectionPortlet
     label = _(u"Edit Collection Criteria Portlet")
     description = _(u"This portlet shows controls for faceted with collections.")

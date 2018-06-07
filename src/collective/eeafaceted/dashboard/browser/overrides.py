@@ -43,7 +43,9 @@ class DashboardFacetedTableView(FacetedTableView):
 
         # if the context is a collection, get customViewFields on it
         if self.collection:
-            return self.collection.getCustomViewFields()
+            selectedViewFields = self.collection.selectedViewFields()
+            # selectedViewFields is a list of tuples (id, title)
+            return [elt[0] for elt in selectedViewFields]
 
         # else get default column names
         return super(DashboardFacetedTableView, self)._getViewFields()

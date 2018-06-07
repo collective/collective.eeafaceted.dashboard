@@ -4,6 +4,9 @@
   <records prefix="plone.resources/faceted-dashboard"
            interface='Products.CMFPlone.interfaces.IResourceRegistry'>
     <value key="js">++resource++collective.eeafaceted.dashboard/collective.eeafaceted.dashboard.js</value>
+    <value key="css">
+      <element>++resource++collective.eeafaceted.dashboard/collective.eeafaceted.dashboard.css</element>
+    </value>
   </records>
 
   <records prefix="plone.bundles/faceted-dashboard"

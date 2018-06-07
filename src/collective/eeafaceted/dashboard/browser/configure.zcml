@@ -10,8 +10,6 @@
         directory="static"
     />
 
-    <include package="plone.app.portlets" />
-
     <!-- Register the portlet -->
     <plone:portlet
         name="FacetedCollectionPortlet"

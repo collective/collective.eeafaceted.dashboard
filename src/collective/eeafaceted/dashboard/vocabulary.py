@@ -3,10 +3,12 @@
 from operator import attrgetter
 
 from zope.interface import implements
+from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 from plone import api
+from plone.app.contenttypes.behaviors.collection import MetaDataFieldsVocabulary
 from plone.app.uuid.utils import uuidToCatalogBrain
 from plone.memoize import ram
 
@@ -17,6 +19,7 @@ from eea.facetednavigation.interfaces import IFacetedNavigable
 
 from imio.helpers.cache import get_cachekey_volatile
 from collective.eeafaceted.dashboard.content.dashboardcollection import IDashboardCollection
+from collective.eeafaceted.dashboard.interfaces import ICustomViewFieldsVocabulary
 
 
 class ConditionAwareCollectionVocabulary(CollectionVocabulary):
@@ -116,3 +119,16 @@ class DashboardCategoryCollectionsVocabulary(object):
         return SimpleVocabulary(terms)
 
 DashboardCategoryCollectionsVocabularyFactory = DashboardCategoryCollectionsVocabulary()
+
+
+@implementer(IVocabularyFactory)
+class DashboardMetaDataFieldsVocabulary(MetaDataFieldsVocabulary):
+
+    def __call__(self, context):
+        if context.portal_type == 'DashboardCollection':
+            return ICustomViewFieldsVocabulary(context)()
+        else:
+            # original behavior for plone.app.contenttypes Collection
+            return super(DashboardMetaDataFieldsVocabulary, self).__call__(context)
+
+DashboardMetaDataFieldsVocabularyFactory = DashboardMetaDataFieldsVocabulary()

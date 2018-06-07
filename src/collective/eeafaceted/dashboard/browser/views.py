@@ -10,8 +10,8 @@ from collective.eeafaceted.collectionwidget.browser.views import RenderTermView 
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.collectionwidget.widgets.widget import CollectionWidget
 
-from imio.dashboard.adapters import CURRENT_CRITERION
-from imio.dashboard.interfaces import IDashboardCollection
+from collective.eeafaceted.dashboard.adapters import CURRENT_CRITERION
+from collective.eeafaceted.dashboard.interfaces import IDashboardCollection
 
 
 class RenderTermView(BaseRenderTermView):
@@ -25,7 +25,7 @@ class RenderTermView(BaseRenderTermView):
         """Display number of items in the collection."""
         if not IDashboardCollection.providedBy(self.context):
             return False
-        return self.context.getShowNumberOfItems() or False
+        return self.context.showNumberOfItems
 
 
 class RenderTermPortletView(BaseRenderTermView):
@@ -36,7 +36,7 @@ class RenderTermPortletView(BaseRenderTermView):
         """Display number of items in the collection."""
         if not IDashboardCollection.providedBy(self.context):
             return False
-        return self.context.getShowNumberOfItems() or False
+        return self.context.showNumberOfItems
 
     def __call__(self, term, category, widget):
         self.request = getRequest()

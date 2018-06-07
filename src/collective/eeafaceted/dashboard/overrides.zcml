@@ -10,4 +10,8 @@
         template="browser/templates/default_widgets.xml"
         permission="eea.faceted.configure" />
 
+    <utility
+        component=".vocabulary.DashboardMetaDataFieldsVocabularyFactory"
+        name="plone.app.contenttypes.metadatafields" />
+
 </configure>

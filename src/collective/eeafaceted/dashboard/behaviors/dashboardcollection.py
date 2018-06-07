@@ -13,8 +13,7 @@ from Products.CMFPlone.interfaces.syndication import ISyndicatable
 from plone.app.querystring.queryparser import parseFormquery
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent
-from imio.dashboard.interfaces import ICustomViewFieldsVocabulary
-from imio.dashboard import ImioDashboardMessageFactory as _
+from collective.eeafaceted.dashboard import FacetedDashboardMessageFactory as _
 
 
 @provider(IFormFieldProvider, ISyndicatable)
@@ -35,14 +34,6 @@ class IDashboardCollection(ICollection):
 @adapter(IDexterityContent)
 class DashboardCollection(Collection):
     """A Collection used in our dashboards"""
-
-    def listMetaDataFields(self, exclude=True):
-        """
-          Return a list of metadata fields from portal_catalog.
-          Wrap the vocabulary in an adapter so it can be easily overrided by another package
-          this is made so a package can add it's own custom columns, not only metadata.
-        """
-        return ICustomViewFieldsVocabulary(self).listMetaDataFields(exclude=exclude)
 
     def displayCatalogQuery(self):
         """

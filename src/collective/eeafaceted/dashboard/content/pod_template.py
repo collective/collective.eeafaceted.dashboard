@@ -5,8 +5,7 @@ from collective.documentgenerator.content.pod_template import ConfigurablePODTem
 from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
 from collective.eeafaceted.collectionwidget.interfaces import NotDashboardContextException
 from collective.eeafaceted.collectionwidget.utils import getCurrentCollection
-
-from imio.dashboard import ImioDashboardMessageFactory as _
+from collective.eeafaceted.dashboard import FacetedDashboardMessageFactory as _
 
 from plone.autoform import directives as form
 

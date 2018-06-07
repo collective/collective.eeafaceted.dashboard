@@ -16,9 +16,11 @@
     <include package="collective.documentgenerator"/>
     <include package="collective.eeafaceted.collectionwidget"/>
     <include package="collective.eeafaceted.z3ctable"/>
+    <include package="plone.app.portlets" />
 
     <include package=".behaviors" />
     <include package=".browser" />
+    <include package=".columns" />
     <include package=".content" />
 
     <genericsetup:registerProfile
@@ -38,10 +40,11 @@
 
     <include file="events.zcml" />
     <include file="permissions.zcml" />
+    <include file="profiles.zcml" />
     <include file="upgrades.zcml" />
 
     <adapter
-        for="plone.app.collection.interfaces.ICollection"
+        for="plone.app.contenttypes.interfaces.ICollection"
         factory=".adapters.CustomViewFieldsVocabularyAdapter"
         provides=".interfaces.ICustomViewFieldsVocabulary" />
 

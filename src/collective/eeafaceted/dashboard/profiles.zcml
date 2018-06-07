@@ -1,0 +1,39 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="collective.eeafaceted.dashboard">
+
+    <genericsetup:registerProfile
+        zcml:condition="have plone-5"
+        name="default"
+        directory="profiles/plone5"
+        title="collective.eeafaceted.dashboard"
+        description="Extension profile for collective.eeafaceted.dashboard."
+        provides="Products.GenericSetup.interfaces.EXTENSION" />
+  
+    <genericsetup:registerProfile
+        zcml:condition="not-have plone-5"
+        name="default"
+        directory="profiles/plone4"
+        title="collective.eeafaceted.dashboard"
+        description="Extension profile for collective.eeafaceted.dashboard."
+        provides="Products.GenericSetup.interfaces.EXTENSION" />
+  
+    <genericsetup:registerProfile
+        name="universal"
+        directory="profiles/common"
+        title="collective.eeafaceted.dashboard Common Configuration"
+        description="Extension profile for collective.eeafaceted.dashboard
+                     settings that aren't version dependent."
+        provides="Products.GenericSetup.interfaces.EXTENSION" />
+
+    <genericsetup:importStep
+        name="collective.eeafaceted.dashboard-postInstall"
+        title="collective.eeafaceted.dashboard post_install import step"
+        description="Post install import step from collective.eeafaceted.dashboard"
+        handler=".setuphandlers.post_install">
+    </genericsetup:importStep>
+
+</configure>

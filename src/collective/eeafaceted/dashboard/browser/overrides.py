@@ -12,6 +12,13 @@ from collective.eeafaceted.z3ctable.browser.views import FacetedTableView
 from collective.eeafaceted.dashboard.content.pod_template import IDashboardPODTemplate
 from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
 
+# necessary for now for elements using ICollection from plone.app.collection
+HAS_PAC = True
+try:
+    from plone.app.collection.interfaces import ICollection as pac_ICollection
+except ImportError:
+    HAS_PAC = False
+
 
 class DashboardFacetedTableView(FacetedTableView):
 
@@ -22,7 +29,8 @@ class DashboardFacetedTableView(FacetedTableView):
         self.collection = self._set_collection()
 
     def _set_collection(self):
-        if ICollection.providedBy(self.context):
+        if ICollection.providedBy(self.context) or \
+           (HAS_PAC and pac_ICollection.providedBy(self.context)):
             return self.context
         else:
             # if we can get the collection we are working with,

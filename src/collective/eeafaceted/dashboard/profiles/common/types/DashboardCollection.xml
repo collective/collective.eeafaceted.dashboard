@@ -16,7 +16,7 @@
   <property name="klass">collective.eeafaceted.dashboard.content.dashboardcollection.DashboardCollection</property>
   <property name="schema"></property>
   <property name="model_source"></property>
-  <property name="model_file">plone.app.contenttypes.schema:collection.xml</property>
+  <property name="model_file" />
   <property name="behaviors" purge="false">
     <element value="plone.app.content.interfaces.INameFromTitle"/>
     <element value="collective.eeafaceted.dashboard.behaviors.dashboardcollection.IDashboardCollection"/>

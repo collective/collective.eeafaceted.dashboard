@@ -26,6 +26,8 @@
   <element value="collective.behavior.talcondition.behavior.ITALCondition"/>
  </property>
  <property name="schema">collective.eeafaceted.dashboard.content.pod_template.IDashboardPODTemplate</property>
+ <property name="model_source"></property>
+ <property name="model_file" />
  <property name="schema_policy">dexterity</property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="@@edit"/>

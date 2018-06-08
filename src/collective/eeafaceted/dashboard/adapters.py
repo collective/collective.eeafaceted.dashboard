@@ -28,8 +28,9 @@ class CustomViewFieldsVocabularyAdapter(object):
         terms = [
             SimpleTerm(
                 name,
+                name,
                 translate(name,
                           'collective.eeafaceted.z3ctable',
-                          context=self.request).encode('utf-8')) for name in columns]
+                          context=self.request)) for name in columns]
 
         return SimpleVocabulary(terms)

@@ -41,7 +41,6 @@ setup(
         # version 1.0.3+ manage correctly orphans
         'plone.batching > 1.0.4',
         'setuptools',
-        'collective.behavior.talcondition',
         'collective.compoundcriterion',
         'collective.documentgenerator',
         'collective.eeafaceted.collectionwidget',

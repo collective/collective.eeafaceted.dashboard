@@ -12,17 +12,16 @@ from plone.app.contenttypes.behaviors.collection import MetaDataFieldsVocabulary
 from plone.app.uuid.utils import uuidToCatalogBrain
 from plone.memoize import ram
 
-from collective.behavior.talcondition.interfaces import ITALConditionable
-from collective.behavior.talcondition.utils import evaluateExpressionFor
+
 from collective.eeafaceted.collectionwidget.vocabulary import CollectionVocabulary
 from eea.facetednavigation.interfaces import IFacetedNavigable
 
 from imio.helpers.cache import get_cachekey_volatile
-from collective.eeafaceted.dashboard.content.dashboardcollection import IDashboardCollection
+from collective.eeafaceted.collectionwidget.interfaces import IDashboardCollection
 from collective.eeafaceted.dashboard.interfaces import ICustomViewFieldsVocabulary
 
 
-class ConditionAwareCollectionVocabulary(CollectionVocabulary):
+class CachedCollectionVocabulary(CollectionVocabulary):
 
     def __call___cachekey(method, self, context):
         '''cachekey method for self.__call__.'''
@@ -44,26 +43,11 @@ class ConditionAwareCollectionVocabulary(CollectionVocabulary):
     def __call__(self, context):
         """Same behaviour as the original CollectionVocabulary
            but we will filter Collections regarding the defined tal_condition."""
-        terms = super(ConditionAwareCollectionVocabulary, self).__call__(context)
-        filtered_terms = []
-        # compute extra_expr_ctx given to evaluateExpressionFor only once
-        extra_expr_ctx = self._extra_expr_ctx()
-        for term in terms:
-            collection = term.value
-            # if collection is ITALConditionable, evaluate the TAL condition
-            # except if current user is Manager
-            if ITALConditionable.providedBy(collection):
-                if not evaluateExpressionFor(collection, extra_expr_ctx=extra_expr_ctx):
-                    continue
-            filtered_terms.append(term)
-        return SimpleVocabulary(filtered_terms)
+        terms = super(CachedCollectionVocabulary, self).__call__(context)
+        return terms
 
-    def _extra_expr_ctx(self):
-        """To be overrided, this way, extra_expr_ctx is given to the
-           expression evaluated on the DashboardCollection."""
-        return {}
 
-ConditionAwareCollectionVocabularyFactory = ConditionAwareCollectionVocabulary()
+CachedCollectionVocabularyFactory = CachedCollectionVocabulary()
 
 
 class DashboardCollectionsVocabulary(object):

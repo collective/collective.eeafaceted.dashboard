@@ -68,14 +68,6 @@
         permission="zope2.View"
         />
 
-    <browser:page
-        for="*"
-        name="render_collection_widget_term"
-        class=".views.RenderTermView"
-        layer="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
-        permission="zope2.View"
-        />
-
     <!-- collective.documentgenerator -->
     <browser:page
         for="OFS.interfaces.IItem"

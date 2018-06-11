@@ -1,42 +1,19 @@
 # -*- coding: utf-8 -*-
 import json
-import pkg_resources
-
 from zope.globalrequest import getRequest
 from plone import api
 from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from collective.eeafaceted.collectionwidget.browser.views import RenderTermView as BaseRenderTermView
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.collectionwidget.widgets.widget import CollectionWidget
 
 from collective.eeafaceted.dashboard.adapters import CURRENT_CRITERION
-from collective.eeafaceted.dashboard.interfaces import IDashboardCollection
-
-
-class RenderTermView(BaseRenderTermView):
-
-    index = ViewPageTemplateFile(
-        pkg_resources.resource_filename(
-            'collective.eeafaceted.collectionwidget',
-            'browser/templates/term.pt'))
-
-    def display_number_of_items(self):
-        """Display number of items in the collection."""
-        if not IDashboardCollection.providedBy(self.context):
-            return False
-        return self.context.showNumberOfItems
+from collective.eeafaceted.collectionwidget.interfaces import IDashboardCollection
 
 
 class RenderTermPortletView(BaseRenderTermView):
 
     selected_term = ''
-
-    def display_number_of_items(self):
-        """Display number of items in the collection."""
-        if not IDashboardCollection.providedBy(self.context):
-            return False
-        return self.context.showNumberOfItems
 
     def __call__(self, term, category, widget):
         self.request = getRequest()

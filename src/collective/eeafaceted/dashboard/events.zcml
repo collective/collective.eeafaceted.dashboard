@@ -7,10 +7,10 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="collective.eeafaceted.dashboard">
 
-    <subscriber for="collective.eeafaceted.dashboard.content.dashboardcollection.IDashboardCollection
+    <subscriber for="collective.eeafaceted.collectionwidget.content.dashboardcollection.IDashboardCollection
                      zope.lifecycleevent.IObjectModifiedEvent"
                 handler=".events.onDashboardCollectionModified" />
-    <subscriber for="collective.eeafaceted.dashboard.content.dashboardcollection.IDashboardCollection
+    <subscriber for="collective.eeafaceted.collectionwidget.content.dashboardcollection.IDashboardCollection
                      Products.DCWorkflow.interfaces.IAfterTransitionEvent"
                 handler=".events.onDashboardCollectionTransition" />
 </configure>

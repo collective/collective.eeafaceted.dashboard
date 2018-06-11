@@ -16,7 +16,7 @@ from zope.interface import implements
 
 
 import logging
-logger = logging.getLogger('imio.dashboard: DashboardPODTemplate')
+logger = logging.getLogger('collective.eeafaceted.dashboard: DashboardPODTemplate')
 
 
 class IDashboardPODTemplate(IConfigurablePODTemplate):
@@ -37,7 +37,7 @@ class IDashboardPODTemplate(IConfigurablePODTemplate):
         title=_(u'Allowed dashboard collections'),
         description=_(u'Select for which dashboard collections the template will be available. '
                       u'If nothing is selected, the template will be available on every dashboards.'),
-        value_type=schema.Choice(source='imio.dashboard.collectionsvocabulary'),
+        value_type=schema.Choice(source='collective.eeafaceted.dashboard.collectionsvocabulary'),
         required=True,
     )
     form.omitted('pod_portal_types')

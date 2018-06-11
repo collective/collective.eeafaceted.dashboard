@@ -18,7 +18,6 @@
     <include package="collective.eeafaceted.z3ctable"/>
     <include package="plone.app.portlets" />
 
-    <include package=".behaviors" />
     <include package=".browser" />
     <include package=".columns" />
     <include package=".content" />
@@ -39,7 +38,6 @@
     </genericsetup:importStep>
 
     <include file="events.zcml" />
-    <include file="permissions.zcml" />
     <include file="profiles.zcml" />
     <include file="upgrades.zcml" />
 
@@ -49,9 +47,9 @@
         provides=".interfaces.ICustomViewFieldsVocabulary" />
 
     <!-- Vocabularies -->
-    <utility component=".vocabulary.ConditionAwareCollectionVocabularyFactory"
-             name="imio.dashboard.conditionawarecollectionvocabulary" />
+    <utility component=".vocabulary.CachedCollectionVocabularyFactory"
+             name="collective.eeafaceted.dashboard.cachedcollectionvocabulary" />
     <utility component=".vocabulary.DashboardCategoryCollectionsVocabularyFactory"
-             name="imio.dashboard.collectionsvocabulary" />
+             name="collective.eeafaceted.dashboard.collectionsvocabulary" />
 
 </configure>

@@ -1,12 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from plone.app.contenttypes.interfaces import ICollection
 from zope.interface import Interface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
-
-
-class IDashboardCollection(ICollection):
-    """ """
 
 
 class IFacetedDashboardLayer(IDefaultBrowserLayer):

@@ -2,11 +2,13 @@
 
 from Acquisition import aq_inner, aq_parent
 
+from zope.formlib import form
 from zope.interface import implements
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.app.portlets.portlets import base
 
 from Products.CMFPlone.utils import base_hasattr
+from Products.CMFPlone.utils import getFSVersionTuple
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from eea.facetednavigation.criteria.interfaces import ICriteria
 from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
@@ -16,6 +18,9 @@ from collective.eeafaceted.collectionwidget.widgets.widget import CollectionWidg
 
 from collective.eeafaceted.dashboard import FacetedDashboardMessageFactory as _
 from collective.eeafaceted.dashboard.config import DEFAULT_PORTLET_TITLE
+
+# in Plone5, portlet form is a z3c.form, in Plone4 it uses formlib
+HAS_PLONE5 = bool(getFSVersionTuple()[0] >= 5)
 
 
 class IFacetedCollectionPortlet(IPortletDataProvider):
@@ -111,7 +116,10 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.AddForm):
-    schema = IFacetedCollectionPortlet
+    if HAS_PLONE5:
+        schema = IFacetedCollectionPortlet
+    else:
+        form_fields = form.Fields(IFacetedCollectionPortlet)
     label = _(u"Add Collection Criteria Portlet")
     description = _(u"This portlet shows controls for faceted with collections.")
 
@@ -120,6 +128,9 @@ class AddForm(base.AddForm):
 
 
 class EditForm(base.EditForm):
-    schema = IFacetedCollectionPortlet
+    if HAS_PLONE5:
+        schema = IFacetedCollectionPortlet
+    else:
+        form_fields = form.Fields(IFacetedCollectionPortlet)
     label = _(u"Edit Collection Criteria Portlet")
     description = _(u"This portlet shows controls for faceted with collections.")

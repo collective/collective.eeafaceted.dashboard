@@ -15,8 +15,8 @@ from plone.testing import z2
 
 import unittest
 
-import imio.dashboard
-from imio.dashboard.utils import enableFacetedDashboardFor
+import collective.eeafaceted.dashboard
+from collective.eeafaceted.dashboard.utils import enableFacetedDashboardFor
 
 
 class ImioDashboardLayer(PloneSandboxLayer):
@@ -27,7 +27,7 @@ class ImioDashboardLayer(PloneSandboxLayer):
     def setUpZope(self, app, configurationContext):
         """Set up Zope."""
         # Load ZCML
-        self.loadZCML(package=imio.dashboard,
+        self.loadZCML(package=collective.eeafaceted.dashboard,
                       name='testing.zcml')
         for p in self.products:
             z2.installProduct(app, p)

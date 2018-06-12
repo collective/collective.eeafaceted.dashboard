@@ -22,22 +22,6 @@
     <include package=".columns" />
     <include package=".content" />
 
-    <genericsetup:registerProfile
-        name="default"
-        title="collective.eeafaceted.dashboard"
-        directory="profiles/default"
-        description="Installs the collective.eeafaceted.dashboard add-on."
-        provides="Products.GenericSetup.interfaces.EXTENSION"
-        />
-
-    <genericsetup:importStep
-        name="collectiveeeafaceteddashboard-postInstall"
-        title="collective.eeafaceted.dashboard post_install import step"
-        description="Post install import step from collective.eeafaceted.dashboard"
-        handler=".setuphandlers.post_install">
-    </genericsetup:importStep>
-
-    <include file="events.zcml" />
     <include file="profiles.zcml" />
     <include file="upgrades.zcml" />
 
@@ -47,8 +31,6 @@
         provides=".interfaces.ICustomViewFieldsVocabulary" />
 
     <!-- Vocabularies -->
-    <utility component=".vocabulary.CachedCollectionVocabularyFactory"
-             name="collective.eeafaceted.dashboard.cachedcollectionvocabulary" />
     <utility component=".vocabulary.DashboardCategoryCollectionsVocabularyFactory"
              name="collective.eeafaceted.dashboard.collectionsvocabulary" />
 

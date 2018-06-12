@@ -79,11 +79,6 @@ dl.portletWidgetCollection li.no-category-tag a {
     margin-left: 0em;
 }
 
-/* do not increase size of selected element */
-.faceted-tag-selected {
-    font-size: 100%;
-}
-
 /* manage the div.listingBar so buttons are displayed all together */
 div.listingBar,
 div.listingBar span.next {
@@ -106,14 +101,6 @@ div.listingBar span.next {
 /* skin sentence "no results" */
 .table_faceted_no_results {
     font-style: italic;
-}
-
-/* icon for DashboardCollection */
-.icons-on .contenttype-dashboardcollection {
-    display: inline-block;
-    line-height: 2em;
-    padding-left: 20px !important;
-    background: url("++resource++collective.eeafaceted.dashboard/dashboardcollection.png") no-repeat 0 transparent;
 }
 
 /* align icons and pretty link correctly */

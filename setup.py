@@ -50,7 +50,6 @@ setup(
     ],
     extras_require={
         'test': [
-            'imio.helpers',
             'plone.app.dexterity',
             'plone.app.testing',
             'plone.app.relationfield',

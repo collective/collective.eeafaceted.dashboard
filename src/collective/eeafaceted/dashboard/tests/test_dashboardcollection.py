@@ -12,6 +12,12 @@ class TestDashboardCollection(IntegrationTestCase):
     def setUp(self):
         """Custom shared utility setup for tests."""
         self.portal = self.layer['portal']
+        self.collection = api.content.create(
+            id='c1',
+            type='Collection',
+            title='Collection 1',
+            container=self.portal
+        )
         self.dashboardcollection = api.content.create(
             id='dc1',
             type='DashboardCollection',

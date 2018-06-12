@@ -7,7 +7,7 @@ from collective.eeafaceted.collectionwidget.browser.views import RenderTermView 
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.collectionwidget.widgets.widget import CollectionWidget
 
-from collective.eeafaceted.dashboard.adapters import CURRENT_CRITERION
+from collective.eeafaceted.dashboard.config import CURRENT_CRITERION
 from collective.eeafaceted.collectionwidget.interfaces import IDashboardCollection
 
 

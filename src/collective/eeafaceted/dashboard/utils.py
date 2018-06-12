@@ -5,8 +5,7 @@ from zope.interface import noLongerProvides
 
 from collective.eeafaceted.collectionwidget.config import NO_FACETED_EXCEPTION_MSG
 from collective.eeafaceted.collectionwidget.interfaces import NoFacetedViewDefinedException
-from collective.eeafaceted.collectionwidget.utils import _get_criterion, getCollectionLinkCriterion  # backward compatibility
-from collective.eeafaceted.collectionwidget.utils import getCurrentCollection  # backward compatibility
+from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 
 from eea.facetednavigation.criteria.interfaces import ICriteria
 from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
@@ -16,7 +15,7 @@ from eea.facetednavigation.layout.interfaces import IFacetedLayout
 from plone import api
 
 import logging
-logger = logging.getLogger('imio.dashboard: utils')
+logger = logging.getLogger('collective.eeafaceted.dashboard: utils')
 
 
 def enableFacetedDashboardFor(obj, xmlpath=None):

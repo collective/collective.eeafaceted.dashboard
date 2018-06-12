@@ -8,9 +8,6 @@ from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
 
-CURRENT_CRITERION = 'querynextprev.current_criterion'
-
-
 class CustomViewFieldsVocabularyAdapter(object):
     """Handles customViewFields for default plone.app.contenttypes collection."""
 

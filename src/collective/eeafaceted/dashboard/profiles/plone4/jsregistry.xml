@@ -6,9 +6,6 @@
               enabled="True"
               expression=""
               inline="False"
-              id="++resource++collective.eeafaceted.dashboard/collective.eeafaceted.dashboard.js"
-  />
-
- <javascript id="imiodashboard_js_variables.js" remove="True" />
+              id="++resource++collective.eeafaceted.dashboard/collective.eeafaceted.dashboard.js" />
 
 </object>

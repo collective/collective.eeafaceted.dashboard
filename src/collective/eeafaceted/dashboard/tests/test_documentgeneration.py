@@ -8,7 +8,7 @@ from collective.documentgenerator.helper.base import DocumentGenerationHelperVie
 
 from eea.facetednavigation.interfaces import ICriteria
 
-from imio.dashboard.testing import IntegrationTestCase
+from collective.eeafaceted.dashboard.testing import IntegrationTestCase
 
 
 class TestDocumentGeneration(IntegrationTestCase):
@@ -23,7 +23,7 @@ class TestDocumentGeneration(IntegrationTestCase):
                                           type='Folder',
                                           title='Folder 2',
                                           container=self.portal)
-        self.folder2.setCreationDate(self.folder2.created() - 1)
+        self.folder2.creation_date = self.folder2.created() - 1
         self.folder2.reindexObject()
         self.dashboardtemplate = api.content.create(
             id='dashboardtemplate',
@@ -54,7 +54,7 @@ class TestDocumentGeneration(IntegrationTestCase):
         # order is respected so sort_on created
         # Date catalog queries are 1 minute sensitive...
         # make sure self.folder created is really older than self.folder2
-        self.folder.setCreationDate(DateTime('2015/01/01 12:00'))
+        self.folder.creation_date = DateTime('2015/01/01 12:00')
         self.folder.reindexObject()
         self.assertEquals(ICriteria(self.folder).get('c0').widget,
                           u'sorting')

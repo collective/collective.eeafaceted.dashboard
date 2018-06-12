@@ -54,7 +54,8 @@ class TestColumns(IntegrationTestCase):
                          column.renderCell(brain))
         column.params = {}
         column.attrName = 'rel_items'
-        self.assertEqual(u"<ul>\n<li><a class='pretty_link' title='Folder 1' href='http://nohost/plone/fold1' target='_self'>"
+        self.assertEqual(u"<ul>\n"
+                         "<li><a class='pretty_link' title='Folder 1' href='http://nohost/plone/fold1' target='_self'>"
                          "<span class='pretty_link_content'>Folder 1</span></a></li>\n"
                          "<li><a class='pretty_link' title='Folder 2' href='http://nohost/plone/fold2' target='_self'>"
                          "<span class='pretty_link_content'>Folder 2</span></a></li>\n</ul>",

@@ -19,10 +19,10 @@ import collective.eeafaceted.dashboard
 from collective.eeafaceted.dashboard.utils import enableFacetedDashboardFor
 
 
-class ImioDashboardLayer(PloneSandboxLayer):
+class FacetedDashboardLayer(PloneSandboxLayer):
 
     defaultBases = (PLONE_FIXTURE,)
-    products = ('imio.dashboard', )
+    products = ('Products.DateRecurringIndex', )
 
     def setUpZope(self, app, configurationContext):
         """Set up Zope."""
@@ -35,7 +35,7 @@ class ImioDashboardLayer(PloneSandboxLayer):
     def setUpPloneSite(self, portal):
         """Set up Plone."""
         # Install into Plone site using portal_setup
-        applyProfile(portal, 'imio.dashboard:testing')
+        applyProfile(portal, 'collective.eeafaceted.dashboard:testing')
 
         # Login and create some test content
         setRoles(portal, TEST_USER_ID, ['Manager'])
@@ -53,7 +53,7 @@ class ImioDashboardLayer(PloneSandboxLayer):
             z2.uninstallProduct(app, p)
 
 
-FIXTURE = ImioDashboardLayer(
+FIXTURE = FacetedDashboardLayer(
     name="FIXTURE"
 )
 

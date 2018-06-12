@@ -3,7 +3,7 @@
 # Run this file in your product folder. E.g. : in yourproduct.name/yourproduct/name
 # Enter your manual added msgids in file locales/manual.pot
 
-CATALOGNAME="imio.dashboard"
+CATALOGNAME="collective.eeafaceted.dashboard"
 
 # List of languages used for po initialization (no mandatory update for syncing)
 # Ex LANGUAGES="en|English|en-au;en-ca;en-gb;en-us fr|French|fr-fr;fr-be;fr-ca nl|Dutch|nl-be;nl-nl"

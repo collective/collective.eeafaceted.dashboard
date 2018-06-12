@@ -10,9 +10,9 @@ from collective.eeafaceted.collectionwidget.widgets.widget import CollectionWidg
 from plone import api
 from plone.portlets.interfaces import IPortletManager, IPortletRenderer
 
-from imio.dashboard.browser import facetedcollectionportlet as portlet
-from imio.dashboard.config import DEFAULT_PORTLET_TITLE
-from imio.dashboard.testing import IntegrationTestCase
+from collective.eeafaceted.dashboard.browser import facetedcollectionportlet as portlet
+from collective.eeafaceted.dashboard.config import DEFAULT_PORTLET_TITLE
+from collective.eeafaceted.dashboard.testing import IntegrationTestCase
 
 
 class TestPortlet(IntegrationTestCase):
@@ -101,8 +101,11 @@ class TestPortlet(IntegrationTestCase):
             id='dashboardcollection1',
             type='DashboardCollection',
             title='Dashboard collection 1',
-            container=self.folder
-        )
+            container=self.folder,
+            query='',
+            sort_on='',
+            sort_reversed=False,
+            showNumberOfItems=True)
         # clean memoize for widget.categories,
         # it was memoized when calling _generate_vocabulary here above
         del IAnnotations(self.request)['plone.memoize']

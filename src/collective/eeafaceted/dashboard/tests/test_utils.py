@@ -8,11 +8,11 @@ from eea.facetednavigation.interfaces import IHidePloneLeftColumn
 from collective.eeafaceted.collectionwidget.interfaces import NoFacetedViewDefinedException
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 
-from imio.dashboard.testing import IntegrationTestCase
-from imio.dashboard.utils import enableFacetedDashboardFor
-from imio.dashboard.utils import _updateDefaultCollectionFor
-from imio.dashboard.utils import getCriterionByTitle
-from imio.dashboard.utils import getCriterionByIndex
+from collective.eeafaceted.dashboard.testing import IntegrationTestCase
+from collective.eeafaceted.dashboard.utils import enableFacetedDashboardFor
+from collective.eeafaceted.dashboard.utils import _updateDefaultCollectionFor
+from collective.eeafaceted.dashboard.utils import getCriterionByTitle
+from collective.eeafaceted.dashboard.utils import getCriterionByIndex
 
 
 class TestUtils(IntegrationTestCase):

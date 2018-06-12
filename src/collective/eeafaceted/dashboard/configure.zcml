@@ -16,7 +16,11 @@
     <include package="collective.documentgenerator"/>
     <include package="collective.eeafaceted.collectionwidget"/>
     <include package="collective.eeafaceted.z3ctable"/>
+    <include package="imio.prettylink" />
+    <include package="plone.app.contenttypes" />
+    <include package="plone.app.dexterity" />
     <include package="plone.app.portlets" />
+    <include package="plone.locking" />
 
     <include package=".browser" />
     <include package=".columns" />
@@ -32,6 +36,6 @@
 
     <!-- Vocabularies -->
     <utility component=".vocabulary.DashboardCategoryCollectionsVocabularyFactory"
-             name="collective.eeafaceted.dashboard.collectionsvocabulary" />
+             name="collective.eeafaceted.collectionwidget.collectionsvocabulary" />
 
 </configure>

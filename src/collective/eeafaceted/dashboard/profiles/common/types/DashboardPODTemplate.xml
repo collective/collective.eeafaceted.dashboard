@@ -5,7 +5,7 @@
         xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title" i18n:translate="">DashboardPODTemplate</property>
  <property name="description" i18n:translate="">A document to generate on a dashboard.</property>
- <property name="icon_expr">string:${portal_url}/++resource++imio.dashboard/dashboardpodtemplate.png</property>
+ <property name="icon_expr">string:${portal_url}/++resource++collective.eeafaceted.dashboard/dashboardpodtemplate.png</property>
  <property name="factory">DashboardPODTemplate</property>
  <property
     name="add_view_expr">string:${folder_url}/++add++DashboardPODTemplate</property>

@@ -6,8 +6,8 @@ from zope.annotation import IAnnotations
 from collective.documentgenerator.viewlets.generationlinks import DocumentGeneratorLinksViewlet
 from collective.eeafaceted.collectionwidget.utils import getCurrentCollection
 from eea.facetednavigation.interfaces import IFacetedNavigable
-from imio.dashboard.browser.overrides import IDDashboardDocumentGeneratorLinksViewlet
-from imio.dashboard.testing import IntegrationTestCase
+from collective.eeafaceted.dashboard.browser.overrides import DashboardDocumentGeneratorLinksViewlet
+from collective.eeafaceted.dashboard.testing import IntegrationTestCase
 
 
 class TestViewlets(IntegrationTestCase):
@@ -84,10 +84,10 @@ class TestViewlets(IntegrationTestCase):
         )
         self.request.form['c1[]'] = dashboardcoll.UID()
         self.assertEquals(getCurrentCollection(self.folder), dashboardcoll)
-        viewlet = IDDashboardDocumentGeneratorLinksViewlet(self.folder,
-                                                           self.request,
-                                                           None,
-                                                           None)
+        viewlet = DashboardDocumentGeneratorLinksViewlet(self.folder,
+                                                         self.request,
+                                                         None,
+                                                         None)
         viewlet.update()
         self.assertFalse(viewlet.available())
         self.assertFalse(viewlet.get_all_pod_templates())
@@ -118,10 +118,10 @@ class TestViewlets(IntegrationTestCase):
         # this viewlet will not be displayed if current context is not a faceted
         self.assertFalse(IFacetedNavigable.providedBy(self.folder2))
         self.assertTrue(IFacetedNavigable.providedBy(self.folder))
-        viewlet = IDDashboardDocumentGeneratorLinksViewlet(self.folder2,
-                                                           self.request,
-                                                           None,
-                                                           None)
+        viewlet = DashboardDocumentGeneratorLinksViewlet(self.folder2,
+                                                         self.request,
+                                                         None,
+                                                         None)
         viewlet.update()
         del IAnnotations(self.request)['plone.memoize']
         self.assertFalse(viewlet.available())

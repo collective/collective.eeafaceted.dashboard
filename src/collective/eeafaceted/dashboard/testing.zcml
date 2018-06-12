@@ -1,16 +1,16 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    i18n_domain="imio.dashboard">
+    i18n_domain="collective.eeafaceted.dashboard">
 
   <include file="configure.zcml" />
   <includeOverrides file="overrides.zcml" />
 
   <genericsetup:registerProfile
       name="testing"
-      title="imio.dashboard tests"
+      title="collective.eeafaceted.dashboard tests"
       directory="profiles/testing"
-      description="Steps to ease tests of imio.dashboard"
+      description="Steps to ease tests of collective.eeafaceted.dashboard"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 

@@ -1,27 +1,32 @@
 language: python
 
+sudo: false
+
+cache:
+  directories:
+    - eggs
+    - downloads
+
 python:
   - 2.7
 
-cache:
-  pip: true
-  directories:
-    - buildout-cache/downloads
-    - buildout-cache/eggs
-
-before_install:
-  - mkdir -p buildout-cache/{eggs,downloads}
-  - virtualenv .
+env:
+  - PLONE_VERSION=4
+  - PLONE_VERSION=5.0
+#  - PLONE_VERSION=5.1
 
 install:
-  - python bootstrap.py --version=2.5.3 -c travis.cfg
-  - bin/buildout -Nc travis.cfg
+  - sed -ie "s#plone-5#plone-$PLONE_VERSION#" buildout.cfg
+  - sed -ie "s#travis-5#travis-$PLONE_VERSION#" travis.cfg
+  - python bootstrap.py --version=2.10.0 -c travis.cfg
+  - bin/buildout -Nc travis.cfg buildout:download-cache=downloads buildout:eggs-directory=eggs annotate
+  - bin/buildout -Nc travis.cfg buildout:download-cache=downloads buildout:eggs-directory=eggs
 
 script:
   - bin/test
+  - bin/coverage
 
 after_success:
-  - bin/coverage run bin/test
   - pip install coveralls==0.5
   - coveralls
 

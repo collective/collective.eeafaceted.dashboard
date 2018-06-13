@@ -2,7 +2,6 @@
 
 from Acquisition import aq_inner, aq_parent
 
-from zope.formlib import form
 from zope.interface import implements
 from plone.portlets.interfaces import IPortletDataProvider
 from plone.app.portlets.portlets import base
@@ -21,6 +20,9 @@ from collective.eeafaceted.dashboard.config import DEFAULT_PORTLET_TITLE
 
 # in Plone5, portlet form is a z3c.form, in Plone4 it uses formlib
 HAS_PLONE5 = bool(getFSVersionTuple()[0] >= 5)
+
+if not HAS_PLONE5:
+    from zope.formlib import form
 
 
 class IFacetedCollectionPortlet(IPortletDataProvider):

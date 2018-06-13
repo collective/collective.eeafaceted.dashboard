@@ -6,11 +6,9 @@ from eea.facetednavigation.interfaces import IFacetedNavigable
 from eea.facetednavigation.interfaces import IHidePloneLeftColumn
 
 from collective.eeafaceted.collectionwidget.interfaces import NoFacetedViewDefinedException
-from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 
 from collective.eeafaceted.dashboard.testing import IntegrationTestCase
 from collective.eeafaceted.dashboard.utils import enableFacetedDashboardFor
-from collective.eeafaceted.dashboard.utils import _updateDefaultCollectionFor
 from collective.eeafaceted.dashboard.utils import getCriterionByTitle
 from collective.eeafaceted.dashboard.utils import getCriterionByIndex
 
@@ -61,25 +59,6 @@ class TestUtils(IntegrationTestCase):
         # same things are done except that the widgets are taken from the given xmlpath
         self.assertEquals(len(ICriteria(folder3).criteria), 1)
         self.assertTrue(ICriteria(folder3).get('c44'))
-
-    def test_updateDefaultCollectionFor(self):
-        """This method will define the default collection used by the collection-link
-           widget defined in a faceted enabled folder."""
-        # get the collection-link and check that it has no default
-        criterion = getCollectionLinkCriterion(self.folder)
-        self.assertFalse(criterion.default)
-        # right, do things correctly, add a DashboardCollection and use it as default
-        dashcoll_id = self.folder.invokeFactory('DashboardCollection', 'dashcoll', title='Dashboard Collection')
-        dashcoll = getattr(self.folder, dashcoll_id)
-        dashcoll.reindexObject()
-        _updateDefaultCollectionFor(self.folder, dashcoll.UID())
-        self.assertEquals(criterion.default, dashcoll.UID())
-
-        # calling it on a non faceted enabled folder will raise a NoFacetedViewDefinedException
-        folder2_id = self.portal.invokeFactory('Folder', 'folder2', title='Folder2')
-        folder2 = getattr(self.portal, folder2_id)
-        folder2.reindexObject()
-        self.assertRaises(NoFacetedViewDefinedException, _updateDefaultCollectionFor, folder2, 'anUID')
 
     def test_getCriterionByTitle(self):
         """Test method returning criteria matching a given title."""

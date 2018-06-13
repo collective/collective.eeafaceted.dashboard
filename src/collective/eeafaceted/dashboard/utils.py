@@ -5,7 +5,6 @@ from zope.interface import noLongerProvides
 
 from collective.eeafaceted.collectionwidget.config import NO_FACETED_EXCEPTION_MSG
 from collective.eeafaceted.collectionwidget.interfaces import NoFacetedViewDefinedException
-from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 
 from eea.facetednavigation.criteria.interfaces import ICriteria
 from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
@@ -48,19 +47,6 @@ def enableFacetedDashboardFor(obj, xmlpath=None):
     obj.reindexObject()
     obj.REQUEST.RESPONSE.status = response_status
     obj.REQUEST.RESPONSE.setHeader('location', response_location or '')
-
-
-def _updateDefaultCollectionFor(folderObj, default_uid):
-    """Use p_default_uid as the default collection selected
-       for the CollectionWidget used on p_folderObj."""
-    # folder should be a facetednav
-    if not IFacetedNavigable.providedBy(folderObj):
-        raise NoFacetedViewDefinedException(NO_FACETED_EXCEPTION_MSG)
-
-    criterion = getCollectionLinkCriterion(folderObj)
-    criterion.default = default_uid
-    # make change persist!
-    ICriteria(folderObj).criteria._p_changed = True
 
 
 def getDashboardQueryResult(faceted_context):

@@ -2,9 +2,6 @@
 from zope.component import queryUtility
 from zope.interface import alsoProvides
 from zope.schema.interfaces import IVocabularyFactory
-from Products.CMFCore.utils import getToolByName
-from plone.app.testing import login
-from plone.app.testing import TEST_USER_NAME
 from plone import api
 from collective.eeafaceted.dashboard.testing import IntegrationTestCase
 from eea.facetednavigation.interfaces import IFacetedNavigable
@@ -41,7 +38,7 @@ class TestConditionAwareVocabulary(IntegrationTestCase):
 
     def test_categorycollectionsvocabulary(self):
         """This will return every DashboardCollections of the portal prefixed by categories."""
-        factory = queryUtility(IVocabularyFactory, u'imio.dashboard.collectionsvocabulary')
+        factory = queryUtility(IVocabularyFactory, u'collective.eeafaceted.dashboard.dashboardcollectionsvocabulary')
         # one DashboardCollection
         self.assertEquals(len(factory(self.portal)), 1)
         term = factory(self.portal).getTerm(self.dashboardcollection.UID())

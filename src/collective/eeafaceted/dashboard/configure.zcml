@@ -36,6 +36,6 @@
 
     <!-- Vocabularies -->
     <utility component=".vocabulary.DashboardCategoryCollectionsVocabularyFactory"
-             name="collective.eeafaceted.collectionwidget.collectionsvocabulary" />
+             name="collective.eeafaceted.dashboard.dashboardcollectionsvocabulary" />
 
 </configure>

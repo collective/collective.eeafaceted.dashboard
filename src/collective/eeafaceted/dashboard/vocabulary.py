@@ -21,6 +21,9 @@ from collective.eeafaceted.dashboard.interfaces import ICustomViewFieldsVocabula
 class DashboardCollectionsVocabulary(object):
     """
     Vocabulary factory for 'dashboard_collections' field of DashboardPODTemplate.
+    Just displays the collection title in the term.
+    NOT USED BY DEFAULT, but there to be registered as
+    "collective.eeafaceted.dashboard.dashboardcollectionsvocabulary" if necessary.
     """
 
     implements(IVocabularyFactory)
@@ -39,6 +42,7 @@ DashboardCollectionsVocabularyFactory = DashboardCollectionsVocabulary()
 class DashboardCategoryCollectionsVocabulary(object):
     """
     Vocabulary factory for 'dashboard_collections' field of DashboardPODTemplate.
+    Displays the parent categories until the faceted container in the term.
     """
 
     implements(IVocabularyFactory)

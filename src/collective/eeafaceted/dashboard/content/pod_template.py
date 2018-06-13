@@ -37,7 +37,7 @@ class IDashboardPODTemplate(IConfigurablePODTemplate):
         title=_(u'Allowed dashboard collections'),
         description=_(u'Select for which dashboard collections the template will be available. '
                       u'If nothing is selected, the template will be available on every dashboards.'),
-        value_type=schema.Choice(source='collective.eeafaceted.dashboard.collectionsvocabulary'),
+        value_type=schema.Choice(source='collective.eeafaceted.dashboard.dashboardcollectionsvocabulary'),
         required=True,
     )
     form.omitted('pod_portal_types')

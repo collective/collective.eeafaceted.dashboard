@@ -43,7 +43,7 @@ setup(
         'setuptools',
         'collective.compoundcriterion',
         'collective.documentgenerator',
-        'collective.eeafaceted.collectionwidget',
+        'collective.eeafaceted.collectionwidget>0.9',
         'collective.eeafaceted.z3ctable>1.0',
         'eea.facetednavigation>=10.0',
         'imio.prettylink',

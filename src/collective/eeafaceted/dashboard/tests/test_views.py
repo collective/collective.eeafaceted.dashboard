@@ -4,7 +4,7 @@ import json
 
 from plone import api
 
-from imio.dashboard.testing import IntegrationTestCase
+from collective.eeafaceted.dashboard.testing import IntegrationTestCase
 
 
 class TestJSONCollectionsCount(IntegrationTestCase):
@@ -36,9 +36,9 @@ class TestJSONCollectionsCount(IntegrationTestCase):
             title='Dashboard collection 3',
             container=self.folder
         )
-        dashboardcoll.setShowNumberOfItems(True)
-        dashboardcol2.setShowNumberOfItems(False)
-        dashboardcol3.setShowNumberOfItems(True)
+        dashboardcoll.showNumberOfItems = True
+        dashboardcol2.showNumberOfItems = False
+        dashboardcol3.showNumberOfItems = True
 
         dashboardcoll.query = [
             {

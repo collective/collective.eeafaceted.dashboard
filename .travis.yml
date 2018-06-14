@@ -27,8 +27,11 @@ script:
   - bin/coverage
 
 after_success:
-  - pip install coveralls==0.5
-  - coveralls
+  - bin/createcoverage
+  - bin/pip install coverage
+  - bin/python -m coverage.pickle2json
+  - bin/pip install coveralls
+  - bin/coveralls
 
 notifications:
   email:

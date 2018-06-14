@@ -24,7 +24,6 @@ install:
 
 script:
   - bin/test
-  - bin/coverage
 
 after_success:
   - bin/createcoverage

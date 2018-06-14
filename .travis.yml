@@ -27,10 +27,10 @@ script:
 
 after_success:
   - bin/coverage run bin/test
-  - bin/pip install coverage
+  - pip install coverage
   - bin/python -m coverage.pickle2json
-  - bin/pip install coveralls
-  - bin/coveralls
+  - pip install coveralls
+  - coveralls
 
 notifications:
   email:

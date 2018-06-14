@@ -29,13 +29,18 @@ class TestPortlet(IntegrationTestCase):
                                   name='plone.leftcolumn',
                                   context=self.portal)
         self.assignment = portlet.Assignment()
-        self.renderer = getMultiAdapter((self.folder,
-                                         self.request,
-                                         self.view,
-                                         self.manager,
-                                         self.assignment),
-                                        IPortletRenderer)
+        self.renderer = self._get_portlet_renderer()
         self.subtyper = getMultiAdapter((self.folder, self.request), name=u'faceted_subtyper')
+
+    def _get_portlet_renderer(self):
+        """ """
+        renderer = getMultiAdapter(
+            (self.folder,
+             self.request,
+             self.view,
+             self.manager,
+             self.assignment), IPortletRenderer)
+        return renderer
 
     def test_portlet_available_when_faceted_enabled(self):
         """The portlet will display when a faceted navigation is enabled on the folder."""
@@ -114,6 +119,8 @@ class TestPortlet(IntegrationTestCase):
         # now it is displayed and as we are on the faceted, it behaves like the collection widget
         # a <form> with an action
         # get the '<ul>' displaying collections
+        # update renderer
+        self.renderer = self._get_portlet_renderer()
         self.assertTrue("<form" in self.renderer.widget_render)
         ul_tag = lxml.html.fromstring(self.renderer.widget_render)[0][0]
         # only 1 children, the collection and the href is as special javascript call that does nothing

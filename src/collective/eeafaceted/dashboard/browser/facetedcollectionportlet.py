@@ -48,6 +48,8 @@ class Renderer(base.Renderer):
 
     @property
     def widget_render(self):
+        if getattr(self, 'rendered_widgets', None):
+            return self.rendered_widgets
         # get the IFacetedNavigable element the criteria are define on
         criteriaHolder = self._criteriaHolder
         criteria = ICriteria(criteriaHolder)
@@ -74,7 +76,8 @@ class Renderer(base.Renderer):
                 widget.base_url = self._buildBaseLinkURL(criteria)
                 rendered_widget = ViewPageTemplateFile('templates/widget.pt')(widget)
             widgets.append(rendered_widget)
-        return ''.join([w for w in widgets])
+        self.rendered_widgets = ''.join([w for w in widgets])
+        return self.rendered_widgets
 
     def getPortletTitle(self):
         """Return the collection widget display name"""

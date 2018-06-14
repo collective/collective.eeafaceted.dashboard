@@ -105,7 +105,9 @@ class TestPortlet(IntegrationTestCase):
             query='',
             sort_on='',
             sort_reversed=False,
-            showNumberOfItems=True)
+            showNumberOfItems=True,
+            tal_condition=u'',
+            roles_bypassing_talcondition=[])
         # clean memoize for widget.categories,
         # it was memoized when calling _generate_vocabulary here above
         del IAnnotations(self.request)['plone.memoize']

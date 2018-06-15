@@ -10,7 +10,7 @@ from collective.eeafaceted.dashboard import FacetedDashboardMessageFactory as _
 from plone.autoform import directives as form
 
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
-
+from z3c.form.browser.radio import RadioFieldWidget
 from zope import schema
 from zope.interface import implements
 
@@ -24,6 +24,7 @@ class IDashboardPODTemplate(IConfigurablePODTemplate):
     DashboardPODTemplate dexterity schema.
     """
 
+    form.widget('use_objects', RadioFieldWidget)
     use_objects = schema.Bool(
         title=_(u'Use objects as generation context'),
         description=_(u'If selelected, receive awoken objects wrapped into their '

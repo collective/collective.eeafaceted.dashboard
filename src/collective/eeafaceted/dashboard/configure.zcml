@@ -1,10 +1,11 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:monkey="http://namespaces.plone.org/monkey"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:five="http://namespaces.zope.org/five"
-    xmlns:i18n="http://namespaces.zope.org/i18n"
-    xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:monkey="http://namespaces.plone.org/monkey"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="collective.eeafaceted.dashboard">
 
     <i18n:registerTranslations directory="locales" />
@@ -34,6 +35,14 @@
         <utility
             component="plone.app.contenttypes.behaviors.collection.MetaDataFieldsVocabularyFactory"
             name="plone.app.contenttypes.metadatafields" />
+        <configure package="eea.facetednavigation">
+            <browser:page
+              for="eea.facetednavigation.interfaces.IPossibleFacetedNavigable"
+              name="default_widgets.xml"
+              template="browser/template/default.xml"
+              permission="eea.faceted.configure"
+              />
+        </configure>
     </unconfigure>
 
     <adapter
@@ -44,5 +53,18 @@
     <!-- Vocabularies -->
     <utility component=".vocabulary.DashboardCategoryCollectionsVocabularyFactory"
              name="collective.eeafaceted.dashboard.dashboardcollectionsvocabulary" />
+
+
+    <!-- Overrides unconfigured here above -->
+    <utility
+        component=".vocabulary.DashboardMetaDataFieldsVocabularyFactory"
+        name="plone.app.contenttypes.metadatafields" />
+
+    <browser:page
+        for="eea.facetednavigation.interfaces.IPossibleFacetedNavigable"
+        name="default_widgets.xml"
+        template="browser/templates/default_widgets.xml"
+        permission="eea.faceted.configure" />
+
 
 </configure>

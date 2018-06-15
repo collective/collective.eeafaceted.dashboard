@@ -4,14 +4,4 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="collective.eeafaceted.dashboard">
 
-    <browser:page
-        for="eea.facetednavigation.interfaces.IPossibleFacetedNavigable"
-        name="default_widgets.xml"
-        template="browser/templates/default_widgets.xml"
-        permission="eea.faceted.configure" />
-
-    <utility
-        component=".vocabulary.DashboardMetaDataFieldsVocabularyFactory"
-        name="plone.app.contenttypes.metadatafields" />
-
 </configure>

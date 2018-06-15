@@ -29,6 +29,13 @@
     <include file="profiles.zcml" />
     <include file="upgrades.zcml" />
 
+    <include package="z3c.unconfigure" file="meta.zcml"/>
+    <unconfigure>
+        <utility
+            component="plone.app.contenttypes.behaviors.collection.MetaDataFieldsVocabularyFactory"
+            name="plone.app.contenttypes.metadatafields" />
+    </unconfigure>
+
     <adapter
         for="plone.app.contenttypes.interfaces.ICollection"
         factory=".adapters.CustomViewFieldsVocabularyAdapter"

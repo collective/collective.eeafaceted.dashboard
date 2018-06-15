@@ -5,6 +5,7 @@ from zope.schema.interfaces import IVocabularyFactory
 from plone import api
 from collective.eeafaceted.dashboard.testing import IntegrationTestCase
 from eea.facetednavigation.interfaces import IFacetedNavigable
+from collective.eeafaceted.dashboard.vocabulary import DashboardCollectionsVocabulary
 
 
 class TestConditionAwareVocabulary(IntegrationTestCase):
@@ -27,8 +28,8 @@ class TestConditionAwareVocabulary(IntegrationTestCase):
 
     def test_collectionsvocabulary(self):
         """This will return every DashboardCollections of the portal."""
-        factory = queryUtility(IVocabularyFactory, u'collective.eeafaceted.dashboard.dashboardcollectionsvocabulary')
         # one DashboardCollection
+        factory = DashboardCollectionsVocabulary()
         self.assertEquals(len(factory(self.portal)), 1)
         term = factory(self.portal).getTerm(self.dashboardcollection.UID())
         self.assertEquals(term.token, term.value, self.dashboardcollection.UID())

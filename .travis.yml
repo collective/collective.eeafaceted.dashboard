@@ -28,7 +28,7 @@ script:
 after_success:
   - bin/coverage run bin/test
   - pip install coverage
-  - bin/python -m coverage.pickle2json
+  - python -m coverage.pickle2json
   - pip install coveralls
   - coveralls
 

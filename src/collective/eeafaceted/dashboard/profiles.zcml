@@ -25,8 +25,7 @@
         name="universal"
         directory="profiles/common"
         title="collective.eeafaceted.dashboard Common Configuration"
-        description="Extension profile for collective.eeafaceted.dashboard
-                     settings that aren't version dependent."
+        description="Extension profile for collective.eeafaceted.dashboard settings that aren't version dependent."
         provides="Products.GenericSetup.interfaces.EXTENSION" />
 
     <genericsetup:importStep

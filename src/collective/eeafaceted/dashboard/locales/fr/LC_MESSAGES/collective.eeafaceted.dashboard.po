@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-12-01 12:26+0000\n"
+"POT-Creation-Date: 2018-06-15 09:11+0000\n"
 "PO-Revision-Date: 2016-02-22 15:20+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,70 +16,62 @@ msgstr ""
 "Language: fr\n"
 "X-Generator: Poedit 1.8.4\n"
 
-#: ./profiles/default/types/DashboardPODTemplate.xml
+#: ./profiles/common/types/DashboardPODTemplate.xml
 msgid "A document to generate on a dashboard."
 msgstr "Un document à générer depuis un tableau de bord."
 
-#: ./browser/facetedcollectionportlet.py:113
+#: ./browser/facetedcollectionportlet.py:128
 msgid "Add Collection Criteria Portlet"
 msgstr "Ajouter portlet 'Faceted Collection'"
 
-#: ./content/pod_template.py:38
+#: ./content/pod_template.py:37
 msgid "Allowed dashboard collections"
 msgstr "Tableaux de bord autorisés"
 
-#. Default: "Collection used in dashboard"
-msgid "Collection used in imio.dashboard"
-msgstr "Collection utilisée dans les tableaux de bord"
-
-#: ./profiles/default/types/DashboardPODTemplate.xml
+#: ./profiles/common/types/DashboardPODTemplate.xml
 msgid "DashboardPODTemplate"
 msgstr "Modèle de document POD pour tableau de bord"
 
-#: ./browser/facetedcollectionportlet.py:122
+#: ./browser/facetedcollectionportlet.py:140
 msgid "Edit Collection Criteria Portlet"
 msgstr "Editer portlet 'Faceted Collection'"
 
-#: ./content/pod_template.py:30
+#: ./profiles.zcml:29
+msgid "Extension profile for collective.eeafaceted.dashboard settings that aren't version dependent."
+msgstr ""
+
+#: ./profiles.zcml:14
+msgid "Extension profile for collective.eeafaceted.dashboard."
+msgstr ""
+
+#: ./content/pod_template.py:29
 msgid "If selelected, receive awoken objects wrapped into their  helper view rather than brains as generation context"
 msgstr "Renvoie les objets et une vue d'aide à la génération comme contexte du modèle plutôt que les brains."
 
-#: ./configure.zcml:45
-msgid "Installs the demo of two tables of imio.dashboard add-on."
-msgstr ""
-
-#: ./configure.zcml:37
-msgid "Installs the imio.dashboard add-on."
-msgstr ""
-
-#: ./content/pod_template.py:39
+#: ./content/pod_template.py:38
 msgid "Select for which dashboard collections the template will be available. If nothing is selected, the template will be available on every dashboards."
 msgstr "Sélectionnez les tableaux de bord pour lesquels le modèle sera disponible. Si rien n'est sélectionné, le modèle sera disponible sur tous les tableaux de bord."
 
-#: ./content/dashboardcollection.py:24
-msgid "Show number of items in filter"
-msgstr "Montrer le nombre d'éléments dans les filtres"
-
 #: ./testing.zcml:15
-msgid "Steps to ease tests of imio.dashboard"
+msgid "Steps to ease tests of collective.eeafaceted.dashboard"
 msgstr ""
 
-#: ./browser/facetedcollectionportlet.py:114
+#: ./browser/facetedcollectionportlet.py:129
 msgid "This portlet shows controls for faceted with collections."
 msgstr "Ce portlet affiche les widgets collection définis sur un dossier utilisant une vue à facettes"
 
-#: ./content/pod_template.py:29
+#: ./content/pod_template.py:28
 msgid "Use objects as generation context"
 msgstr "Utiliser les objets comme contexte de génération."
 
-#: ./configure.zcml:37
-msgid "imio.dashboard"
+#: ./profiles.zcml:14
+msgid "collective.eeafaceted.dashboard"
 msgstr ""
 
-#: ./configure.zcml:45
-msgid "imio.dashboard demo of two tables"
+#: ./profiles.zcml:29
+msgid "collective.eeafaceted.dashboard Common Configuration"
 msgstr ""
 
 #: ./testing.zcml:15
-msgid "imio.dashboard tests"
+msgid "collective.eeafaceted.dashboard tests"
 msgstr ""

@@ -1,5 +1,6 @@
 graft src/collective
 graft docs
+include LICENSE
 include *.cfg *.rst *.in
 include *.py
 include .coveragerc

@@ -29,7 +29,7 @@ function generatePodDocument(template_uid, output_format, tag) {
 }
 
 $(document).ready(function () {
-  var url = $('base').attr('href') + '/@@json_collections_count';
+  var url = $("link[rel='canonical']").attr('href') + '/@@json_collections_count';
   if ($('.faceted-tagscloud-collection-widget').length > 0) {
     $(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function() {
         $.get(url, function (response) {

@@ -27,6 +27,7 @@
     <include package=".columns" />
     <include package=".content" />
 
+    <include file="columns.zcml" />
     <include file="profiles.zcml" />
     <include file="upgrades.zcml" />
 

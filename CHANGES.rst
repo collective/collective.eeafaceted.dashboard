@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2 (unreleased)
+0.2 (2018-09-04)
 ----------------
 
 - Get current URL in JS to call the @@json_collections_count a way it works in

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-06-15 09:11+0000\n"
+"POT-Creation-Date: 2018-08-31 10:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Add Collection Criteria Portlet"
 msgstr ""
 
-#: ./content/pod_template.py:37
+#: ./content/pod_template.py:38
 msgid "Allowed dashboard collections"
 msgstr ""
 
@@ -45,11 +45,11 @@ msgstr ""
 msgid "Extension profile for collective.eeafaceted.dashboard."
 msgstr ""
 
-#: ./content/pod_template.py:29
+#: ./content/pod_template.py:30
 msgid "If selelected, receive awoken objects wrapped into their  helper view rather than brains as generation context"
 msgstr ""
 
-#: ./content/pod_template.py:38
+#: ./content/pod_template.py:39
 msgid "Select for which dashboard collections the template will be available. If nothing is selected, the template will be available on every dashboards."
 msgstr ""
 
@@ -61,7 +61,7 @@ msgstr ""
 msgid "This portlet shows controls for faceted with collections."
 msgstr ""
 
-#: ./content/pod_template.py:28
+#: ./content/pod_template.py:29
 msgid "Use objects as generation context"
 msgstr ""
 

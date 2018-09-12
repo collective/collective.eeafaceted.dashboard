@@ -10,6 +10,10 @@ Changelog
   [gbastien]
 - Added `demo` profile.
   [gbastien]
+- Added parameter `show_left_column=True` to `utils.enableFacetedDashboardFor`
+  to be able to not show the Plone left column when enabling dashboard on a
+  faceted folder.
+  [gbastien]
 
 0.2 (2018-09-04)
 ----------------

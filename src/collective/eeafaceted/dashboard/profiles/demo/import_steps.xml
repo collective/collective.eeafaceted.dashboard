@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<import-steps>
+ <import-step
+    id="collective.eeafaceted.dashboard-demo"
+    handler="collective.eeafaceted.dashboard.setuphandlers.add_demo_data"
+    title="Demo profile for collective.eeafaceted.dashboard adding and dashboard with preconfigured searches"
+    version="2018-09-12T12:00:00">
+   Demo profile for collective.eeafaceted.dashboard adding and dashboard with preconfigured searches
+ </import-step>
+</import-steps>

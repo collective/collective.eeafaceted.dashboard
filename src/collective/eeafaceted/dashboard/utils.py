@@ -17,7 +17,7 @@ import logging
 logger = logging.getLogger('collective.eeafaceted.dashboard: utils')
 
 
-def enableFacetedDashboardFor(obj, xmlpath=None):
+def enableFacetedDashboardFor(obj, xmlpath=None, show_left_column=True):
     """Enable a faceted view on obj and import a
        specific xml if given p_xmlpath."""
     # already a faceted?
@@ -38,7 +38,7 @@ def enableFacetedDashboardFor(obj, xmlpath=None):
     # use correct layout in the faceted
     IFacetedLayout(obj).update_layout('faceted-table-items')
     # show the left portlets
-    if IHidePloneLeftColumn.providedBy(obj):
+    if show_left_column and IHidePloneLeftColumn.providedBy(obj):
         noLongerProvides(obj, IHidePloneLeftColumn)
     # import configuration
     if xmlpath:

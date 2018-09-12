@@ -64,7 +64,7 @@
     <browser:page
         for="eea.facetednavigation.interfaces.IPossibleFacetedNavigable"
         name="default_widgets.xml"
-        template="browser/templates/default_widgets.xml"
+        template="default_widgets.xml"
         permission="eea.faceted.configure" />
 
 

@@ -8,6 +8,8 @@ Changelog
   also used when adding a new DashboardCollection, so when current context is
   not a DashboardCollection but the parent.
   [gbastien]
+- Added `demo` profile.
+  [gbastien]
 
 0.2 (2018-09-04)
 ----------------

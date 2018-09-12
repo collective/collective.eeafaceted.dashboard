@@ -28,6 +28,13 @@
         description="Extension profile for collective.eeafaceted.dashboard settings that aren't version dependent."
         provides="Products.GenericSetup.interfaces.EXTENSION" />
 
+    <genericsetup:registerProfile
+        name="demo"
+        directory="profiles/demo"
+        title="collective.eeafaceted.dashboard Demo profile"
+        description="Demo profile for collective.eeafaceted.dashboard adding and dashboard with preconfigured searches."
+        provides="Products.GenericSetup.interfaces.EXTENSION" />
+
     <genericsetup:importStep
         name="collective.eeafaceted.dashboard-postInstall"
         title="collective.eeafaceted.dashboard post_install import step"

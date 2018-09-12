@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-08-31 10:06+0000\n"
+"POT-Creation-Date: 2018-09-12 12:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,6 +31,10 @@ msgstr ""
 
 #: ./profiles/common/types/DashboardPODTemplate.xml
 msgid "DashboardPODTemplate"
+msgstr ""
+
+#: ./profiles.zcml:36
+msgid "Demo profile for collective.eeafaceted.dashboard adding and dashboard with preconfigured searches."
 msgstr ""
 
 #: ./browser/facetedcollectionportlet.py:140
@@ -71,6 +75,10 @@ msgstr ""
 
 #: ./profiles.zcml:29
 msgid "collective.eeafaceted.dashboard Common Configuration"
+msgstr ""
+
+#: ./profiles.zcml:36
+msgid "collective.eeafaceted.dashboard Demo profile"
 msgstr ""
 
 #: ./testing.zcml:15

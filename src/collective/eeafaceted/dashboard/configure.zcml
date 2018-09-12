@@ -47,7 +47,7 @@
     </unconfigure>
 
     <adapter
-        for="plone.app.contenttypes.interfaces.ICollection"
+        for="*"
         factory=".adapters.CustomViewFieldsVocabularyAdapter"
         provides=".interfaces.ICustomViewFieldsVocabulary" />
 

@@ -1,21 +1,18 @@
 # encoding: utf-8
 
+from collective.eeafaceted.collectionwidget.interfaces import IDashboardCollection
+from collective.eeafaceted.dashboard.interfaces import ICustomViewFieldsVocabulary
+from eea.facetednavigation.interfaces import IFacetedNavigable
 from operator import attrgetter
-
-from zope.interface import implements
-from zope.interface import implementer
-from zope.schema.interfaces import IVocabularyFactory
-from zope.schema.vocabulary import SimpleTerm
-from zope.schema.vocabulary import SimpleVocabulary
 from plone import api
 from plone.app.contenttypes.behaviors.collection import MetaDataFieldsVocabulary
 from plone.app.uuid.utils import uuidToCatalogBrain
-
-
-from eea.facetednavigation.interfaces import IFacetedNavigable
-
-from collective.eeafaceted.collectionwidget.interfaces import IDashboardCollection
-from collective.eeafaceted.dashboard.interfaces import ICustomViewFieldsVocabulary
+from zope.globalrequest import getRequest
+from zope.interface import implementer
+from zope.interface import implements
+from zope.schema.interfaces import IVocabularyFactory
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
 
 
 class DashboardCollectionsVocabulary(object):
@@ -80,8 +77,16 @@ DashboardCategoryCollectionsVocabularyFactory = DashboardCategoryCollectionsVoca
 @implementer(IVocabularyFactory)
 class DashboardMetaDataFieldsVocabulary(MetaDataFieldsVocabulary):
 
+    def _is_adding_new_dashboard_collection(self):
+        """ """
+        request = getRequest()
+        published = request.get('PUBLISHED')
+        if published and hasattr(published, '__name__') and published.__name__ == 'DashboardCollection':
+            return True
+        return False
+
     def __call__(self, context):
-        if context.portal_type == 'DashboardCollection':
+        if context.portal_type == 'DashboardCollection' or self._is_adding_new_dashboard_collection():
             return ICustomViewFieldsVocabulary(context)()
         else:
             # original behavior for plone.app.contenttypes Collection

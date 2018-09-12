@@ -53,10 +53,22 @@ class FacetedDashboardLayer(PloneSandboxLayer):
             z2.uninstallProduct(app, p)
 
 
+class DemoFacetedDashboardLayer(FacetedDashboardLayer):
+    """ """
+
+    def setUpPloneSite(self, portal):
+        """Set up Plone."""
+        super(DemoFacetedDashboardLayer, self).setUpPloneSite(portal)
+        applyProfile(portal, 'collective.eeafaceted.dashboard:demo')
+
+
 FIXTURE = FacetedDashboardLayer(
     name="FIXTURE"
 )
 
+DEMO_FIXTURE = DemoFacetedDashboardLayer(
+    name="DEMO_FIXTURE"
+)
 
 INTEGRATION = IntegrationTesting(
     bases=(FIXTURE,),
@@ -70,7 +82,7 @@ FUNCTIONAL = FunctionalTesting(
 )
 
 
-ACCEPTANCE = FunctionalTesting(bases=(FIXTURE,
+ACCEPTANCE = FunctionalTesting(bases=(DEMO_FIXTURE,
                                       REMOTE_LIBRARY_BUNDLE_FIXTURE,
                                       z2.ZSERVER_FIXTURE),
                                name="ACCEPTANCE")

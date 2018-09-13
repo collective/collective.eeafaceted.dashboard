@@ -3,7 +3,7 @@ import unittest
 import robotsuite
 from plone.testing import layered
 
-from ..testing.layers import ACCEPTANCE
+from collective.eeafaceted.dashboard.testing import ACCEPTANCE
 
 
 def test_suite():

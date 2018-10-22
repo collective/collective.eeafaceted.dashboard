@@ -14,6 +14,9 @@ Changelog
   to be able to not show the Plone left column when enabling dashboard on a
   faceted folder.
   [gbastien]
+- Added `DashboardCollectionsVocabulary._render_term_title` to make it easy to
+  override term title rendering.
+  [gbastien]
 
 0.2 (2018-09-04)
 ----------------

@@ -25,11 +25,14 @@ class DashboardCollectionsVocabulary(object):
 
     implements(IVocabularyFactory)
 
+    def _render_term_title(self, brain):
+        return brain.Title
+
     def __call__(self, context):
         catalog = api.portal.get_tool('portal_catalog')
         collection_brains = catalog(object_provides=IDashboardCollection.__identifier__)
         vocabulary = SimpleVocabulary(
-            [SimpleTerm(b.UID, b.UID, b.Title) for b in collection_brains]
+            [SimpleTerm(b.UID, b.UID, self._render_term_title(b.Title)) for b in collection_brains]
         )
         return vocabulary
 

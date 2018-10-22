@@ -55,7 +55,6 @@
     <utility component=".vocabulary.DashboardCategoryCollectionsVocabularyFactory"
              name="collective.eeafaceted.dashboard.dashboardcollectionsvocabulary" />
 
-
     <!-- Overrides unconfigured here above -->
     <utility
         component=".vocabulary.DashboardMetaDataFieldsVocabularyFactory"

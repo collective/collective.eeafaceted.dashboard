@@ -11,7 +11,7 @@ Suite Teardown  Close all browsers
 
 *** Variables ***
 
-#${BROWSER} =  Firefox
+${BROWSER} =  Chrome
 ${SELENIUM_RUN_ON_FAILURE} =  Debug
 
 *** Test cases ***

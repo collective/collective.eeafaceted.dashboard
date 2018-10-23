@@ -28,10 +28,10 @@ install:
   - bin/buildout -Nc travis.cfg buildout:download-cache=downloads buildout:eggs-directory=eggs
 
 script:
-  - bin/test
+  - bin/test --test=\!"robot"
 
 after_success:
-  - bin/coverage run bin/test
+  - bin/coverage run bin/test --test=\!"robot"
   - pip install coverage
   - python -m coverage.pickle2json
   - pip install coveralls

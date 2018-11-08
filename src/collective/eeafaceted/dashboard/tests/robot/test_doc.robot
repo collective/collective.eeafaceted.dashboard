@@ -20,7 +20,7 @@ Dashboard homepage
     Go to  ${PLONE_URL}/dashboard
     Set Window Size  1280  2880
     Wait until element is visible  css=.faceted-table-results  10
-    Capture and crop page screenshot  doc/screenshots/application.png  css=.site-plone  id=portal-footer-wrapper
+    Capture and crop page screenshot  doc/screenshots/robot_application.png  css=.site-plone  id=portal-footer-wrapper
     Wait until element is visible  css=.gna
 
 

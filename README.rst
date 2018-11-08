@@ -9,23 +9,21 @@ collective.eeafaceted.dashboard
 
 This package does the glue between :
 
-- collective.eeafaceted.collectionwidget
-- collective.eeafaceted.z3ctable
-- collective.compoundcriterion
-- collective.documentgenerator
+- `collective.eeafaceted.collectionwidget <https://github.com/collective/collective.eeafaceted.collectionwidget>`_
+- `collective.eeafaceted.z3ctable <https://github.com/collective/collective.eeafaceted.z3ctable>`_
+- `collective.compoundcriterion <https://github.com/collective/collective.compoundcriterion>`_
+- `collective.documentgenerator <https://github.com/collective/collective.documentgenerator>`_
 
-This build a useable eea.facetednavigation based dashboard.
+This build a useable eea.facetednavigation based dashboard.  Use the demo profile to easily check what it does :
 
-By default, a demo profile is available that configure a faceted navigation like this:
+.. image:: https://github.com/IMIO/collective.eeafaceted.dashboard/blob/master/doc/screenshots/application.png
 
-.. image:: https://github.com/IMIO/collective.eeafaceted.dashboard/doc/screenshots/application.png
+.. image:: https://github.com/IMIO/collective.eeafaceted.dashboard/blob/master/doc/screenshots/review.png
 
-.. image:: https://github.com/IMIO/collective.eeafaceted.dashboard/doc/screenshots/review.png
+Dashboard is essentially made of a faceted widget displaying pre-configured searches, results are displayed in a faceted layout using a table.
 
-There are essentially 2 extra elements regarding a default faceted navigation :
-
-The searches filter :
----------------------
+The searches filter (collective.eeafaceted.collectionwidget) :
+--------------------------------------------------------------
 
 This filter aims to display "functional and already well thought" searches to users.
 
@@ -35,8 +33,8 @@ This filter aims to display "functional and already well thought" searches to us
 - the current page title changes depending on selected search;
 - a default search can be selected so it is executed when user access the dashboard.
 
-The table faceted layout :
---------------------------
+The table faceted layout (collective.eeafaceted.z3ctable) :
+-----------------------------------------------------------
 
 Every faceted layout can be selected to display the dashboard results but collective.eeafaceted.z3ctable add a new faceted layout that displays a z3c.table with sortable columns (using the sort icons in the column header) and a selection column.
 
@@ -44,13 +42,13 @@ Every faceted layout can be selected to display the dashboard results but collec
 - a "refresh search results" is available so user may refresh the faceted layout without having to reload the entire page;
 - the selection column is useable with collective.documentgenerator or collection.eeafaceted.batchactions for example.
 
-Managing complex searches :
----------------------------
+Managing complex searches (collective.compoundcriterion) :
+----------------------------------------------------------
 
 This package rely on collective.compoundcriterion, it is a new search criterion for Collections that will let user select an named adapter registered for the ICompoundCriterionFilter.  This adapter returns a catalog query compatible with a Collection query.  This makes it possible to manage complex searches that are not configurable on a Collection using the querywidget.
 
-Document generation :
----------------------
+Document generation (collective.documentgenerator) :
+----------------------------------------------------
 
 Dashboard integrates the colletive.documentgenerator package that makes it possible to export a dashboard in any format supported by collective.documentgenerator (odt, doc, docx, ods, xls, pdf, ...).  Exportable documents are managed by DashboardPODTemplates added in the dashboard folder.
 
@@ -61,6 +59,6 @@ This package works on Plone 4.3.x and Plone 5.1.x (not tested with Plone 5.0 but
 
 TODO :
 ------
-- integrate collective.eeafaceted.batchactons when it will work on Plone 5 (integration is already possible on Plone 4).
+- integrate collective.eeafaceted.batchactions when it will work on Plone 5 (integration is already possible on Plone 4).
 
 

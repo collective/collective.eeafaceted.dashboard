@@ -45,7 +45,7 @@ Every faceted layout can be selected to display the dashboard results but collec
 Managing complex searches (collective.compoundcriterion) :
 ----------------------------------------------------------
 
-This package rely on collective.compoundcriterion, it is a new search criterion for Collections that will let user select an named adapter registered for the ICompoundCriterionFilter.  This adapter returns a catalog query compatible with a Collection query.  This makes it possible to manage complex searches that are not configurable on a Collection using the querywidget.
+This package rely on collective.compoundcriterion, it adds a new search criterion called "Filter" for Collections that will let user select a named adapter registered for the ICompoundCriterionFilter.  This adapter returns a catalog query compatible with a Collection query.  This makes it possible to manage complex searches that are not configurable on a Collection using the querywidget.
 
 Document generation (collective.documentgenerator) :
 ----------------------------------------------------

@@ -54,6 +54,7 @@ div#faceted-form {
     position: absolute;
     padding-top: 0.5em;
     font-weight: bold;
+    right: 10px;
 }
 
 /* add some padding inside the portlet widget collection */
@@ -142,4 +143,8 @@ body.template-facetednavigation_view.portaltype-folder div#faceted-results div#d
     margin-top: -28px;
     position: absolute;
     right: 0.5em;
+}
+
+div.faceted_loading {
+  background: url('++resource++collective.eeafaceted.dashboard/ajax-loader.gif') no-repeat 50% 1.5em;
 }

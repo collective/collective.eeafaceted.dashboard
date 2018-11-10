@@ -17,6 +17,8 @@ Changelog
 - Added `DashboardCollectionsVocabulary._render_term_title` to make it easy to
   override term title rendering.
   [gbastien]
+- Override default eea.facetednavigation spinner (ajax-loader.gif).
+  [gbastien]
 
 0.2 (2018-09-04)
 ----------------

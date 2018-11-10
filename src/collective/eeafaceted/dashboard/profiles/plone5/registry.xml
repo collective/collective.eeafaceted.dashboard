@@ -15,7 +15,7 @@
       <element>faceted-dashboard</element>
     </value>
     <value key="depends"></value>
-    <value key="csscompilation"></value>
+    <value key="csscompilation">++plone++static/faceted-dashboard.min.css</value>
     <value key="jscompilation">++plone++static/faceted-dashboard.min.js</value>
     <value key="compile">False</value>
     <value key="enabled">True</value>

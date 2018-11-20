@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.3 (unreleased)
+0.3 (2018-11-20)
 ----------------
 
 - Make sure overrided vocabulary `plone.app.contenttypes.metadatafields` is

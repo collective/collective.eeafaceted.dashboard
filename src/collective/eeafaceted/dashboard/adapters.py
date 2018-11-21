@@ -28,6 +28,6 @@ class CustomViewFieldsVocabularyAdapter(object):
                 name,
                 translate(name,
                           'collective.eeafaceted.z3ctable',
-                          context=self.request)) for name in columns]
+                          context=self.request)) for name in sorted(set(columns))]
 
         return SimpleVocabulary(terms)

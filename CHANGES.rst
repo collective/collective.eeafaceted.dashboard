@@ -4,8 +4,9 @@ Changelog
 0.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Sort uniquely collection vocabulary columns names, because multiple columns
+  with same name can be defined for different interfaces.
+  [sgeulette]
 
 0.3 (2018-11-20)
 ----------------
@@ -40,4 +41,3 @@ Changelog
 ----------------
 - Initial release.
   [gbastien]
-

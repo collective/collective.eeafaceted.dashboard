@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
-import json
-from os import path
-from zope.interface import noLongerProvides
-
 from collective.eeafaceted.collectionwidget.config import NO_FACETED_EXCEPTION_MSG
 from collective.eeafaceted.collectionwidget.interfaces import NoFacetedViewDefinedException
-
+from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
 from eea.facetednavigation.criteria.interfaces import ICriteria
-from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
 from eea.facetednavigation.interfaces import IHidePloneLeftColumn
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
-
+from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
+from os import path
 from plone import api
+from zope.interface import noLongerProvides
 
+import json
 import logging
+
+
 logger = logging.getLogger('collective.eeafaceted.dashboard: utils')
 
 
-def enableFacetedDashboardFor(obj, xmlpath=None, show_left_column=True):
+def enableFacetedDashboardFor(obj, xmlpath=None, show_left_column=True, default_UID=None):
     """Enable a faceted view on obj and import a
        specific xml if given p_xmlpath."""
     # already a faceted?
@@ -44,6 +44,9 @@ def enableFacetedDashboardFor(obj, xmlpath=None, show_left_column=True):
     if xmlpath:
         obj.unrestrictedTraverse('@@faceted_exportimport').import_xml(
             import_file=open(xmlpath))
+    # define default collection UID
+    if default_UID:
+        _updateDefaultCollectionFor(obj, default_UID)
     obj.reindexObject()
     obj.REQUEST.RESPONSE.status = response_status
     obj.REQUEST.RESPONSE.setHeader('location', response_location or '')

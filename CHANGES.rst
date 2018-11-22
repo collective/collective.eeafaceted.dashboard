@@ -7,6 +7,9 @@ Changelog
 - Sort uniquely collection vocabulary columns names, because multiple columns
   with same name can be defined for different interfaces.
   [sgeulette]
+- Added parameter `default_UID` to `utils.enableFacetedDashboardFor` to set
+  default collection UID when enabling faceted on a folder.
+  [gbastien]
 
 0.3 (2018-11-20)
 ----------------

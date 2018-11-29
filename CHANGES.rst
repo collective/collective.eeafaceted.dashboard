@@ -10,6 +10,10 @@ Changelog
 - Added parameter `default_UID` to `utils.enableFacetedDashboardFor` to set
   default collection UID when enabling faceted on a folder.
   [gbastien]
+- When calling `utils.enableFacetedDashboardFor`, set a value in the `REQUEST`
+  `enablingFacetedDashboard` specifying that we are currently enabling a
+  faceted dashboard.
+  [gbastien]
 
 0.3 (2018-11-20)
 ----------------

@@ -18,6 +18,13 @@ logger = logging.getLogger('collective.eeafaceted.dashboard: utils')
 
 
 def enableFacetedDashboardFor(obj, xmlpath=None, show_left_column=True, default_UID=None):
+    """Mark in REQUEST that we are enabling a dashboard, sometimes useful for subprocesses."""
+    obj.REQUEST.set('enablingFacetedDashboard', True)
+    _enableFacetedDashboardFor(obj, xmlpath, show_left_column, default_UID)
+    obj.REQUEST.set('enablingFacetedDashboard', False)
+
+
+def _enableFacetedDashboardFor(obj, xmlpath=None, show_left_column=True, default_UID=None):
     """Enable a faceted view on obj and import a
        specific xml if given p_xmlpath."""
     # already a faceted?

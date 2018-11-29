@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.4 (unreleased)
+0.4 (2018-11-29)
 ----------------
 
 - Sort uniquely collection vocabulary columns names, because multiple columns

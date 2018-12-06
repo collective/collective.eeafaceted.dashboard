@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.5 (unreleased)
+0.5 (2018-12-06)
 ----------------
 
 - Remove contsraint on Products.ZCatalog.

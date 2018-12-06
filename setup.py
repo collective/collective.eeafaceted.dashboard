@@ -36,7 +36,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'Products.ZCatalog >= 3.1',
+        'Products.ZCatalog',
         'plone.api',
         # version 1.0.3+ manage correctly orphans
         'plone.batching > 1.0.4',

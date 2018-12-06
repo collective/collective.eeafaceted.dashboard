@@ -4,7 +4,10 @@ Changelog
 0.5 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Remove contsraint on Products.ZCatalog.
+  [sdelcourt]
+- Always use latest versions of eea products.
+  [gbastien]
 
 
 0.4 (2018-11-29)

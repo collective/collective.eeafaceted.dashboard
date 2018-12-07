@@ -91,11 +91,10 @@ div.listingBar span.next {
 
 /* place "number of results" beside the listingBar */
 .table_faceted_results_number,
-.table_faceted_no_results,
 .table_faceted_results {
     float: left;
-    margin: 1em;
-    margin-top: 0em;
+    margin-left: 1em;
+    margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
 

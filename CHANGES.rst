@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.6 (unreleased)
+0.6 (2018-12-18)
 ----------------
 
 - Adapted CSS for `div.table_faceted_results` displaying number of results.

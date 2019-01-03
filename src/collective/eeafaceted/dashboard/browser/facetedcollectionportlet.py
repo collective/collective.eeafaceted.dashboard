@@ -68,13 +68,16 @@ class Renderer(base.Renderer):
             if no_redirect:
                 # avoid redirect
                 self.request.set('no_redirect', '1')
-            # initialize the widget
-            rendered_widget = widget()
             # render the widget as "portlet outside facetednav"
             if no_redirect:
                 # compute default criteria to display in the URL
                 widget.base_url = self._buildBaseLinkURL(criteria)
+                widget._initialize_widget()
+                # render template so default is ignored when rendered outside dashboard
                 rendered_widget = ViewPageTemplateFile('templates/widget.pt')(widget)
+            else:
+                # initialize the widget
+                rendered_widget = widget()
             widgets.append(rendered_widget)
         self.rendered_widgets = ''.join([w for w in widgets])
         return self.rendered_widgets

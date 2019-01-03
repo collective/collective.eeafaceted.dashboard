@@ -4,8 +4,8 @@ Changelog
 0.7 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Do not render widget twice when portlet faceted displayed outside dashboard.
+  [gbastien]
 
 0.6 (2018-12-18)
 ----------------
@@ -20,7 +20,6 @@ Changelog
   [sdelcourt]
 - Always use latest versions of eea products.
   [gbastien]
-
 
 0.4 (2018-11-29)
 ----------------

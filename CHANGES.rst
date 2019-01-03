@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.7 (unreleased)
+0.7 (2019-01-03)
 ----------------
 
 - Do not render widget twice when portlet faceted displayed outside dashboard.

@@ -4,8 +4,9 @@ Changelog
 0.8 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Do not compute collections count when initializing collections portlet, it is
+  now correctly updated using the `@@json_collections_count view`.
+  [gbastien]
 
 0.7 (2019-01-03)
 ----------------

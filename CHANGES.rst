@@ -4,8 +4,9 @@ Changelog
 0.8 (unreleased)
 ----------------
 
-- Do not compute collections count when initializing collections portlet, it is
-  now correctly updated using the `@@json_collections_count view`.
+- Do not compute collections count when initializing collections portlet, as it
+  is updated in the Faceted.AJAX_QUERY_SUCCESS event, it avoid being computed
+  twice.
   [gbastien]
 
 0.7 (2019-01-03)

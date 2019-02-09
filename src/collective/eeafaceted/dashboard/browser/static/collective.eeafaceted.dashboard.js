@@ -43,10 +43,10 @@ function update_collections_count() {
 }
 
 $(document).ready(function () {
-  if (!has_faceted()) {
-    update_collections_count();
-  }
   if ($('div[class*="faceted-tagscloud-collection-widget"').length > 0) {
+    if (!has_faceted()) {
+      update_collections_count();
+    }
     $(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function() {
       update_collections_count();
     });

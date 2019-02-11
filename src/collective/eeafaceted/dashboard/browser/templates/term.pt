@@ -18,7 +18,7 @@
                   tal:attributes="href python: redirect_to and redirect_to or '{0}&{1}={2}'.format(widget.base_url, wid, term_id)">
                   <span class="term-label" tal:content="term_label" />
                   <span tal:condition="view/display_number_of_items">
-                     [<span class="term-count" tal:content="view/number_of_items" />]
+                     [<span class="term-count" tal:content="python: view.number_of_items(init=True)" />]
                   </span>
               </a>
           </li>

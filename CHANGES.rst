@@ -4,8 +4,10 @@ Changelog
 0.8 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Do not compute collections count when initializing collections portlet, as it
+  is updated in the Faceted.AJAX_QUERY_SUCCESS event, it avoid being computed
+  twice.
+  [gbastien]
 
 0.7 (2019-01-03)
 ----------------

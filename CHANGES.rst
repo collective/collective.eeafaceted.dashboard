@@ -8,6 +8,8 @@ Changelog
   is updated in the Faceted.AJAX_QUERY_SUCCESS event, it avoid being computed
   twice.
   [gbastien]
+- Use `<base> href` instead `link rel="canonical"` as base URL for JS calls.
+  [gbastien]
 
 0.7 (2019-01-03)
 ----------------

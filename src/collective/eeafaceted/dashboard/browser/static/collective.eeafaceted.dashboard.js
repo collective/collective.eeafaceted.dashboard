@@ -29,7 +29,7 @@ function generatePodDocument(template_uid, output_format, tag) {
 }
 
 function update_collections_count() {
-  var url = $("base").attr('href') + '@@json_collections_count';
+  var url = $("link[rel='canonical']").attr('href') + '/@@json_collections_count';
   $.get(url, async=true, function (response) {
       var info = JSON.parse(response);
       if (info.criterionId) {

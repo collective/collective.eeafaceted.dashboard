@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.8 (unreleased)
+0.8 (2019-05-16)
 ----------------
 
 - Do not compute collections count when initializing collections portlet, as it

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object name="searches" meta_type="ATFolder"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        i18n:domain="eea">
+ <criteria>
+
+  <criterion name="c50" i18n:attributes="title">
+   <property name="widget">text</property>
+   <property name="title">Search title</property>
+   <property name="position">center</property>
+   <property name="section">default</property>
+   <property name="hidden">False</property>
+   <property name="index">Title</property>
+   <property name="default"/>
+   <property name="onlyallelements">True</property>
+   <property name="wildcard">True</property>
+  </criterion>
+
+ </criteria>
+</object>

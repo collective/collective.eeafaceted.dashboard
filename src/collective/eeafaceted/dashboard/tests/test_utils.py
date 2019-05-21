@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
-import os
+
+from collective.eeafaceted.collectionwidget.interfaces import NoFacetedViewDefinedException
+from collective.eeafaceted.dashboard.testing import IntegrationTestCase
+from collective.eeafaceted.dashboard.utils import addFacetedCriteria
+from collective.eeafaceted.dashboard.utils import enableFacetedDashboardFor
+from collective.eeafaceted.dashboard.utils import getCriterionByIndex
+from collective.eeafaceted.dashboard.utils import getCriterionByTitle
 from eea.facetednavigation.interfaces import ICriteria
 from eea.facetednavigation.interfaces import IFacetedLayout
 from eea.facetednavigation.interfaces import IFacetedNavigable
 from eea.facetednavigation.interfaces import IHidePloneLeftColumn
 
-from collective.eeafaceted.collectionwidget.interfaces import NoFacetedViewDefinedException
-
-from collective.eeafaceted.dashboard.testing import IntegrationTestCase
-from collective.eeafaceted.dashboard.utils import enableFacetedDashboardFor
-from collective.eeafaceted.dashboard.utils import getCriterionByTitle
-from collective.eeafaceted.dashboard.utils import getCriterionByIndex
+import os
 
 
 class TestUtils(IntegrationTestCase):
@@ -59,6 +60,13 @@ class TestUtils(IntegrationTestCase):
         # same things are done except that the widgets are taken from the given xmlpath
         self.assertEquals(len(ICriteria(folder3).criteria), 1)
         self.assertTrue(ICriteria(folder3).get('c44'))
+
+    def test_addFacetedCriteria(self):
+        """ """
+        self.assertFalse(ICriteria(self.folder).get('c50'))
+        xmlpath = os.path.dirname(__file__) + '/faceted_conf/extra_testing_widgets.xml'
+        addFacetedCriteria(self.folder, xmlpath)
+        self.assertTrue(ICriteria(self.folder).get('c50'))
 
     def test_getCriterionByTitle(self):
         """Test method returning criteria matching a given title."""

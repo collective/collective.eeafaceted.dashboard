@@ -4,8 +4,9 @@ Changelog
 0.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- Added function utils.addFacetedCriteria to ease applying a faceted conf xml
+  that adds extra faceted criteria to an existing dashboard.
+  [gbastien]
 
 0.8 (2019-05-16)
 ----------------

@@ -24,11 +24,25 @@ def enableFacetedDashboardFor(obj, xmlpath=None, show_left_column=True, default_
     obj.REQUEST.set('enablingFacetedDashboard', False)
 
 
-def _enableFacetedDashboardFor(obj, xmlpath=None, show_left_column=True, default_UID=None):
+def addFacetedCriteria(obj, xmlpath):
+    """Helper to add extra faceted criteria to an already faceted enabled dashboard."""
+    _enableFacetedDashboardFor(obj,
+                               xmlpath,
+                               show_left_column=False,
+                               enable_faceted=False,
+                               update_layout=False)
+
+
+def _enableFacetedDashboardFor(obj,
+                               xmlpath=None,
+                               show_left_column=True,
+                               default_UID=None,
+                               enable_faceted=True,
+                               update_layout=True):
     """Enable a faceted view on obj and import a
        specific xml if given p_xmlpath."""
     # already a faceted?
-    if IFacetedNavigable.providedBy(obj):
+    if enable_faceted and IFacetedNavigable.providedBy(obj):
         logger.error("Faceted navigation is already enabled for '%s'" %
                      '/'.join(obj.getPhysicalPath()))
         return
@@ -40,10 +54,12 @@ def _enableFacetedDashboardFor(obj, xmlpath=None, show_left_column=True, default
     # we cancel this, safe previous RESPONSE status and location
     response_status = obj.REQUEST.RESPONSE.getStatus()
     response_location = obj.REQUEST.RESPONSE.getHeader('location')
-    obj.unrestrictedTraverse('@@faceted_subtyper').enable()
+    if enable_faceted:
+        obj.unrestrictedTraverse('@@faceted_subtyper').enable()
 
-    # use correct layout in the faceted
-    IFacetedLayout(obj).update_layout('faceted-table-items')
+    if update_layout:
+        # use correct layout in the faceted
+        IFacetedLayout(obj).update_layout('faceted-table-items')
     # show the left portlets
     if show_left_column and IHidePloneLeftColumn.providedBy(obj):
         noLongerProvides(obj, IHidePloneLeftColumn)

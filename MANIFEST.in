@@ -6,6 +6,7 @@ include *.py
 include .coveragerc
 include .travis.yml
 include Makefile
+include requirements.txt
 exclude .installed.cfg
 exclude .mr.developer.cfg
 exclude buildout.d

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.9 (unreleased)
+0.9 (2019-06-07)
 ----------------
 
 - Added function utils.addFacetedCriteria to ease applying a faceted conf xml

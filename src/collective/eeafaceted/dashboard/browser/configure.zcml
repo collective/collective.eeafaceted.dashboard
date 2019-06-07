@@ -77,7 +77,7 @@
         permission="zope2.View"
         />
     <browser:viewlet
-        for="OFS.interfaces.IItem"
+        for="eea.facetednavigation.subtypes.interfaces.IFacetedNavigable"
         name="dashboard-document-generation-link"
         manager="collective.eeafaceted.z3ctable.interfaces.ITopAboveNavManager"
         class="collective.eeafaceted.dashboard.browser.overrides.DashboardDocumentGeneratorLinksViewlet"

@@ -6,5 +6,6 @@
       <dependency>profile-plone.app.contenttypes:default</dependency>
       <dependency>profile-plone.app.relationfield:default</dependency>
       <dependency>profile-collective.eeafaceted.dashboard:default</dependency>
+      <dependency>profile-imio.helpers:default</dependency>
   </dependencies>
 </metadata>

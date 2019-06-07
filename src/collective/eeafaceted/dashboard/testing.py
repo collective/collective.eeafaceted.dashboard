@@ -12,6 +12,9 @@ from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.testing import z2
+from Products.Five.browser import BrowserView
+from zope.component import getMultiAdapter
+from zope.viewlet.interfaces import IViewletManager
 
 import unittest
 
@@ -100,6 +103,23 @@ class IntegrationTestCase(unittest.TestCase):
         self.folder = self.portal.get('folder')
         enableFacetedDashboardFor(self.folder)
         self.faceted_table = self.folder.restrictedTraverse('faceted-table-view')
+
+    # utils method to be put later in testing helpers
+    def _get_viewlet_manager(self, context, manager_name):
+        """ """
+        view = BrowserView(context, self.request)
+        viewlet_manager = getMultiAdapter(
+            (context, self.request, view),
+            IViewletManager,
+            manager_name)
+        viewlet_manager.update()
+        return viewlet_manager
+
+    def _get_viewlet(self, context, manager_name, viewlet_name):
+        """ """
+        viewlet_manager = self._get_viewlet_manager(context, manager_name)
+        viewlet = viewlet_manager.get(viewlet_name)
+        return viewlet
 
 
 class FunctionalTestCase(unittest.TestCase):

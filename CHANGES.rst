@@ -9,6 +9,10 @@ Changelog
   [gbastien]
 - Improved template evaluate method to avoid getting collection and criterias if not necessary
   [sgeulette]
+- Display dashboard-document-generation-link only on IFacetedNavigable
+  [sgeulette]
+- Corrected robot tests
+  [sgeulette]
 
 0.8 (2019-05-16)
 ----------------

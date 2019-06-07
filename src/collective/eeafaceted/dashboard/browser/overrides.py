@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.utils import getToolByName
-from plone import api
-from plone.app.contenttypes.interfaces import ICollection
-from eea.facetednavigation.interfaces import IFacetedNavigable
-
 from collective.documentgenerator.browser.generation_view import DocumentGenerationView
 from collective.documentgenerator.viewlets.generationlinks import DocumentGeneratorLinksViewlet
+from collective.eeafaceted.collectionwidget.interfaces import NotDashboardContextException
+from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.collectionwidget.widgets.widget import CollectionWidget
-from collective.eeafaceted.z3ctable.browser.views import FacetedTableView
-
 from collective.eeafaceted.dashboard.content.pod_template import IDashboardPODTemplate
 from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
+from collective.eeafaceted.z3ctable.browser.views import FacetedTableView
+from eea.facetednavigation.interfaces import IFacetedNavigable
+from plone import api
+from plone.app.contenttypes.interfaces import ICollection
+from Products.CMFCore.utils import getToolByName
+
 
 # necessary for now for elements using ICollection from plone.app.collection
 HAS_PAC = True
@@ -110,3 +111,13 @@ class DashboardDocumentGeneratorLinksViewlet(DocumentGeneratorLinksViewlet):
         pod_templates = [self.context.unrestrictedTraverse(brain.getPath()) for brain in brains]
 
         return pod_templates
+
+    def available(self):
+        """
+        Check if we have a collectionwidget criterion
+        """
+        try:
+            getCollectionLinkCriterion(self.context)
+        except NotDashboardContextException:
+            return False
+        return super(DashboardDocumentGeneratorLinksViewlet, self).available()

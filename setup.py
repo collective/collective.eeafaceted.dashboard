@@ -54,8 +54,8 @@ setup(
             'plone.app.dexterity',
             'plone.app.testing',
             'plone.app.relationfield',
-            'plone.app.robotframework[debug]',
-        ],
+            'plone.app.robotframework[ride,reload]',
+            'robotframework-selenium2screenshots'],
     },
     entry_points="""
     [z3c.autoinclude.plugin]

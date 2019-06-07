@@ -5,6 +5,7 @@
 
   <include file="configure.zcml" />
   <includeOverrides file="overrides.zcml" />
+  <include package="imio.helpers" />
 
   <genericsetup:registerProfile
       name="testing"

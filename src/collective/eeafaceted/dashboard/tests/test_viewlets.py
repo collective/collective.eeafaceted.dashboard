@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from plone import api
-
-from zope.annotation import IAnnotations
 from collective.documentgenerator.viewlets.generationlinks import DocumentGeneratorLinksViewlet
 from collective.eeafaceted.collectionwidget.utils import getCurrentCollection
-from eea.facetednavigation.interfaces import IFacetedNavigable
 from collective.eeafaceted.dashboard.browser.overrides import DashboardDocumentGeneratorLinksViewlet
 from collective.eeafaceted.dashboard.testing import IntegrationTestCase
+from eea.facetednavigation.criteria.interfaces import ICriteria
+from eea.facetednavigation.interfaces import IFacetedNavigable
+from plone import api
+from zope.annotation import IAnnotations
 
 
 class TestViewlets(IntegrationTestCase):
@@ -118,12 +118,19 @@ class TestViewlets(IntegrationTestCase):
         # this viewlet will not be displayed if current context is not a faceted
         self.assertFalse(IFacetedNavigable.providedBy(self.folder2))
         self.assertTrue(IFacetedNavigable.providedBy(self.folder))
-        viewlet = DashboardDocumentGeneratorLinksViewlet(self.folder2,
-                                                         self.request,
-                                                         None,
-                                                         None)
-        viewlet.update()
+        # not faceted context
+        viewlet = self._get_viewlet(context=self.folder2, manager_name='collective.eeafaceted.z3ctable.topabovenav',
+                                    viewlet_name='dashboard-document-generation-link')
+        self.assertIsNone(viewlet)
+        # collection criterion not found
+        viewlet = self._get_viewlet(context=self.folder, manager_name='collective.eeafaceted.z3ctable.topabovenav',
+                                    viewlet_name='dashboard-document-generation-link')
+        self.assertIsNotNone(viewlet)
         del IAnnotations(self.request)['plone.memoize']
+        self.assertTrue(viewlet.available())
+        criteria = ICriteria(self.folder).criteria
+        index = [i for i, crit in enumerate(criteria) if crit.widget == u'collection-link'][0]
+        del criteria[index]  # we remove collectionwidget criterion
         self.assertFalse(viewlet.available())
         # no matter there are pod templates
         self.assertTrue(viewlet.get_all_pod_templates())

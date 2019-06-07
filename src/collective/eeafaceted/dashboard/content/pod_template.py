@@ -62,14 +62,15 @@ class DashboardPODTemplateCondition(ConfigurablePODTemplateCondition):
         - That we are on an allowed dashboard collection (if any defined);
         - Original ConfigurablePODTemplateCondition conditions.
         """
-        try:
-            current_collection = getCurrentCollection(self.context)
-        except NotDashboardContextException:
-            return False
-
         allowed_collections = self.pod_template.dashboard_collections
-        if not current_collection or \
-           (allowed_collections and not current_collection.UID() in allowed_collections):
-            return False
+        if allowed_collections:
+            try:
+                current_collection = getCurrentCollection(self.context)
+            except NotDashboardContextException:
+                return False
+
+            if not current_collection or \
+               (allowed_collections and not current_collection.UID() in allowed_collections):
+                return False
 
         return super(DashboardPODTemplateCondition, self).evaluate()

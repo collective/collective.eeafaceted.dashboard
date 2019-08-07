@@ -4,8 +4,10 @@ Changelog
 0.10 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- In `@@json_collections_count` get the collection directly from `term.value`
+  that contains the collection object instead doing a catalog query with
+  `term.token` that contains the collection UID.
+  [gbastien]
 
 0.9 (2019-06-07)
 ----------------

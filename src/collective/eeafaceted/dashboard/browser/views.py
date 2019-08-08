@@ -47,9 +47,10 @@ class JSONCollectionsCount(BrowserView):
             widget = CollectionWidget(faceted_context, self.request, data)
             voc = widget._generate_vocabulary()
             info = []
+            portal = api.portal.get()
             for category in voc.itervalues():
                 for term in category['collections']:
-                    collection = api.content.get(UID=term.token)
+                    collection = portal.unrestrictedTraverse(term.value)
                     if IDashboardCollection.providedBy(collection) \
                             and collection.showNumberOfItems:
                         view = collection.unrestrictedTraverse(

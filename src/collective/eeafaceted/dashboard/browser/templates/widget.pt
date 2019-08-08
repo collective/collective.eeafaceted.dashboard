@@ -21,9 +21,9 @@
                             category_term python:grouped_element[1].get('term', None) ;
                             collection_terms python:grouped_element[1]['collections'];">
         <tal:renderCategory condition="category"
-            replace="structure python: category_term.value.restrictedTraverse('@@render_collection_widget_category')(widget=view)" />
+            replace="structure python: view.render_category(category_term)" />
         <tal:items repeat="term collection_terms">
-          <tal:renderTerm replace="structure python: term.value.unrestrictedTraverse('@@render_collection_widget_term_portlet')(term, category, widget=view)" />
+          <tal:renderTerm replace="structure python: view.render_term(term, category, view_name='@@render_collection_widget_term_portlet')" />
         </tal:items>
       </tal:category>
     </tal:categories>

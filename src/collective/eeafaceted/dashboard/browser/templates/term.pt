@@ -12,8 +12,7 @@
             class python: not category and default_class + ' no-category-tag' or default_class;
             value python:term_id;
             title term_label;
-            id string:${wid}${term_id};
-            data-kept-criteria python:widget.kept_criteria_as_json(term_id);">
+            id string:${wid}${term_id};">
                <a href="#"
                   tal:attributes="href python: redirect_to and redirect_to or '{0}&{1}={2}'.format(widget.base_url, wid, term_id)">
                   <span class="term-label" tal:content="term_label" />

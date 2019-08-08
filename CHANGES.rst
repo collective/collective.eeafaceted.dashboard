@@ -4,8 +4,12 @@ Changelog
 0.10 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Adapted code to render term as term.value does not contain the collection
+  object anymore but it's path.
+  [gbastien]
+- Do not compute kept_criteria when widget is rendered outside dashboard as
+  faceted criteria will not be displayed.
+  [gbastien]
 
 0.9 (2019-06-07)
 ----------------
@@ -13,7 +17,8 @@ Changelog
 - Added function utils.addFacetedCriteria to ease applying a faceted conf xml
   that adds extra faceted criteria to an existing dashboard.
   [gbastien]
-- Improved template evaluate method to avoid getting collection and criterias if not necessary
+- Improved template evaluate method to avoid getting collection and criterias
+  if not necessary
   [sgeulette]
 - Display dashboard-document-generation-link only on IFacetedNavigable
   [sgeulette]

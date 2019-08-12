@@ -21,8 +21,8 @@ before_install:
     - export PATH=$PATH:$PWD/geckodriver
 
 install:
-  - sed -ie "s#plone-5#plone-$PLONE_VERSION#" buildout.cfg
-  - sed -ie "s#travis-5#travis-$PLONE_VERSION#" travis.cfg
+  - sed -ie "s#plone-5.1#plone-$PLONE_VERSION#" buildout.cfg
+  - sed -ie "s#travis-5.1#travis-$PLONE_VERSION#" travis.cfg
   - easy_install --version
   - pip install setuptools==38.2.4
   - mkdir -p buildout-cache/{eggs,downloads}

@@ -6,6 +6,7 @@ from collective.documentgenerator.interfaces import IPODTemplateCondition
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.dashboard.content.pod_template import DashboardPODTemplateCondition
 from collective.eeafaceted.dashboard.testing import IntegrationTestCase
+from zope.annotation import IAnnotations
 
 
 class TestDashboardPODTemplate(IntegrationTestCase):
@@ -58,4 +59,7 @@ class TestDashboardPODTemplate(IntegrationTestCase):
         self.assertFalse(self.dashboardtemplate.can_be_generated(self.folder))
         # except if it is the current collection
         self.request.form['{0}[]'.format(criterion_name)] = dashboardcollection2.UID()
+        # clear cache for collectionwidget.utils.getCurrentCollection
+        cache_key = 'collectionwidget-utils-getCurrentCollection-{0}'.format(self.folder.UID())
+        del IAnnotations(self.request)[cache_key]
         self.assertTrue(self.dashboardtemplate.can_be_generated(self.folder))

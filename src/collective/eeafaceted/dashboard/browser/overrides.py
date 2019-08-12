@@ -3,14 +3,14 @@ from collective.documentgenerator.browser.generation_view import DocumentGenerat
 from collective.documentgenerator.viewlets.generationlinks import DocumentGeneratorLinksViewlet
 from collective.eeafaceted.collectionwidget.interfaces import NotDashboardContextException
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
-from collective.eeafaceted.collectionwidget.widgets.widget import CollectionWidget
+from collective.eeafaceted.collectionwidget.utils import getCurrentCollection
 from collective.eeafaceted.dashboard.content.pod_template import IDashboardPODTemplate
 from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
+
 from collective.eeafaceted.z3ctable.browser.views import FacetedTableView
 from eea.facetednavigation.interfaces import IFacetedNavigable
 from plone import api
 from plone.app.contenttypes.interfaces import ICollection
-from Products.CMFCore.utils import getToolByName
 
 
 # necessary for now for elements using ICollection from plone.app.collection
@@ -34,18 +34,8 @@ class DashboardFacetedTableView(FacetedTableView):
            (HAS_PAC and pac_ICollection.providedBy(self.context)):
             return self.context
         else:
-            # if we can get the collection we are working with,
-            # use customViewFields defined on it if any
-            for criterion in self.criteria.values():
-                if criterion.widget == CollectionWidget.widget_type:
-                    # value is stored in the request with ending [], like 'c4[]'
-                    collectionUID = self.request.get('{0}[]'.format(criterion.getId()))
-                    if not collectionUID:
-                        continue
-                    catalog = getToolByName(self.context, 'portal_catalog')
-                    collection = catalog(UID=collectionUID)
-                    if collection:
-                        return collection[0].getObject()
+            collection = getCurrentCollection(self.context)
+            return collection
 
     def _getViewFields(self):
         """Returns fields we want to show in the table."""

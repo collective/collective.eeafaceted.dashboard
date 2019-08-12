@@ -10,6 +10,9 @@ Changelog
 - Do not compute kept_criteria when widget is rendered outside dashboard as
   faceted criteria will not be displayed.
   [gbastien]
+- Use `collectionwidget.utils.getCurrentCollection` to get the current
+  collection to use for `DashboardFacetedTableView` columns.
+  [gbastien]
 
 0.9 (2019-06-07)
 ----------------

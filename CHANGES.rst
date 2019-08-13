@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.10 (unreleased)
+0.10 (2019-08-13)
 -----------------
 
 - Adapted code to render term as term.value does not contain the collection

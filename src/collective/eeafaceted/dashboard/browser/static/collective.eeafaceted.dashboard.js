@@ -1,3 +1,8 @@
+// currently displaying a faceted navigation?
+function has_faceted() {
+  return Boolean($("div#faceted-form").length);
+}
+
 // Function that allows to generate a document aware of table listing documents in a faceted navigation.
 function generatePodDocument(template_uid, output_format, tag) {
     theForm = $(tag).parents('form')[0];

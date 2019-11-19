@@ -4,12 +4,9 @@ from collective.documentgenerator.viewlets.generationlinks import DocumentGenera
 from collective.eeafaceted.collectionwidget.interfaces import NotDashboardContextException
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.collectionwidget.utils import getCurrentCollection
-from collective.eeafaceted.dashboard.content.pod_template import IDashboardPODTemplate
 from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
-
 from collective.eeafaceted.z3ctable.browser.views import FacetedTableView
 from eea.facetednavigation.interfaces import IFacetedNavigable
-from plone import api
 from plone.app.contenttypes.interfaces import ICollection
 
 
@@ -88,19 +85,6 @@ class DashboardDocumentGenerationView(DocumentGenerationView):
 
 class DashboardDocumentGeneratorLinksViewlet(DocumentGeneratorLinksViewlet):
     """For displaying on dashboards."""
-
-    def get_all_pod_templates(self):
-        """
-        Override to only return dashboard templates.
-        """
-        catalog = api.portal.get_tool(name='portal_catalog')
-        brains = catalog.unrestrictedSearchResults(
-            object_provides=IDashboardPODTemplate.__identifier__,
-            sort_on='getObjPositionInParent'
-        )
-        pod_templates = [self.context.unrestrictedTraverse(brain.getPath()) for brain in brains]
-
-        return pod_templates
 
     def available(self):
         """

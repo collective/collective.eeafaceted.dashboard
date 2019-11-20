@@ -31,7 +31,7 @@ class TestViewlets(IntegrationTestCase):
                                                 None)
         viewlet.update()
         self.assertFalse(viewlet.available())
-        self.assertFalse(viewlet.get_all_pod_templates())
+        self.assertFalse(viewlet.get_generable_templates())
 
         # add a DashboardPODTemplate, still not available
         api.content.create(id='dashtemplate',
@@ -42,7 +42,7 @@ class TestViewlets(IntegrationTestCase):
         # get_generable_templates that use it
         del IAnnotations(self.request)['plone.memoize']
         self.assertFalse(viewlet.available())
-        self.assertFalse(viewlet.get_all_pod_templates())
+        self.assertFalse(viewlet.get_generable_templates())
 
         # add a PODTemplate, this time it is available
         template = api.content.create(id='template',
@@ -52,8 +52,8 @@ class TestViewlets(IntegrationTestCase):
         # clean memoize
         del IAnnotations(self.request)['plone.memoize']
         self.assertTrue(viewlet.available())
-        self.assertEquals(len(viewlet.get_all_pod_templates()), 1)
-        self.assertEquals(viewlet.get_all_pod_templates()[0].UID(),
+        self.assertEquals(len(viewlet.get_generable_templates()), 1)
+        self.assertEquals(viewlet.get_generable_templates()[0].UID(),
                           template.UID())
 
         # this viewlet will not be displayed if current context is a faceted
@@ -67,7 +67,7 @@ class TestViewlets(IntegrationTestCase):
         del IAnnotations(self.request)['plone.memoize']
         self.assertTrue(viewlet.available())
         # no matter there are pod templates
-        self.assertTrue(viewlet.get_all_pod_templates())
+        self.assertTrue(viewlet.get_generable_templates())
 
     def test_DashboardPODTemplateViewlet(self):
         """Test the IDDashboardDocumentGeneratorLinksViewlet
@@ -90,7 +90,7 @@ class TestViewlets(IntegrationTestCase):
                                                          None)
         viewlet.update()
         self.assertFalse(viewlet.available())
-        self.assertFalse(viewlet.get_all_pod_templates())
+        self.assertFalse(viewlet.get_generable_templates())
 
         # add a PODTemplate, still not available
         api.content.create(id='template',
@@ -101,7 +101,7 @@ class TestViewlets(IntegrationTestCase):
         # get_generable_templates that use it
         del IAnnotations(self.request)['plone.memoize']
         self.assertFalse(viewlet.available())
-        self.assertFalse(viewlet.get_all_pod_templates())
+        self.assertFalse(viewlet.get_generable_templates())
 
         # add a DashboardPODTemplate, this time it is available
         dashtemplate = api.content.create(id='dashtemplate',
@@ -111,8 +111,8 @@ class TestViewlets(IntegrationTestCase):
         # clean memoize
         del IAnnotations(self.request)['plone.memoize']
         self.assertTrue(viewlet.available())
-        self.assertEquals(len(viewlet.get_all_pod_templates()), 1)
-        self.assertEquals(viewlet.get_all_pod_templates()[0].UID(),
+        self.assertEquals(len(viewlet.get_generable_templates()), 1)
+        self.assertEquals(viewlet.get_generable_templates()[0].UID(),
                           dashtemplate.UID())
 
         # this viewlet will not be displayed if current context is not a faceted
@@ -133,4 +133,4 @@ class TestViewlets(IntegrationTestCase):
         del criteria[index]  # we remove collectionwidget criterion
         self.assertFalse(viewlet.available())
         # no matter there are pod templates
-        self.assertTrue(viewlet.get_all_pod_templates())
+        self.assertTrue(viewlet.get_generable_templates())

@@ -4,8 +4,10 @@ Changelog
 0.11 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Adapted override of `collective.documentgenerator` method
+  `get_all_pod_templates` now that it is handled by an `IGenerablePODTemplates`
+  adapter instead the `DocumentGeneratorLinksViewlet`.
+  [gbastien]
 
 0.10 (2019-08-13)
 -----------------

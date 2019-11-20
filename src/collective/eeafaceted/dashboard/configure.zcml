@@ -51,6 +51,11 @@
         factory=".adapters.CustomViewFieldsVocabularyAdapter"
         provides=".interfaces.ICustomViewFieldsVocabulary" />
 
+    <adapter
+        for="eea.facetednavigation.subtypes.interfaces.IFacetedNavigable"
+        provides="collective.documentgenerator.interfaces.IGenerablePODTemplates"
+        factory=".adapters.DashboardGenerablePODTemplatesAdapter"/>
+
     <!-- Vocabularies -->
     <utility component=".vocabulary.DashboardCategoryCollectionsVocabularyFactory"
              name="collective.eeafaceted.dashboard.dashboardcollectionsvocabulary" />

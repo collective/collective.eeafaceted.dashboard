@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.11 (unreleased)
+0.11 (2019-11-26)
 -----------------
 
 - Adapted override of `collective.documentgenerator` method

@@ -119,6 +119,4 @@ Changelog
 0.1 (2018-06-21)
 ----------------
 - Initial release.
-DTemplates`
-        '--test-path', '/srv/zinstances/buildout.pm/src/imio.prettylink/src',
-  [gbastiena
+  [gbastien]

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.12 (unreleased)
+0.12 (2019-11-27)
 -----------------
 
 - Implement our own `IDashboardGenerablePODTemplates` adapter like it is the

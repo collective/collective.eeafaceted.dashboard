@@ -4,8 +4,11 @@ Changelog
 0.12 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Implement our own `IDashboardGenerablePODTemplates` adapter like it is the
+  case for `collective.documentgenerator` `IGenerablePODTemplates` adapter to
+  be used in the `dashboard-document-generation-link` viewlet so it is
+  registered for `IFacetedNavigation` and easier to override when necessary.
+  [gbastien]
 
 0.11 (2019-11-26)
 -----------------
@@ -116,4 +119,6 @@ Changelog
 0.1 (2018-06-21)
 ----------------
 - Initial release.
-  [gbastien]
+DTemplates`
+        '--test-path', '/srv/zinstances/buildout.pm/src/imio.prettylink/src',
+  [gbastiena

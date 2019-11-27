@@ -4,10 +4,13 @@ from collective.documentgenerator.viewlets.generationlinks import DocumentGenera
 from collective.eeafaceted.collectionwidget.interfaces import NotDashboardContextException
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.collectionwidget.utils import getCurrentCollection
+from collective.eeafaceted.dashboard.interfaces import IDashboardGenerablePODTemplates
 from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
 from collective.eeafaceted.z3ctable.browser.views import FacetedTableView
 from eea.facetednavigation.interfaces import IFacetedNavigable
 from plone.app.contenttypes.interfaces import ICollection
+from plone.memoize.view import memoize
+from zope.component import getAdapter
 
 
 # necessary for now for elements using ICollection from plone.app.collection
@@ -85,6 +88,12 @@ class DashboardDocumentGenerationView(DocumentGenerationView):
 
 class DashboardDocumentGeneratorLinksViewlet(DocumentGeneratorLinksViewlet):
     """For displaying on dashboards."""
+
+    @memoize
+    def get_generable_templates(self):
+        adapter = getAdapter(self.context, IDashboardGenerablePODTemplates)
+        generable_templates = adapter.get_generable_templates()
+        return generable_templates
 
     def available(self):
         """

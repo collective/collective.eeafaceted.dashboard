@@ -18,3 +18,9 @@ class ICustomViewFieldsVocabulary(Interface):
         """
           Get every IFacetedColumn z3c.table columns.
         """
+
+
+class IDashboardGenerablePODTemplates(Interface):
+    """
+    Marker interface for dashboard generable POD templates adapter.
+    """

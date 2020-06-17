@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2018-09-12 12:36+0000\n"
+"POT-Creation-Date: 2020-06-17 10:41+0000\n"
 "PO-Revision-Date: 2016-02-22 15:20+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,7 +20,7 @@ msgstr ""
 msgid "A document to generate on a dashboard."
 msgstr "Un document à générer depuis un tableau de bord."
 
-#: ./browser/facetedcollectionportlet.py:128
+#: ./browser/facetedcollectionportlet.py:131
 msgid "Add Collection Criteria Portlet"
 msgstr "Ajouter portlet 'Faceted Collection'"
 
@@ -36,9 +36,13 @@ msgstr "Modèle de document POD pour tableau de bord"
 msgid "Demo profile for collective.eeafaceted.dashboard adding and dashboard with preconfigured searches."
 msgstr ""
 
-#: ./browser/facetedcollectionportlet.py:140
+#: ./browser/facetedcollectionportlet.py:143
 msgid "Edit Collection Criteria Portlet"
 msgstr "Editer portlet 'Faceted Collection'"
+
+#: ./content/pod_template.py:47
+msgid "Enter the maximum amount of brains allowed in the generation context."
+msgstr "Encodez le nombre maximum d'objets authorisés pour la génération de ce document"
 
 #: ./profiles.zcml:29
 msgid "Extension profile for collective.eeafaceted.dashboard settings that aren't version dependent."
@@ -52,15 +56,24 @@ msgstr ""
 msgid "If selelected, receive awoken objects wrapped into their  helper view rather than brains as generation context"
 msgstr "Renvoie les objets et une vue d'aide à la génération comme contexte du modèle plutôt que les brains."
 
+#: ./content/pod_template.py:46
+msgid "Maximum amount of objects to print"
+msgstr "Nombre maximum d'éléments à imprimer"
+
 #: ./content/pod_template.py:39
 msgid "Select for which dashboard collections the template will be available. If nothing is selected, the template will be available on every dashboards."
 msgstr "Sélectionnez les tableaux de bord pour lesquels le modèle sera disponible. Si rien n'est sélectionné, le modèle sera disponible sur tous les tableaux de bord."
 
-#: ./testing.zcml:15
+#: ./testing.zcml:16
 msgid "Steps to ease tests of collective.eeafaceted.dashboard"
 msgstr ""
 
-#: ./browser/facetedcollectionportlet.py:129
+#. Default: "collective.eeafaceted.dashboard"
+#: ./browser/overrides.py:71
+msgid "The document ${title} cannot be generated because there are more than ${nb} items selected"
+msgstr "Le document ${title} ne peux pas être généré car plus de ${nb} éléments sont sélectionnés"
+
+#: ./browser/facetedcollectionportlet.py:132
 msgid "This portlet shows controls for faceted with collections."
 msgstr "Ce portlet affiche les widgets collection définis sur un dossier utilisant une vue à facettes"
 
@@ -80,6 +93,6 @@ msgstr ""
 msgid "collective.eeafaceted.dashboard Demo profile"
 msgstr ""
 
-#: ./testing.zcml:15
+#: ./testing.zcml:16
 msgid "collective.eeafaceted.dashboard tests"
 msgstr ""

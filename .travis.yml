@@ -1,5 +1,7 @@
+os:
+  - linux
+dist: bionic
 language: python
-
 sudo: false
 
 cache:
@@ -14,19 +16,14 @@ env:
   - PLONE_VERSION=4
   - PLONE_VERSION=5.0
   - PLONE_VERSION=5.1
-
-before_install:
-    - wget https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz
-    - mkdir geckodriver && tar zxvf geckodriver-v0.19.1-linux64.tar.gz -C geckodriver
-    - export PATH=$PATH:$PWD/geckodriver
+  - PLONE_VERSION=5.2
 
 install:
   - sed -ie "s#plone-5.1#plone-$PLONE_VERSION#" buildout.cfg
   - sed -ie "s#travis-5.1#travis-$PLONE_VERSION#" travis.cfg
-  - easy_install --version
-  - pip install setuptools==38.2.4
+  - virtualenv .
+  - bin/pip install -r requirements.txt
   - mkdir -p buildout-cache/{eggs,downloads}
-  - python bootstrap.py -c travis.cfg --setuptools-version=38.2.4 --version=2.10.0
   - bin/buildout -c travis.cfg buildout:download-cache=downloads buildout:eggs-directory=eggs annotate
   - bin/buildout -c travis.cfg buildout:download-cache=downloads buildout:eggs-directory=eggs
 
@@ -34,11 +31,9 @@ script:
   - bin/test --test=\!"robot"
 
 after_success:
-  - bin/coverage run bin/test --test=\!"robot"
-  - pip install coverage
-  - python -m coverage.pickle2json
-  - pip install coveralls
-  - coveralls
+  - bin/createcoverage --output-dir=parts/test/coverage
+  - bin/pip install -q coveralls
+  - bin/coveralls
 
 notifications:
   email:

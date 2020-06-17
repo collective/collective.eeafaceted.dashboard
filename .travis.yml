@@ -2,7 +2,6 @@ os:
   - linux
 dist: bionic
 language: python
-sudo: false
 
 cache:
   directories:
@@ -19,8 +18,7 @@ env:
   - PLONE_VERSION=5.2
 
 install:
-  - sed -ie "s#plone-5.1#plone-$PLONE_VERSION#" buildout.cfg
-  - sed -ie "s#travis-5.1#travis-$PLONE_VERSION#" travis.cfg
+  - sed -ie "s#test-5.1#test-$PLONE_VERSION#" travis.cfg
   - virtualenv .
   - bin/pip install -r requirements.txt
   - mkdir -p buildout-cache/{eggs,downloads}

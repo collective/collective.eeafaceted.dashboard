@@ -32,20 +32,18 @@
     <include file="upgrades.zcml" />
 
     <include package="z3c.unconfigure" file="meta.zcml"/>
-    <unconfigure>
+    <unconfigure package="plone.app.contenttypes">
         <utility
             component="plone.app.contenttypes.behaviors.collection.MetaDataFieldsVocabularyFactory"
             name="plone.app.contenttypes.metadatafields" />
     </unconfigure>
-    <unconfigure>
-        <configure package="eea.facetednavigation">
-            <browser:page
-              for="eea.facetednavigation.interfaces.IPossibleFacetedNavigable"
-              name="default_widgets.xml"
-              template="browser/template/default.xml"
-              permission="eea.faceted.configure"
-              />
-        </configure>
+    <unconfigure package="eea.facetednavigation">
+        <browser:page
+          for="eea.facetednavigation.interfaces.IPossibleFacetedNavigable"
+          name="default_widgets.xml"
+          template="browser/template/default.xml"
+          permission="eea.faceted.configure"
+          />
     </unconfigure>
 
     <adapter

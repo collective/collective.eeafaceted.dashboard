@@ -36,6 +36,8 @@
         <utility
             component="plone.app.contenttypes.behaviors.collection.MetaDataFieldsVocabularyFactory"
             name="plone.app.contenttypes.metadatafields" />
+    </unconfigure>
+    <unconfigure>
         <configure package="eea.facetednavigation">
             <browser:page
               for="eea.facetednavigation.interfaces.IPossibleFacetedNavigable"

@@ -4,6 +4,7 @@ from collective.documentgenerator.viewlets.generationlinks import DocumentGenera
 from collective.eeafaceted.collectionwidget.interfaces import NotDashboardContextException
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.collectionwidget.utils import getCurrentCollection
+from collective.eeafaceted.dashboard.content.pod_template import DashboardPODTemplate
 from collective.eeafaceted.dashboard.interfaces import IDashboardGenerablePODTemplates
 from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
 from collective.eeafaceted.z3ctable.browser.views import FacetedTableView
@@ -11,7 +12,7 @@ from eea.facetednavigation.interfaces import IFacetedNavigable
 from plone.app.contenttypes.interfaces import ICollection
 from plone.memoize.view import memoize
 from zope.component import getAdapter
-
+from zope.i18n import translate as _
 
 # necessary for now for elements using ICollection from plone.app.collection
 HAS_PAC = True
@@ -105,3 +106,16 @@ class DashboardDocumentGeneratorLinksViewlet(DocumentGeneratorLinksViewlet):
         except NotDashboardContextException:
             return False
         return super(DashboardDocumentGeneratorLinksViewlet, self).available()
+
+    def get_links_info(self):
+        links = super(DashboardDocumentGeneratorLinksViewlet, self).get_links_info()
+
+        for link in links:
+            template = link["template"]
+            link["title"] = "{} (Max {})".format(template.Title(), template.max_objects)
+            link["description"] = _("Only the first ${nb} items will be generated",
+                                    domain="collective.eeafaceted.dashboard",
+                                    mapping={
+                                        u"nb": template.max_objects
+                                    })
+        return links

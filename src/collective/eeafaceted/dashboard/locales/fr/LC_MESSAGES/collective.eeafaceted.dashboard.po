@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2020-06-17 10:41+0000\n"
+"POT-Creation-Date: 2020-06-18 14:33+0000\n"
 "PO-Revision-Date: 2016-02-22 15:20+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -60,6 +60,11 @@ msgstr "Renvoie les objets et une vue d'aide à la génération comme contexte d
 msgid "Maximum amount of objects to print"
 msgstr "Nombre maximum d'éléments à imprimer"
 
+#. Default: "collective.eeafaceted.dashboard"
+#: ./browser/overrides.py:117
+msgid "Only the first ${nb} items will be generated"
+msgstr "Seuls les ${nb} premiers éléments seront pris en compte"
+
 #: ./content/pod_template.py:39
 msgid "Select for which dashboard collections the template will be available. If nothing is selected, the template will be available on every dashboards."
 msgstr "Sélectionnez les tableaux de bord pour lesquels le modèle sera disponible. Si rien n'est sélectionné, le modèle sera disponible sur tous les tableaux de bord."
@@ -67,11 +72,6 @@ msgstr "Sélectionnez les tableaux de bord pour lesquels le modèle sera disponi
 #: ./testing.zcml:16
 msgid "Steps to ease tests of collective.eeafaceted.dashboard"
 msgstr ""
-
-#. Default: "collective.eeafaceted.dashboard"
-#: ./browser/overrides.py:71
-msgid "The document ${title} cannot be generated because there are more than ${nb} items selected"
-msgstr "Le document ${title} ne peux pas être généré car plus de ${nb} éléments sont sélectionnés"
 
 #: ./browser/facetedcollectionportlet.py:132
 msgid "This portlet shows controls for faceted with collections."

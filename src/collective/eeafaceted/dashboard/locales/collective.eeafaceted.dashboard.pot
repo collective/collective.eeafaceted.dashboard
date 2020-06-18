@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-06-17 10:41+0000\n"
+"POT-Creation-Date: 2020-06-18 14:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,17 +61,17 @@ msgstr ""
 msgid "Maximum amount of objects to print"
 msgstr ""
 
+#. Default: "collective.eeafaceted.dashboard"
+#: ./browser/overrides.py:117
+msgid "Only the first ${nb} items will be generated"
+msgstr ""
+
 #: ./content/pod_template.py:39
 msgid "Select for which dashboard collections the template will be available. If nothing is selected, the template will be available on every dashboards."
 msgstr ""
 
 #: ./testing.zcml:16
 msgid "Steps to ease tests of collective.eeafaceted.dashboard"
-msgstr ""
-
-#. Default: "collective.eeafaceted.dashboard"
-#: ./browser/overrides.py:71
-msgid "The document ${title} cannot be generated because there are more than ${nb} items selected"
 msgstr ""
 
 #: ./browser/facetedcollectionportlet.py:132

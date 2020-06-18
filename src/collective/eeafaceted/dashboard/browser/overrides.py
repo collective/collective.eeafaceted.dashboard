@@ -8,8 +8,6 @@ from collective.eeafaceted.dashboard.interfaces import IDashboardGenerablePODTem
 from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
 from collective.eeafaceted.z3ctable.browser.views import FacetedTableView
 from eea.facetednavigation.interfaces import IFacetedNavigable
-from zope.i18n import translate as _
-from plone import api
 from plone.app.contenttypes.interfaces import ICollection
 from plone.memoize.view import memoize
 from zope.component import getAdapter
@@ -67,16 +65,7 @@ class DashboardDocumentGenerationView(DocumentGenerationView):
 
         if IFacetedNavigable.providedBy(self.context):
             brains = getDashboardQueryResult(self.context)
-            if len(brains) > pod_template.max_objects:
-                message = _("The document ${title} cannot be generated because there are more than ${nb} items selected",
-                            domain="collective.eeafaceted.dashboard",
-                            mapping={
-                                u"title": pod_template.title,
-                                u"nb": pod_template.max_objects
-                            })
-                api.portal.show_message(message=message, request=self.request, type="error")
-                raise ValueError(message)
-
+            brains = brains[0:pod_template.max_objects]
             generation_context['brains'] = brains
             if getattr(pod_template, 'use_objects', False):
                 wrapped_objects = []

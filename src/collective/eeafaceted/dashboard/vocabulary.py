@@ -36,6 +36,7 @@ class DashboardCollectionsVocabulary(object):
         )
         return vocabulary
 
+
 DashboardCollectionsVocabularyFactory = DashboardCollectionsVocabulary()
 
 
@@ -74,6 +75,7 @@ class DashboardCategoryCollectionsVocabulary(object):
         terms.sort(key=attrgetter('title'))
         return SimpleVocabulary(terms)
 
+
 DashboardCategoryCollectionsVocabularyFactory = DashboardCategoryCollectionsVocabulary()
 
 
@@ -94,5 +96,6 @@ class DashboardMetaDataFieldsVocabulary(MetaDataFieldsVocabulary):
         else:
             # original behavior for plone.app.contenttypes Collection
             return super(DashboardMetaDataFieldsVocabulary, self).__call__(context)
+
 
 DashboardMetaDataFieldsVocabularyFactory = DashboardMetaDataFieldsVocabulary()

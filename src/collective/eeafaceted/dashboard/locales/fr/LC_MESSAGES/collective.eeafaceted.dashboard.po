@@ -42,7 +42,7 @@ msgstr "Editer portlet 'Faceted Collection'"
 
 #: ./content/pod_template.py:47
 msgid "Enter the maximum amount of brains allowed in the generation context."
-msgstr "Encodez le nombre maximum d'objets authorisés pour la génération de ce document"
+msgstr "Encodez le nombre maximum d'objets autorisés pour la génération de ce document."
 
 #: ./profiles.zcml:29
 msgid "Extension profile for collective.eeafaceted.dashboard settings that aren't version dependent."

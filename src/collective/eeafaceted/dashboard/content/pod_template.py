@@ -47,6 +47,7 @@ class IDashboardPODTemplate(IConfigurablePODTemplate):
         description=_(u'Enter the maximum amount of brains allowed in the generation context.'),
         required=True,
         default=500,
+        min=1,
     )
 
     form.omitted('pod_portal_types')

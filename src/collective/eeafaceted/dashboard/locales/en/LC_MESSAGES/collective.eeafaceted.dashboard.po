@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-09-12 12:36+0000\n"
+"POT-Creation-Date: 2020-06-18 14:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid "A document to generate on a dashboard."
 msgstr ""
 
-#: ./browser/facetedcollectionportlet.py:128
+#: ./browser/facetedcollectionportlet.py:131
 msgid "Add Collection Criteria Portlet"
 msgstr ""
 
@@ -35,8 +35,12 @@ msgstr ""
 msgid "Demo profile for collective.eeafaceted.dashboard adding and dashboard with preconfigured searches."
 msgstr ""
 
-#: ./browser/facetedcollectionportlet.py:140
+#: ./browser/facetedcollectionportlet.py:143
 msgid "Edit Collection Criteria Portlet"
+msgstr ""
+
+#: ./content/pod_template.py:47
+msgid "Enter the maximum amount of brains allowed in the generation context."
 msgstr ""
 
 #: ./profiles.zcml:29
@@ -51,15 +55,24 @@ msgstr ""
 msgid "If selelected, receive awoken objects wrapped into their  helper view rather than brains as generation context"
 msgstr ""
 
+#: ./content/pod_template.py:46
+msgid "Maximum amount of objects to print"
+msgstr ""
+
+#. Default: "collective.eeafaceted.dashboard"
+#: ./browser/overrides.py:117
+msgid "Only the first ${nb} items will be generated"
+msgstr ""
+
 #: ./content/pod_template.py:39
 msgid "Select for which dashboard collections the template will be available. If nothing is selected, the template will be available on every dashboards."
 msgstr ""
 
-#: ./testing.zcml:15
+#: ./testing.zcml:16
 msgid "Steps to ease tests of collective.eeafaceted.dashboard"
 msgstr ""
 
-#: ./browser/facetedcollectionportlet.py:129
+#: ./browser/facetedcollectionportlet.py:132
 msgid "This portlet shows controls for faceted with collections."
 msgstr ""
 
@@ -79,6 +92,6 @@ msgstr ""
 msgid "collective.eeafaceted.dashboard Demo profile"
 msgstr ""
 
-#: ./testing.zcml:15
+#: ./testing.zcml:16
 msgid "collective.eeafaceted.dashboard tests"
 msgstr ""

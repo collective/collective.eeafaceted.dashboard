@@ -7,11 +7,11 @@ from collective.eeafaceted.collectionwidget.utils import getCurrentCollection
 from collective.eeafaceted.dashboard.interfaces import IDashboardGenerablePODTemplates
 from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
 from collective.eeafaceted.z3ctable.browser.views import FacetedTableView
+from collective.eeafaceted.dashboard import FacetedDashboardMessageFactory as _
 from eea.facetednavigation.interfaces import IFacetedNavigable
 from plone.app.contenttypes.interfaces import ICollection
 from plone.memoize.view import memoize
 from zope.component import getAdapter
-
 
 # necessary for now for elements using ICollection from plone.app.collection
 HAS_PAC = True
@@ -65,6 +65,7 @@ class DashboardDocumentGenerationView(DocumentGenerationView):
 
         if IFacetedNavigable.providedBy(self.context):
             brains = getDashboardQueryResult(self.context)
+            brains = brains[0:pod_template.max_objects]
             generation_context['brains'] = brains
             if getattr(pod_template, 'use_objects', False):
                 wrapped_objects = []
@@ -104,3 +105,15 @@ class DashboardDocumentGeneratorLinksViewlet(DocumentGeneratorLinksViewlet):
         except NotDashboardContextException:
             return False
         return super(DashboardDocumentGeneratorLinksViewlet, self).available()
+
+    def get_links_info(self):
+        links = super(DashboardDocumentGeneratorLinksViewlet, self).get_links_info()
+
+        for link in links:
+            template = link["template"]
+            link["max"] = template.max_objects
+            link["description"] = _("Only the first ${nb} items will be generated",
+                                    mapping={
+                                        u"nb": template.max_objects
+                                    })
+        return links

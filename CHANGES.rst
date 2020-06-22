@@ -4,8 +4,8 @@ Changelog
 0.13 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Limit the number of items that can be generated in a DashboardPodTemplate.
+  [odelaere]
 
 0.12 (2019-11-27)
 -----------------

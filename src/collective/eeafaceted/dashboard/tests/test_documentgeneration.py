@@ -60,11 +60,23 @@ class TestDocumentGeneration(IntegrationTestCase):
                           u'sorting')
         self.request.form['c0[]'] = 'created'
 
+        self.assertEqual(self.dashboardtemplate.max_objects, 500)
         gen_context = self.view._get_generation_context(self.helper, self.dashboardtemplate)
         self.assertTrue('uids' in gen_context)
         self.assertEquals(len(gen_context['uids']), 3)
         self.assertTrue('brains' in gen_context)
         self.assertEquals(len(gen_context['brains']), 3)
+
+        self.dashboardtemplate.max_objects = 2
+        gen_context = self.view._get_generation_context(self.helper, self.dashboardtemplate)
+        self.assertEquals(len(gen_context['uids']), 2)
+        self.assertEquals(len(gen_context['brains']), 2)
+
+        self.dashboardtemplate.max_objects = 3
+        gen_context = self.view._get_generation_context(self.helper, self.dashboardtemplate)
+        self.assertEquals(len(gen_context['uids']), 3)
+        self.assertEquals(len(gen_context['brains']), 3)
+
         self.assertEqual(gen_context['details'], '1')
         # brains are sorted according to uids list
         self.assertEquals(gen_context['uids'],

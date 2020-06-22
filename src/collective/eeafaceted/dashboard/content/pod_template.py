@@ -41,6 +41,14 @@ class IDashboardPODTemplate(IConfigurablePODTemplate):
         value_type=schema.Choice(source='collective.eeafaceted.dashboard.dashboardcollectionsvocabulary'),
         required=True,
     )
+
+    max_objects = schema.Int(
+        title=_(u'Maximum amount of objects to print'),
+        description=_(u'Enter the maximum amount of brains allowed in the generation context.'),
+        required=True,
+        default=500,
+    )
+
     form.omitted('pod_portal_types')
 
 

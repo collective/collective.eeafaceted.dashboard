@@ -15,6 +15,7 @@ env:
   - PLONE_VERSION=4
   - PLONE_VERSION=5.0
   - PLONE_VERSION=5.1
+  - PLONE_VERSION=5.2
 
 install:
   - sed -ie "s#test-5.1#test-$PLONE_VERSION#" travis.cfg

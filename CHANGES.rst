@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.13 (unreleased)
+0.13 (2020-06-24)
 -----------------
 
 - Limit the number of items that can be generated in a DashboardPodTemplate.

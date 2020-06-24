@@ -18,7 +18,7 @@
 		   style="cursor: pointer">
             <img src="#"
              tal:attributes="src string:${view/portal_url}/++resource++collective.documentgenerator/${infos/output_format}.png" />
-            <span tal:replace="infos/title">Template title</span> (<span class="highlightValue" ><span tal:replace="infos/max">500</span> Max</span>)
+            <span tal:replace="infos/title">Template title</span> (<span class="highlightValue" ><span tal:replace="infos/max">500</span> max</span>)
 		</a>
 	    </li>
 	</ul>

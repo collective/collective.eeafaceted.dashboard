@@ -1,11 +1,12 @@
 Changelog
 =========
 
-0.14 (unreleased)
------------------
+0.13.1 (unreleased)
+-------------------
 
-- Nothing changed yet.
-
+- Check if received `pod_template` has a `max_objects` before restricting
+  number of `brains` to `max_objects`.
+  [gbastien]
 
 0.13 (2020-06-24)
 -----------------

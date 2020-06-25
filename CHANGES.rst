@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.13.1 (unreleased)
+0.13.1 (2020-06-25)
 -------------------
 
 - Check if received `pod_template` has a `max_objects` before restricting

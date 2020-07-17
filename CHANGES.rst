@@ -4,7 +4,8 @@ Changelog
 0.13.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fixed IndexError when generating a dashboardpotemplte whith empty elements.
+  [odelaere]
 
 
 0.13.1 (2020-06-25)

@@ -64,10 +64,10 @@ class DashboardDocumentGenerationView(DocumentGenerationView):
                               'uids': []}
 
         if IFacetedNavigable.providedBy(self.context):
-            brains = getDashboardQueryResult(self.context)
+            brains = getDashboardQueryResult(self.context) or []
             max_objects = getattr(pod_template, 'max_objects', None)
             if max_objects:
-                brains = brains[0:max_objects]
+                brains = brains[:max_objects]
             generation_context['brains'] = brains
             if getattr(pod_template, 'use_objects', False):
                 wrapped_objects = []

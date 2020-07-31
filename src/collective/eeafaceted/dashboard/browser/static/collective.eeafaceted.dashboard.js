@@ -40,9 +40,19 @@ function update_collections_count() {
       if (info.criterionId) {
       var criterionId = info.criterionId;
       var countByCollection = info.countByCollection;
+      var itemTotal = 0;
       countByCollection.forEach(function (item) {
         $('li#' + criterionId + item.uid + ' .term-count').html(item.count);
+        itemTotal += parseInt(item.count);
       });
+      if (itemTotal > 0) {
+          var title = document.title;
+          var existing_count_title = title.match(/^\(\d+\) (.+)$/);
+          if (existing_count_title) {
+              title = existing_count_title[1];
+          }
+          document.title = "(" + itemTotal + ") " + title;
+      }
     }
   });
 }

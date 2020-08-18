@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.13.2 (unreleased)
+0.13.2 (2020-08-18)
 -------------------
 
 - Fixed IndexError when generating a dashboardpotemplte whith empty elements.

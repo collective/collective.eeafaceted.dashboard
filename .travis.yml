@@ -51,7 +51,7 @@ script:
   - bin/test --test=\!"robot"
 
 after_success:
-  - bin/coverage run bin/test
+  - bin/coverage run bin/test --test=\!"robot"
   - bin/pip install -q coveralls==0.5
   - bin/coveralls
 

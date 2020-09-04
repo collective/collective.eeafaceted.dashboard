@@ -4,15 +4,14 @@ Changelog
 0.14 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Fixed css of `no results` sentence for `eea.facetednavigation>14`.
+  [gbastien]
 
 0.13.2 (2020-08-18)
 -------------------
 
 - Fixed IndexError when generating a dashboardpotemplte whith empty elements.
   [odelaere]
-
 
 0.13.1 (2020-06-25)
 -------------------

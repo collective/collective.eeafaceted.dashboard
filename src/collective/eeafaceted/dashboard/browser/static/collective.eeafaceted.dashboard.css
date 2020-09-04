@@ -101,6 +101,8 @@ div.listingBar span.next {
 /* skin sentence "no results" */
 .table_faceted_no_results {
     font-style: italic;
+    display: inline;
+    color: black;
 }
 
 /* align icons and pretty link correctly */

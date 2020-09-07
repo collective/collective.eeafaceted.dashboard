@@ -5,18 +5,13 @@ all: run
 BUILDOUT_FILES = bin/buildout buildout.cfg buildout.d/*.cfg
 
 .PHONY: bootstrap buildout run test cleanall
-bin/buildout: bootstrap.py buildout.cfg
+bin/buildout: buildout.cfg
 	virtualenv-2.7 .
 	bin/pip install -r requirements.txt
 	touch $@
 
 buildout: bin/buildout
 	bin/buildout -t 5
-
-bootstrap: bin/buildout
-
-run: bin/instance 
-	bin/instance fg
 
 bin/instance: $(BUILDOUT_FILES)
 	bin/buildout -Nvt 5

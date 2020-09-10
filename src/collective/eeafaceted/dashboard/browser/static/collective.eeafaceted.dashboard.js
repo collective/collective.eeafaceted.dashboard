@@ -34,27 +34,45 @@ function generatePodDocument(template_uid, output_format, tag) {
 }
 
 function update_collections_count() {
-  var url = $("link[rel='canonical']").attr('href') + '/@@json_collections_count';
-  $.get(url, async=true, function (response) {
-      var info = JSON.parse(response);
-      if (info.criterionId) {
-      var criterionId = info.criterionId;
-      var countByCollection = info.countByCollection;
-      var itemTotal = 0;
-      countByCollection.forEach(function (item) {
-        $('li#' + criterionId + item.uid + ' .term-count').html(item.count);
-        itemTotal += parseInt(item.count);
-      });
-      if (itemTotal > 0) {
-          var title = document.title;
-          var existing_count_title = title.match(/^\(\d+\) (.+)$/);
-          if (existing_count_title) {
-              title = existing_count_title[1];
-          }
-          document.title = "(" + itemTotal + ") " + title;
-      }
-    }
-  });
+    var config = [
+        {
+            link: $("#portaltab-incoming-mail a"),
+            url: $("#portaltab-incoming-mail a").attr("href") + '/mail-searches/@@json_collections_count'
+        },
+        {
+            link: $("#portaltab-outgoing-mail a"),
+            url: $("#portaltab-outgoing-mail a").attr("href") + '/mail-searches/@@json_collections_count'
+        },
+        {
+            link: $("#portaltab-tasks a"),
+            url: $("#portaltab-tasks a").attr("href") + '/task-searches/@@json_collections_count'
+        }
+    ]
+
+    config.forEach(function(tab) {
+        $.get(tab.url, async=true, function (response) {
+            var info = JSON.parse(response);
+
+            // set dashboards counts, only for current page
+            if (tab.link.parent().hasClass("selected")) {
+                if (info.criterionId) {
+                    var criterionId = info.criterionId;
+                    var countByCollection = info.countByCollection;
+                    countByCollection.forEach(function (item) {
+                        $('li#' + criterionId + item.uid + ' .term-count').html(item.count);
+                    });
+                }
+            }
+
+            // set portal tab totals
+            var itemTotal = 0;
+            info.countByCollection.forEach(function (item) {
+              itemTotal += parseInt(item.count);
+            });
+            var new_text = tab.link.html() + " (" + itemTotal + ")";
+            tab.link.html(new_text);
+        });
+    });
 }
 
 $(document).ready(function () {

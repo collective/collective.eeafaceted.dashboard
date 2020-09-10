@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.14 (unreleased)
+0.14 (2020-09-10)
 -----------------
 
 - Fixed css of `no results` sentence for `eea.facetednavigation>14`.

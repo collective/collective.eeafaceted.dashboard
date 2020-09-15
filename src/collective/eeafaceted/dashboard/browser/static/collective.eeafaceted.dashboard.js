@@ -91,6 +91,9 @@ $(document).ready(function () {
     $(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function() {
       update_collections_count();
     });
+    $('body').on('click', '#collections-count-refresh', function() {
+        update_collections_count();
+    });
   }
   Faceted.Options.FADE_SPEED=0;
   //Faceted.Options.SHOW_SPINNER=false;

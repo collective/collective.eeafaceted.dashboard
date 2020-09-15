@@ -4,6 +4,7 @@ from collective.eeafaceted.collectionwidget.interfaces import IDashboardCollecti
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.collectionwidget.widgets.widget import CollectionWidget
 from collective.eeafaceted.dashboard.config import CURRENT_CRITERION
+from collective.eeafaceted.dashboard.interfaces import ICountableTab
 from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
 from plone import api
 from Products.Five.browser import BrowserView
@@ -62,3 +63,13 @@ class JSONCollectionsCount(BrowserView):
             res = {'criterionId': data.__name__,
                    'countByCollection': info}
         return json.dumps(res)
+
+
+class JSONListCountableTabs(BrowserView):
+
+    """Produce json to list all portal tabs that require a counter of items to take care of."""
+
+    def __call__(self):
+        catalog = api.portal.get_tool('portal_catalog')
+        brains = catalog(object_provides=ICountableTab.__identifier__)
+        return json.dumps({'urls': [brain.getURL() for brain in brains]})

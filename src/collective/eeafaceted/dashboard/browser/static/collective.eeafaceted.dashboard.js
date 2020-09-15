@@ -34,43 +34,51 @@ function generatePodDocument(template_uid, output_format, tag) {
 }
 
 function update_collections_count() {
-    var config = [
-        {
-            link: $("#portaltab-incoming-mail a"),
-            url: $("#portaltab-incoming-mail a").attr("href") + '/mail-searches/@@json_collections_count'
-        },
-        {
-            link: $("#portaltab-outgoing-mail a"),
-            url: $("#portaltab-outgoing-mail a").attr("href") + '/mail-searches/@@json_collections_count'
-        },
-        {
-            link: $("#portaltab-tasks a"),
-            url: $("#portaltab-tasks a").attr("href") + '/task-searches/@@json_collections_count'
-        }
-    ]
+    $.getJSON($("body").data("portalUrl") + "/@@json_list_countable_tabs", function (data) {
+        var urls_to_show_count = data.urls;
+        var urls_to_download = new Set(data.urls);
 
-    config.forEach(function(tab) {
-        $.get(tab.url, async=true, function (response) {
-            var info = JSON.parse(response);
+        // add current page to the urls to download.
+        // even if the current tab isn't to be counted,
+        // its dashboard must be updated.
+        $("#portal-globalnav li.selected a").each(function () {
+            var url = $(this).attr("href");
+            urls_to_download.add(url);
+        });
 
-            // set dashboards counts, only for current page
-            if (tab.link.parent().hasClass("selected")) {
-                if (info.criterionId) {
-                    var criterionId = info.criterionId;
-                    var countByCollection = info.countByCollection;
-                    countByCollection.forEach(function (item) {
-                        $('li#' + criterionId + item.uid + ' .term-count').html(item.count);
-                    });
+        urls_to_download.forEach(function(url) {
+            $.get(url + '/@@json_collections_count', async=true, function (response) {
+                var info = JSON.parse(response);
+                var element = $("#portal-globalnav a[href='" + url + "']");
+
+                // set dashboards counts, only for current page
+                if (element.parent().hasClass("selected")) {
+                    if (info.criterionId) {
+                        var criterionId = info.criterionId;
+                        var countByCollection = info.countByCollection;
+                        countByCollection.forEach(function (item) {
+                            $('li#' + criterionId + item.uid + ' .term-count').html(item.count);
+                        });
+                    }
                 }
-            }
 
-            // set portal tab totals
-            var itemTotal = 0;
-            info.countByCollection.forEach(function (item) {
-              itemTotal += parseInt(item.count);
+                // set portal tab totals
+                if (urls_to_show_count.includes(url)) {
+                    var itemTotal = 0;
+                    info.countByCollection.forEach(function (item) {
+                        itemTotal += parseInt(item.count);
+                    });
+
+                    var title = element.html();
+                    var existing_count_title = title.match(/^(.+) \(\d+\)$/);
+                    if (existing_count_title) {
+                        title = existing_count_title[1];
+                    }
+
+                    var new_text = title + " (" + itemTotal + ")";
+                    element.html(new_text);
+                }
             });
-            var new_text = tab.link.html() + " (" + itemTotal + ")";
-            tab.link.html(new_text);
         });
     });
 }

@@ -111,7 +111,6 @@ div.pretty_link span.pretty_link_icons,
 a.pretty_link span.pretty_link_content,
 div.pretty_link span.pretty_link_content {
     padding-right: 0.2em;
-    vertical-align: bottom;
 }
 
 #content table.listing th a.sort_arrow_disabled {

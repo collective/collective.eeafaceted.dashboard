@@ -4,8 +4,9 @@ Changelog
 0.15 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Fixed pretty link displayed in dashboards, not necessary to change
+  `vertical-align` CSS property.
+  [gbastien]
 
 0.14 (2020-09-10)
 -----------------

@@ -34,50 +34,37 @@ function generatePodDocument(template_uid, output_format, tag) {
 }
 
 function update_collections_count() {
+    var url = $("link[rel='canonical']").attr('href') + '/@@json_collections_count';
+    $.getJSON(url, function (info) {
+        if (info.criterionId) {
+            var criterionId = info.criterionId;
+            var countByCollection = info.countByCollection;
+            countByCollection.forEach(function (item) {
+                $('li#' + criterionId + item.uid + ' .term-count').html(item.count);
+            });
+        }
+    });
+}
+
+function update_tabs_count() {
     $.getJSON($("body").data("portalUrl") + "/@@json_list_countable_tabs", function (data) {
-        var urls_to_show_count = data.urls;
-        var urls_to_download = new Set(data.urls);
-
-        // add current page to the urls to download.
-        // even if the current tab isn't to be counted,
-        // its dashboard must be updated.
-        $("#portal-globalnav li.selected a").each(function () {
-            var url = $(this).attr("href");
-            urls_to_download.add(url);
-        });
-
-        urls_to_download.forEach(function(url) {
-            $.get(url + '/@@json_collections_count', async=true, function (response) {
+        data.urls.forEach(function(url) {
+            $.get(url + '/@@json_collections_count', function (response) {
                 var info = JSON.parse(response);
                 var element = $("#portal-globalnav a[href='" + url + "']");
+                var itemTotal = 0;
+                info.countByCollection.forEach(function (item) {
+                    itemTotal += parseInt(item.count);
+                });
 
-                // set dashboards counts, only for current page
-                if (element.parent().hasClass("selected")) {
-                    if (info.criterionId) {
-                        var criterionId = info.criterionId;
-                        var countByCollection = info.countByCollection;
-                        countByCollection.forEach(function (item) {
-                            $('li#' + criterionId + item.uid + ' .term-count').html(item.count);
-                        });
-                    }
+                var title = element.html();
+                var existing_count_title = title.match(/^(.+) \(\d+\)$/);
+                if (existing_count_title) {
+                    title = existing_count_title[1];
                 }
 
-                // set portal tab totals
-                if (urls_to_show_count.includes(url)) {
-                    var itemTotal = 0;
-                    info.countByCollection.forEach(function (item) {
-                        itemTotal += parseInt(item.count);
-                    });
-
-                    var title = element.html();
-                    var existing_count_title = title.match(/^(.+) \(\d+\)$/);
-                    if (existing_count_title) {
-                        title = existing_count_title[1];
-                    }
-
-                    var new_text = title + " (" + itemTotal + ")";
-                    element.html(new_text);
-                }
+                var new_text = title + " (" + itemTotal + ")";
+                element.html(new_text);
             });
         });
     });
@@ -85,6 +72,7 @@ function update_collections_count() {
 
 $(document).ready(function () {
   if ($('div[class*="faceted-tagscloud-collection-widget"').length > 0) {
+    update_tabs_count();
     if (!has_faceted()) {
       update_collections_count();
     }
@@ -92,7 +80,7 @@ $(document).ready(function () {
       update_collections_count();
     });
     $('body').on('click', '#collections-count-refresh', function() {
-        update_collections_count();
+      update_tabs_count();
     });
   }
   Faceted.Options.FADE_SPEED=0;

@@ -67,11 +67,17 @@ function update_tabs_count() {
                 element.html(new_text);
             });
         });
+        if (window.update_tabs_count_timeout > 0) {
+            clearTimeout(window.update_tabs_count_timeout);
+            window.update_tabs_count_timeout = 0;
+        }
+        window.update_tabs_count_timeout = setTimeout(update_tabs_count, 60 * 60 * 1000);
     });
 }
 
 $(document).ready(function () {
   if ($('div[class*="faceted-tagscloud-collection-widget"').length > 0) {
+    window.update_tabs_count_timeout = 0;
     update_tabs_count();
     if (!has_faceted()) {
       update_collections_count();

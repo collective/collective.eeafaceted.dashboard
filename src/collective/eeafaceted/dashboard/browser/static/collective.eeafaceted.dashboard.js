@@ -71,7 +71,10 @@ function update_tabs_count() {
             clearTimeout(window.update_tabs_count_timeout);
             window.update_tabs_count_timeout = 0;
         }
-        window.update_tabs_count_timeout = setTimeout(update_tabs_count, 60 * 60 * 1000);
+        if (data.urls.length > 0) {  // to avoid setting timeout when no countable tabs
+            var interval=60 * 60 * 1000;
+            window.update_tabs_count_timeout = setTimeout(update_tabs_count, interval);
+        }
     });
 }
 

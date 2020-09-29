@@ -67,29 +67,34 @@ function update_tabs_count() {
                 element.html(new_text);
             });
         });
-        if (window.update_tabs_count_timeout > 0) {
-            clearTimeout(window.update_tabs_count_timeout);
-            window.update_tabs_count_timeout = 0;
+        /*  Only manual now
+        if (sessionStorage.getItem('tabs_count_timeout') != '0') {
+            clearInterval(parseInt(sessionStorage.getItem('tabs_count_timeout')));
+            sessionStorage.setItem('tabs_count_timeout', '0');
         }
         if (data.urls.length > 0) {  // to avoid setting timeout when no countable tabs
             var interval = 60 * 60 * 1000;
-            window.update_tabs_count_timeout = setTimeout(update_tabs_count, interval);
+            setInterval is reset at each page load. Have to create a function called every sec to store timer in session
+            sessionStorage.setItem('tabs_count_timeout', setInterval(update_tabs_count, interval));
         }
+        */
     });
 }
 
 $(document).ready(function () {
   if ($('div[class*="faceted-tagscloud-collection-widget"').length > 0) {
-    window.update_tabs_count_timeout = 0;
-    update_tabs_count();
+    if (sessionStorage.getItem('tabs_count_timeout') === null) {
+        sessionStorage.setItem('tabs_count_timeout', '0');
+        update_tabs_count();
+    }
     if (!has_faceted()) {
-      update_collections_count();
+        update_collections_count();
     }
     $(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function() {
-      update_collections_count();
+        update_collections_count();
     });
     $('body').on('click', '#collections-count-refresh', function() {
-      update_tabs_count();
+        update_tabs_count();
     });
   }
   Faceted.Options.FADE_SPEED=0;

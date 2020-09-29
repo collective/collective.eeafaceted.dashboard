@@ -24,3 +24,9 @@ class IDashboardGenerablePODTemplates(Interface):
     """
     Marker interface for dashboard generable POD templates adapter.
     """
+
+
+class ICountableTab(Interface):
+    """
+    Marker interface for a tab to be affixed with a counter.
+    """

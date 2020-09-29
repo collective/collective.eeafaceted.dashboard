@@ -29,6 +29,14 @@
         permission="zope2.View"
         />
 
+    <browser:page
+        for="*"
+        name="json_list_countable_tabs"
+        class=".views.JSONListCountableTabs"
+        layer="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
+        permission="zope2.View"
+        />
+
     <!-- collective.eeafaceted.z3ctable -->
     <configure package="collective.eeafaceted.z3ctable">
         <browser:view

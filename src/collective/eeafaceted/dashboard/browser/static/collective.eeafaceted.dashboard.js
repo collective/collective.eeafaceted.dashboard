@@ -34,26 +34,67 @@ function generatePodDocument(template_uid, output_format, tag) {
 }
 
 function update_collections_count() {
-  var url = $("link[rel='canonical']").attr('href') + '/@@json_collections_count';
-  $.get(url, async=true, function (response) {
-      var info = JSON.parse(response);
-      if (info.criterionId) {
-      var criterionId = info.criterionId;
-      var countByCollection = info.countByCollection;
-      countByCollection.forEach(function (item) {
-        $('li#' + criterionId + item.uid + ' .term-count').html(item.count);
-      });
-    }
-  });
+    var url = $("link[rel='canonical']").attr('href') + '/@@json_collections_count';
+    $.getJSON(url, function (info) {
+        if (info.criterionId) {
+            var criterionId = info.criterionId;
+            var countByCollection = info.countByCollection;
+            countByCollection.forEach(function (item) {
+                $('li#' + criterionId + item.uid + ' .term-count').html(item.count);
+            });
+        }
+    });
+}
+
+function update_tabs_count() {
+    $.getJSON($("body").data("portalUrl") + "/@@json_list_countable_tabs", function (data) {
+        data.urls.forEach(function(url) {
+            $.get(url + '/@@json_collections_count', function (response) {
+                var info = JSON.parse(response);
+                var element = $("#portal-globalnav a[href='" + url + "']");
+                var itemTotal = 0;
+                info.countByCollection.forEach(function (item) {
+                    itemTotal += parseInt(item.count);
+                });
+
+                var title = element.html();
+                var existing_count_title = title.match(/^(.+) \(\d+\)$/);
+                if (existing_count_title) {
+                    title = existing_count_title[1];
+                }
+
+                var new_text = title + " (" + itemTotal + ")";
+                element.html(new_text);
+            });
+        });
+        /*  Only manual now
+        if (sessionStorage.getItem('tabs_count_timeout') != '0') {
+            clearInterval(parseInt(sessionStorage.getItem('tabs_count_timeout')));
+            sessionStorage.setItem('tabs_count_timeout', '0');
+        }
+        if (data.urls.length > 0) {  // to avoid setting timeout when no countable tabs
+            var interval = 60 * 60 * 1000;
+            setInterval is reset at each page load. Have to create a function called every sec to store timer in session
+            sessionStorage.setItem('tabs_count_timeout', setInterval(update_tabs_count, interval));
+        }
+        */
+    });
 }
 
 $(document).ready(function () {
   if ($('div[class*="faceted-tagscloud-collection-widget"').length > 0) {
+    if (sessionStorage.getItem('tabs_count_timeout') === null) {
+        sessionStorage.setItem('tabs_count_timeout', '0');
+        update_tabs_count();
+    }
     if (!has_faceted()) {
-      update_collections_count();
+        update_collections_count();
     }
     $(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function() {
-      update_collections_count();
+        update_collections_count();
+    });
+    $('body').on('click', '#collections-count-refresh', function() {
+        update_tabs_count();
     });
   }
   Faceted.Options.FADE_SPEED=0;

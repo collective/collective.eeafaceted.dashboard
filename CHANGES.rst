@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.15 (unreleased)
+0.15 (2020-10-02)
 -----------------
 
 - Fixed pretty link displayed in dashboards, not necessary to change

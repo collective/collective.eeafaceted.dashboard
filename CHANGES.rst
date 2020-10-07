@@ -13,6 +13,9 @@ Changelog
 - Fixed pretty link displayed in dashboards, not necessary to change
   `vertical-align` CSS property.
   [gbastien]
+- Added total collections results count on folder tabs providing ICountableTab.
+  Only manual refresh for now.
+  [daggelpop, sgeulette]
 
 0.14 (2020-09-10)
 -----------------

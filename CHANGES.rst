@@ -4,8 +4,11 @@ Changelog
 0.16 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Avoid double different checks in
+  `DashboardDocumentGenerationView._get_generation_context` (one time checked
+  on presence of `facetedQuery` in `REQUEST` then if context is
+  `IFacetedNavigable`, only check if context is `IFacetedNavigable`).
+  [gbastien]
 
 0.15 (2020-10-02)
 -----------------

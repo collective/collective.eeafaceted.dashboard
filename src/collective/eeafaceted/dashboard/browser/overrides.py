@@ -55,33 +55,31 @@ class DashboardDocumentGenerationView(DocumentGenerationView):
        is available for sub-packages that want to extend the template generation context."""
 
     def _get_generation_context(self, helper_view, pod_template):
-        """ """
-        # if we are in base viewlet (not dashboard), return the base context
-        if 'facetedQuery' not in self.request.form:
-            return super(DashboardDocumentGenerationView, self)._get_generation_context(helper_view, pod_template)
+        """Include brains/uids if we are on a dashboard."""
+        if not IFacetedNavigable.providedBy(self.context):
+            return super(DashboardDocumentGenerationView, self)._get_generation_context(
+                helper_view, pod_template)
 
         generation_context = {'brains': [],
                               'uids': []}
-
-        if IFacetedNavigable.providedBy(self.context):
-            brains = getDashboardQueryResult(self.context) or []
-            max_objects = getattr(pod_template, 'max_objects', None)
-            if max_objects:
-                brains = brains[:max_objects]
-            generation_context['brains'] = brains
-            if getattr(pod_template, 'use_objects', False):
-                wrapped_objects = []
-                brain_and_objects = []
-                for brain in brains:
-                    generation_context['uids'].append(brain.UID)
-                    obj = brain.getObject()
-                    helper = obj.unrestrictedTraverse('@@document_generation_helper_view')
-                    wrapped_objects.append((helper.context, helper))
-                    brain_and_objects.append((brain, helper.context, helper))
-                generation_context['objects'] = wrapped_objects
-                generation_context['all'] = brain_and_objects
-            else:
-                generation_context['uids'] = [brain.UID for brain in brains]
+        brains = getDashboardQueryResult(self.context) or []
+        max_objects = getattr(pod_template, 'max_objects', None)
+        if max_objects:
+            brains = brains[:max_objects]
+        generation_context['brains'] = brains
+        if getattr(pod_template, 'use_objects', False):
+            wrapped_objects = []
+            brain_and_objects = []
+            for brain in brains:
+                generation_context['uids'].append(brain.UID)
+                obj = brain.getObject()
+                helper = obj.unrestrictedTraverse('@@document_generation_helper_view')
+                wrapped_objects.append((helper.context, helper))
+                brain_and_objects.append((brain, helper.context, helper))
+            generation_context['objects'] = wrapped_objects
+            generation_context['all'] = brain_and_objects
+        else:
+            generation_context['uids'] = [brain.UID for brain in brains]
 
         generation_context.update(
             super(DashboardDocumentGenerationView, self)._get_generation_context(

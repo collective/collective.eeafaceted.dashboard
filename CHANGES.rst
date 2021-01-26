@@ -9,6 +9,11 @@ Changelog
   on presence of `facetedQuery` in `REQUEST` then if context is
   `IFacetedNavigable`, only check if context is `IFacetedNavigable`).
   [gbastien]
+- Adapted `DashboardDocumentGeneratorLinksViewlet` template
+  (`generationlinks.pt`) to use svg icons now that it is the case in
+  `collective.documentgenerator`.
+  Require `collective.documentgenerator>3.19`.
+  [gbastien]
 
 0.15 (2020-10-02)
 -----------------

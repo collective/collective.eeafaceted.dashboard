@@ -42,7 +42,7 @@ setup(
         'plone.batching > 1.0.4',
         'setuptools',
         'collective.compoundcriterion',
-        'collective.documentgenerator',
+        'collective.documentgenerator>3.19',
         'collective.eeafaceted.collectionwidget>0.9',
         'collective.eeafaceted.z3ctable>1.0',
         'eea.facetednavigation>=10.0',

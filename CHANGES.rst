@@ -14,6 +14,9 @@ Changelog
   `collective.documentgenerator`.
   Require `collective.documentgenerator>3.19`.
   [gbastien]
+- Small fix in faceted criterion CSS to be sure that first value is
+  correctly displayed.
+  [gbastien]
 
 0.15 (2020-10-02)
 -----------------

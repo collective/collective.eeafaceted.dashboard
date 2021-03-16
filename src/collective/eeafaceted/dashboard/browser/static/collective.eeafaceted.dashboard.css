@@ -26,9 +26,11 @@ div#center---default---widgets div.faceted-widget {
 }
 
 /* reduce margin and use height and overflow so checkbox lists are displayed with a scrollbar */
+/* use a little top margin or letters like À are not correctly displayed, the accent is hidden */
 #content fieldset.widget-fieldset ul {
     margin-left: 0.2em;
     margin-right: 0.2em;
+    margin-top: 0.1em;
 }
 #content div#top---advanced---widgets .widget-fieldset > form {
     height: 100px;

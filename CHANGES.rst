@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.16 (unreleased)
+0.16 (2021-04-20)
 -----------------
 
 - Avoid double different checks in

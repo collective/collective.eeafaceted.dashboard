@@ -7,7 +7,6 @@ Changelog
 - Adapt code to allow override of faceted context
   [mpeeters]
 
-
 0.16 (2021-04-20)
 -----------------
 

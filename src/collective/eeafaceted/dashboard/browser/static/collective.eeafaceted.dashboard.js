@@ -23,7 +23,8 @@ function generatePodDocument(template_uid, output_format, tag) {
             else {
                 // if we unselected some checkboxes, we pass uids
                 // else, we pass nothing, it is as if we did selected everything
-                if ($('input[name="select_item"]').length === uids.length) {
+                // take care that the select/unselect all has also the name "select_item"
+                if ($('input[name="select_item"]:not(#select_unselect_items)').length === uids.length) {
                     uids = [];
                 }
                 theForm.uids.value = uids;

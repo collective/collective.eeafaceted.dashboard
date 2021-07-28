@@ -1,11 +1,12 @@
 Changelog
 =========
 
-0.17 (unreleased)
------------------
+0.16.1 (unreleased)
+-------------------
 
-- Nothing changed yet.
-
+- Fixed bug in JS function `generatePodDocument` that was only taking elements
+  of the current dashboard page and no more following pages.
+  [gbastien]
 
 0.16 (2021-04-20)
 -----------------

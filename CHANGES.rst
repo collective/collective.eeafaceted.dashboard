@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.16.1 (unreleased)
+0.16.1 (2021-07-28)
 -------------------
 
 - Fixed bug in JS function `generatePodDocument` that was only taking elements

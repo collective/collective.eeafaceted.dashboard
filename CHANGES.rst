@@ -6,6 +6,9 @@ Changelog
 
 - Adapt code to allow override of faceted context
   [mpeeters]
+- Fixed bug in JS function `generatePodDocument` that was only taking elements
+  of the current dashboard page and no more following pages.
+  [gbastien]
 
 0.16 (2021-04-20)
 -----------------

@@ -36,17 +36,17 @@ class JSONCollectionsCount(BrowserView):
 
     """Produce json to update counts."""
 
-    def get_context(self):
-        faceted_context = self.context
-        while not IFacetedNavigable.providedBy(faceted_context) and not faceted_context.meta_type == 'Plone Site':
-            return faceted_context.aq_inner.aq_parent
+    def get_context(self, faceted_context):
+        while not IFacetedNavigable.providedBy(faceted_context) and \
+                not faceted_context.meta_type == 'Plone Site':
+            return self.get_context(faceted_context.aq_inner.aq_parent)
         return faceted_context
 
     def __call__(self):
         # view may be called on a faceted context or a sub-element, if it is a sub-element
         # get the first parent that is a faceted
         res = {}
-        faceted_context = self.get_context()
+        faceted_context = self.get_context(self.context)
         if faceted_context.meta_type != 'Plone Site':
             data = getCollectionLinkCriterion(faceted_context)
             widget = CollectionWidget(faceted_context, self.request, data)

@@ -84,3 +84,23 @@ class TestJSONCollectionsCount(IntegrationTestCase):
             'countByCollection': []
         }
         self.assertEqual(self.view(), json.dumps(expected))
+
+    def test_with_sub_elements(self):
+        """Make sure especially the JSONCollectionsCount.get_context gets
+           the faceted context when the view is called from a sub/sub element."""
+        self.assertEqual(self.view.context, self.folder)
+        self.assertEqual(self.view(), '{"criterionId": "c1", "countByCollection": []}')
+        subfolder = api.content.create(
+            id='subfolder',
+            type='Folder',
+            title='Subfolder',
+            container=self.folder)
+        self.view.context = subfolder
+        self.assertEqual(self.view(), '{"criterionId": "c1", "countByCollection": []}')
+        subsubfolder = api.content.create(
+            id='subsubfolder',
+            type='Folder',
+            title='Subsubfolder',
+            container=subfolder)
+        self.view.context = subsubfolder
+        self.assertEqual(self.view(), '{"criterionId": "c1", "countByCollection": []}')

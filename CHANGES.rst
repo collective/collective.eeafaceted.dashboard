@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.17 (unreleased)
+0.17 (2021-08-27)
 -----------------
 
 - Adapt code to allow override of faceted context

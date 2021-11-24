@@ -4,6 +4,8 @@ Changelog
 0.18 (unreleased)
 -----------------
 
+- Removed depracated Products.ATContentTypes
+  [fngaha]
 - Fixed py3 errors.
   [fngaha]
 

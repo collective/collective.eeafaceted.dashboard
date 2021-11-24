@@ -1,21 +1,19 @@
 # -*- coding: utf-8 -*-
 
+import logging
+
 from collective.documentgenerator.content.condition import ConfigurablePODTemplateCondition
 from collective.documentgenerator.content.pod_template import ConfigurablePODTemplate
 from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
 from collective.eeafaceted.collectionwidget.interfaces import NotDashboardContextException
 from collective.eeafaceted.collectionwidget.utils import getCurrentCollection
 from collective.eeafaceted.dashboard import FacetedDashboardMessageFactory as _
-
 from plone.autoform import directives as form
-
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from z3c.form.browser.radio import RadioFieldWidget
 from zope import schema
-from zope.interface import implements
+from zope.interface import implementer
 
-
-import logging
 logger = logging.getLogger('collective.eeafaceted.dashboard: DashboardPODTemplate')
 
 
@@ -53,12 +51,11 @@ class IDashboardPODTemplate(IConfigurablePODTemplate):
     form.omitted('pod_portal_types')
 
 
+@implementer(IDashboardPODTemplate)
 class DashboardPODTemplate(ConfigurablePODTemplate):
     """
     DashboardPODTemplate dexterity class.
     """
-
-    implements(IDashboardPODTemplate)
 
 
 class DashboardPODTemplateCondition(ConfigurablePODTemplateCondition):

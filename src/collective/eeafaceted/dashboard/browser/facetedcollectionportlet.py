@@ -1,22 +1,19 @@
 # encoding: utf-8
 
 from Acquisition import aq_inner, aq_parent
-
-from zope.interface import implements
-from plone.portlets.interfaces import IPortletDataProvider
-from plone.app.portlets.portlets import base
-
 from Products.CMFPlone.utils import base_hasattr
 from Products.CMFPlone.utils import getFSVersionTuple
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from eea.facetednavigation.criteria.interfaces import ICriteria
-from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
 from collective.eeafaceted.collectionwidget.interfaces import NoFacetedViewDefinedException
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.collectionwidget.widgets.widget import CollectionWidget
-
 from collective.eeafaceted.dashboard import FacetedDashboardMessageFactory as _
 from collective.eeafaceted.dashboard.config import DEFAULT_PORTLET_TITLE
+from eea.facetednavigation.criteria.interfaces import ICriteria
+from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
+from plone.app.portlets.portlets import base
+from plone.portlets.interfaces import IPortletDataProvider
+from zope.interface import implementer
 
 # in Plone5, portlet form is a z3c.form, in Plone4 it uses formlib
 HAS_PLONE5 = bool(getFSVersionTuple()[0] >= 5)
@@ -29,8 +26,8 @@ class IFacetedCollectionPortlet(IPortletDataProvider):
     """ A portlet that shows controls for faceted with collections """
 
 
+@implementer(IFacetedCollectionPortlet)
 class Assignment(base.Assignment):
-    implements(IFacetedCollectionPortlet)
 
     @property
     def title(self):

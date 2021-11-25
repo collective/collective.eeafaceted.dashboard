@@ -4,8 +4,8 @@ Changelog
 0.22.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Fix ModuleNotFoundError, uses `plone.app.vocabularies.metadatafields.MetaDataFieldsVocabulary` instead of
+  `plone.app.contenttypes.behaviors.collection.MetaDataFieldsVocabulary`
 
 0.22.0 (2023-12-07)
 -------------------

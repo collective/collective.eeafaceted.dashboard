@@ -5,7 +5,7 @@ from collective.eeafaceted.dashboard.interfaces import ICustomViewFieldsVocabula
 from eea.facetednavigation.interfaces import IFacetedNavigable
 from operator import attrgetter
 from plone import api
-from plone.app.contenttypes.behaviors.collection import MetaDataFieldsVocabulary
+from plone.app.vocabularies.metadatafields import MetaDataFieldsVocabulary
 from plone.app.uuid.utils import uuidToCatalogBrain
 from zope.globalrequest import getRequest
 from zope.interface import implementer

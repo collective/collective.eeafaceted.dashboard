@@ -4,6 +4,8 @@ Changelog
 0.18 (unreleased)
 -----------------
 
+- Fix ModuleNotFoundError, uses `plone.app.vocabularies.metadatafields.MetaDataFieldsVocabulary` instead of
+  `plone.app.contenttypes.behaviors.collection.MetaDataFieldsVocabulary`
 - Removed depracated Products.ATContentTypes
   [fngaha]
 - Fixed py3 errors.

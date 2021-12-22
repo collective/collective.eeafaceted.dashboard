@@ -4,8 +4,8 @@ Changelog
 0.18 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Searched unrestrictedly countable tabs.
+  [sgeulette]
 
 0.17 (2021-08-27)
 -----------------

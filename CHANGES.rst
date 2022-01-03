@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.18 (unreleased)
+0.18 (2022-01-03)
 -----------------
 
 - Searched unrestrictedly countable tabs.

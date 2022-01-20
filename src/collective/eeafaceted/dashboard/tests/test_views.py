@@ -24,6 +24,8 @@ class TestJSONCollectionsCount(IntegrationTestCase):
             container=self.folder,
             tal_condition=u'',
             roles_bypassing_talcondition=[],
+            sort_reversed=False,
+            query=[]
         )
         dashboardcol2 = api.content.create(
             id='dc2',
@@ -31,7 +33,9 @@ class TestJSONCollectionsCount(IntegrationTestCase):
             title='Dashboard collection 2',
             container=self.folder,
             tal_condition=u'',
-            roles_bypassing_talcondition=[]
+            roles_bypassing_talcondition=[],
+            sort_reversed=False,
+            query=[]
         )
         dashboardcol3 = api.content.create(
             id='dc3',
@@ -39,7 +43,9 @@ class TestJSONCollectionsCount(IntegrationTestCase):
             title='Dashboard collection 3',
             container=self.folder,
             tal_condition=u'',
-            roles_bypassing_talcondition=[]
+            roles_bypassing_talcondition=[],
+            sort_reversed=False,
+            query=[]
         )
         dashboardcoll.showNumberOfItems = True
         dashboardcol2.showNumberOfItems = False

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Base module for unittesting."""
 
+from collective.eeafaceted.dashboard.utils import enableFacetedDashboardFor
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
@@ -16,10 +17,8 @@ from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter
 from zope.viewlet.interfaces import IViewletManager
 
-import unittest
-
 import collective.eeafaceted.dashboard
-from collective.eeafaceted.dashboard.utils import enableFacetedDashboardFor
+import unittest
 
 
 class FacetedDashboardLayer(PloneSandboxLayer):

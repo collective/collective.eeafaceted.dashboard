@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from zope.component import queryMultiAdapter
-from plone import api
 from collective.documentgenerator.interfaces import IPODTemplateCondition
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.dashboard.content.pod_template import DashboardPODTemplateCondition
 from collective.eeafaceted.dashboard.testing import IntegrationTestCase
+from plone import api
 from zope.annotation import IAnnotations
+from zope.component import queryMultiAdapter
 
 
 class TestDashboardPODTemplate(IntegrationTestCase):

@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 """Test views."""
-import json
-
+from collective.eeafaceted.dashboard.testing import IntegrationTestCase
 from plone import api
 
-from collective.eeafaceted.dashboard.testing import IntegrationTestCase
+import json
 
 
 class TestJSONCollectionsCount(IntegrationTestCase):
@@ -24,7 +23,9 @@ class TestJSONCollectionsCount(IntegrationTestCase):
             title='Dashboard collection 1',
             container=self.folder,
             tal_condition=u'',
-            roles_bypassing_talcondition=[]
+            roles_bypassing_talcondition=[],
+            sort_reversed=False,
+            query=[]
         )
         dashboardcol2 = api.content.create(
             id='dc2',
@@ -32,7 +33,9 @@ class TestJSONCollectionsCount(IntegrationTestCase):
             title='Dashboard collection 2',
             container=self.folder,
             tal_condition=u'',
-            roles_bypassing_talcondition=[]
+            roles_bypassing_talcondition=[],
+            sort_reversed=False,
+            query=[]
         )
         dashboardcol3 = api.content.create(
             id='dc3',
@@ -40,7 +43,9 @@ class TestJSONCollectionsCount(IntegrationTestCase):
             title='Dashboard collection 3',
             container=self.folder,
             tal_condition=u'',
-            roles_bypassing_talcondition=[]
+            roles_bypassing_talcondition=[],
+            sort_reversed=False,
+            query=[]
         )
         dashboardcoll.showNumberOfItems = True
         dashboardcol2.showNumberOfItems = False

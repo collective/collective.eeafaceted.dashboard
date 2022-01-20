@@ -8,7 +8,6 @@
 *.egg-info
 *.EGG-INFO
 *.log
-.*.cfg
 .coverage
 bin/
 build/
@@ -25,3 +24,7 @@ var/
 src/*
 !src/collective
 pip-selfcheck.json
+.idea
+pyvenv.cfg
+.installed.cfg
+.mr.developer.cfg

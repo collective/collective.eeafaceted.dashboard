@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 """Test views."""
-import json
-
+from collective.eeafaceted.dashboard.testing import IntegrationTestCase
 from plone import api
 
-from collective.eeafaceted.dashboard.testing import IntegrationTestCase
+import json
 
 
 class TestJSONCollectionsCount(IntegrationTestCase):
@@ -24,7 +23,7 @@ class TestJSONCollectionsCount(IntegrationTestCase):
             title='Dashboard collection 1',
             container=self.folder,
             tal_condition=u'',
-            roles_bypassing_talcondition=[]
+            roles_bypassing_talcondition=[],
         )
         dashboardcol2 = api.content.create(
             id='dc2',

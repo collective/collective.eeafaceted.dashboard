@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """Setup/installation tests for this package."""
 
-from plone import api
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.dashboard.testing import IntegrationTestCase
 from collective.eeafaceted.dashboard.utils import enableFacetedDashboardFor
+from plone import api
 from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 

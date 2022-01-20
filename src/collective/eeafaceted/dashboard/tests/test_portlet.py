@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
-import lxml
-from zope.annotation import IAnnotations
-from zope.component import getUtility
-from zope.component import getMultiAdapter
-from eea.facetednavigation.criteria.interfaces import ICriteria
 from collective.eeafaceted.collectionwidget.interfaces import NoCollectionWidgetDefinedException
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.collectionwidget.widgets.widget import CollectionWidget
-from plone import api
-from plone.portlets.interfaces import IPortletManager, IPortletRenderer
-
 from collective.eeafaceted.dashboard.browser import facetedcollectionportlet as portlet
 from collective.eeafaceted.dashboard.config import DEFAULT_PORTLET_TITLE
 from collective.eeafaceted.dashboard.testing import IntegrationTestCase
+from eea.facetednavigation.criteria.interfaces import ICriteria
+from plone import api
+from plone.portlets.interfaces import IPortletManager
+from plone.portlets.interfaces import IPortletRenderer
+from zope.annotation import IAnnotations
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+
+import lxml
 
 
 class TestPortlet(IntegrationTestCase):

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
+from collective.eeafaceted.dashboard.testing import IntegrationTestCase
+from collective.eeafaceted.dashboard.vocabulary import DashboardCollectionsVocabulary
+from eea.facetednavigation.interfaces import IFacetedNavigable
+from plone import api
 from zope.component import queryUtility
 from zope.interface import alsoProvides
 from zope.schema.interfaces import IVocabularyFactory
-from plone import api
-from collective.eeafaceted.dashboard.testing import IntegrationTestCase
-from eea.facetednavigation.interfaces import IFacetedNavigable
-from collective.eeafaceted.dashboard.vocabulary import DashboardCollectionsVocabulary
 
 
 class TestConditionAwareVocabulary(IntegrationTestCase):

@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from DateTime import DateTime
-from plone import api
-
 from collective.documentgenerator.helper.base import DisplayProxyObject
 from collective.documentgenerator.helper.base import DocumentGenerationHelperView
-
-from eea.facetednavigation.interfaces import ICriteria
-
 from collective.eeafaceted.dashboard.testing import IntegrationTestCase
+from DateTime import DateTime
+from eea.facetednavigation.interfaces import ICriteria
+from plone import api
 
 
 class TestDocumentGeneration(IntegrationTestCase):

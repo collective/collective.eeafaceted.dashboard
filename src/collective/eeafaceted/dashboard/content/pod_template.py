@@ -6,16 +6,15 @@ from collective.documentgenerator.content.pod_template import IConfigurablePODTe
 from collective.eeafaceted.collectionwidget.interfaces import NotDashboardContextException
 from collective.eeafaceted.collectionwidget.utils import getCurrentCollection
 from collective.eeafaceted.dashboard import FacetedDashboardMessageFactory as _
-
 from plone.autoform import directives as form
-
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from z3c.form.browser.radio import RadioFieldWidget
 from zope import schema
 from zope.interface import implements
 
-
 import logging
+
+
 logger = logging.getLogger('collective.eeafaceted.dashboard: DashboardPODTemplate')
 
 

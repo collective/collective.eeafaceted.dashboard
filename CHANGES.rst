@@ -4,8 +4,9 @@ Changelog
 0.19 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Fixed CSS when using `select2 widget`, a small `margin-left` gap was visible
+  between the input and the dropdown.
+  [gbastien]
 
 0.18 (2022-01-03)
 -----------------

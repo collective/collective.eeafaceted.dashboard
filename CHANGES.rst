@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.19 (unreleased)
+0.19 (2022-05-16)
 -----------------
 
 - Fixed CSS when using `select2 widget`, a small `margin-left` gap was visible

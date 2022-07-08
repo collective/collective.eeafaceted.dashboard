@@ -108,13 +108,14 @@ class DashboardDocumentGeneratorLinksViewlet(DocumentGeneratorLinksViewlet):
         return super(DashboardDocumentGeneratorLinksViewlet, self).available()
 
     def get_links_info(self):
-        links = super(DashboardDocumentGeneratorLinksViewlet, self).get_links_info()
+        link_infos = super(DashboardDocumentGeneratorLinksViewlet, self).get_links_info()
 
-        for link in links:
-            template = link["template"]
-            link["max"] = template.max_objects
-            link["description"] = _("Only the first ${nb} items will be generated",
-                                    mapping={
-                                        u"nb": template.max_objects
-                                    })
-        return links
+        for link_title, links in link_infos.items():
+            for link in links:
+                template = link["template"]
+                link["max"] = template.max_objects
+                link["description"] = _("Only the first ${nb} items will be generated",
+                                        mapping={
+                                            u"nb": template.max_objects
+                                        })
+        return link_infos

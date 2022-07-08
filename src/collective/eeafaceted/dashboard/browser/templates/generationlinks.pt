@@ -1,27 +1,35 @@
 <div id="doc-generation-view"
      tal:condition="view/available"
+     tal:define="infos view/get_links_info;
+         titles python:infos.keys();"
      i18n:domain="collective.documentgenerator">
-    <form name="podTemplateForm"
-	  method="POST"
-	  target='_blank'
-	  tal:attributes="action string:${context/absolute_url}/document-generation;">
-	<input type="hidden" name="template_uid"/>
-	<input type="hidden" name="output_format"/>
-	<input type="hidden" name="uids" value=""/>
-	<input type="hidden" name="facetedQuery" value=""/>
 
-	<ul class="pod-template">
-	    <li tal:repeat="infos view/get_links_info">
-		<a href="#"
-		   tal:attributes="onclick string:event.preventDefault();;javascript:generatePodDocument('${infos/template_uid}','${infos/output_format}', this);
-                           title infos/description"
-		   style="cursor: pointer">
-            <img src="#" class="svg-icon"
-             tal:attributes="src string:${view/portal_url}/++resource++collective.documentgenerator/${infos/output_format}.svg" />
-            <span tal:replace="infos/title">Template title</span> (<span class="highlightValue" ><span tal:replace="infos/max">500</span> max</span>)
-		</a>
-	    </li>
-	</ul>
+  <form name="podTemplateForm"
+    method="POST"
+    target='_blank'
+    tal:attributes="action string:${context/absolute_url}/document-generation;">
+    <input type="hidden" name="template_uid"/>
+    <input type="hidden" name="output_format"/>
+    <input type="hidden" name="uids" value=""/>
+    <input type="hidden" name="facetedQuery" value=""/>
 
-    </form>
+    <ul class="pod-template">
+      <li tal:repeat="title titles" class="template-link">
+        <span class="template-link-title" tal:content="title">Template title</span>
+        <span class="template-link-after-title"></span>
+        <span class="template-link-before-link"
+              tal:repeat="link python: infos[title]">
+          <a href="#"
+             tal:attributes="onclick string:event.preventDefault();;javascript:generatePodDocument('${link/template_uid}','${link/output_format}', this);
+                             title link/description"
+             style="cursor: pointer">
+              <img src="#" class="svg-icon"
+               tal:attributes="src string:${view/portal_url}/++resource++collective.documentgenerator/${link/output_format}.svg" />
+              (<span class="highlightValue" ><span tal:replace="link/max">500</span> max</span>)
+          </a>
+        </span>
+        <span class="link-separator"></span>
+      </li>
+    </ul>
+  </form>
 </div>

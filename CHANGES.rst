@@ -4,8 +4,9 @@ Changelog
 0.20 (unreleased)
 -----------------
 
-- Nothing changed yet.
-
+- Adapted `DashboardDocumentGeneratorLinksViewlet.get_links_info` to be
+  compatible with `collective.documentgenerator>=3.35`.
+  [gbastien]
 
 0.19 (2022-05-16)
 -----------------

@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.20 (unreleased)
+0.20 (2022-08-26)
 -----------------
 
 - Adapted `DashboardDocumentGeneratorLinksViewlet.get_links_info` to be

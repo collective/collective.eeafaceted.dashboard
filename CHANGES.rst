@@ -4,7 +4,8 @@ Changelog
 0.21 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Fix an issue when there is more than one line of document generation actions
+  [mpeeters]
 
 
 0.20 (2022-08-26)

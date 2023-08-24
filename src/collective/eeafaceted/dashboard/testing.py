@@ -77,6 +77,10 @@ INTEGRATION = IntegrationTesting(
     name="INTEGRATION"
 )
 
+DEMO_INTEGRATION = IntegrationTesting(
+    bases=(DEMO_FIXTURE,),
+    name="DEMO_INTEGRATION"
+)
 
 FUNCTIONAL = FunctionalTesting(
     bases=(FIXTURE,),

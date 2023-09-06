@@ -84,20 +84,22 @@ function update_tabs_count() {
 
 $(document).ready(function () {
   if ($('div[class*="faceted-tagscloud-collection-widget"').length > 0) {
-    if (sessionStorage.getItem('tabs_count_timeout') === null) {
-        sessionStorage.setItem('tabs_count_timeout', '0');
-        update_tabs_count();
-    }
     if (!has_faceted()) {
         update_collections_count();
     }
     $(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function() {
         update_collections_count();
     });
-    $('body').on('click', '#collections-count-refresh', function() {
-        update_tabs_count();
-    });
   }
+
+  if (sessionStorage.getItem('tabs_count_timeout') === null) {
+      sessionStorage.setItem('tabs_count_timeout', '0');
+      update_tabs_count();
+  }
+  $('body').on('click', '#collections-count-refresh', function() {
+      update_tabs_count();
+  });
+
   Faceted.Options.FADE_SPEED=0;
   //Faceted.Options.SHOW_SPINNER=false;
 });

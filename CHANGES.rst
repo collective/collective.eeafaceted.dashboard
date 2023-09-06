@@ -6,7 +6,8 @@ Changelog
 
 - The `update_tabs_count` is now available anywhere, not only on faceted context.
   [sgeulette]
-
+- A span has been added so the tab count can be styled.
+  [sgeulette]
 
 0.20 (2022-08-26)
 -----------------

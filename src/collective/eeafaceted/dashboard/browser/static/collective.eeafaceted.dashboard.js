@@ -64,7 +64,7 @@ function update_tabs_count() {
                     title = existing_count_title[1];
                 }
 
-                var new_text = title + " (" + itemTotal + ")";
+                var new_text = title + " <span class='tabs_count_total'>(" + itemTotal + ")</span>";
                 element.html(new_text);
             });
         });

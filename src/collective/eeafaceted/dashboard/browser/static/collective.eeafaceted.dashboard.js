@@ -48,7 +48,7 @@ function update_collections_count() {
 }
 
 function update_tabs_count() {
-    $.getJSON($("body").data("portalUrl") + "/@@json_list_countable_tabs", function (data) {
+    $.getJSON($("body").data("baseUrl") + "/@@json_list_countable_tabs", function (data) {
         data.urls.forEach(function(url) {
             $.get(url + '/@@json_collections_count', function (response) {
                 var info = JSON.parse(response);
@@ -64,7 +64,7 @@ function update_tabs_count() {
                     title = existing_count_title[1];
                 }
 
-                var new_text = title + " (" + itemTotal + ")";
+                var new_text = title + " <span class='tabs_count_total'>(" + itemTotal + ")</span>";
                 element.html(new_text);
             });
         });
@@ -84,20 +84,22 @@ function update_tabs_count() {
 
 $(document).ready(function () {
   if ($('div[class*="faceted-tagscloud-collection-widget"').length > 0) {
-    if (sessionStorage.getItem('tabs_count_timeout') === null) {
-        sessionStorage.setItem('tabs_count_timeout', '0');
-        update_tabs_count();
-    }
     if (!has_faceted()) {
         update_collections_count();
     }
     $(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function() {
         update_collections_count();
     });
-    $('body').on('click', '#collections-count-refresh', function() {
-        update_tabs_count();
-    });
   }
+
+  if (sessionStorage.getItem('tabs_count_timeout') === null) {
+      sessionStorage.setItem('tabs_count_timeout', '0');
+      update_tabs_count();
+  }
+  $('body').on('click', '#collections-count-refresh', function() {
+      update_tabs_count();
+  });
+
   Faceted.Options.FADE_SPEED=0;
   //Faceted.Options.SHOW_SPINNER=false;
 });

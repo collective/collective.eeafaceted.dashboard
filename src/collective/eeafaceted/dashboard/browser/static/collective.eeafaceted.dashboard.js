@@ -48,7 +48,7 @@ function update_collections_count() {
 }
 
 function update_tabs_count() {
-    $.getJSON($("body").data("portalUrl") + "/@@json_list_countable_tabs", function (data) {
+    $.getJSON($("body").data("baseUrl") + "/@@json_list_countable_tabs", function (data) {
         data.urls.forEach(function(url) {
             $.get(url + '/@@json_collections_count', function (response) {
                 var info = JSON.parse(response);

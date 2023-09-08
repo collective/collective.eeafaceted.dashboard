@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.21 (unreleased)
------------------
+0.21.0 (2023-09-08)
+-------------------
 
 - The `update_tabs_count` is now available anywhere, not only on faceted context.
   [sgeulette]

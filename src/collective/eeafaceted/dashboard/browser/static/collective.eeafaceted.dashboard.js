@@ -59,7 +59,7 @@ function update_tabs_count() {
                 });
 
                 var title = element.html();
-                var existing_count_title = title.match(/^(.+) \(\d+\)$/);
+                var existing_count_title = title.match(/^(.+) <span class=('|")tabs_count_total('|")>\(\d+\)<\/span>$/);
                 if (existing_count_title) {
                     title = existing_count_title[1];
                 }

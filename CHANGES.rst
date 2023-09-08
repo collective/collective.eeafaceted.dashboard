@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.21.1 (unreleased)
+0.21.1 (2023-09-08)
 -------------------
 
 - Corrected existing count title check.

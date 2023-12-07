@@ -75,5 +75,5 @@ class JSONListCountableTabs(BrowserView):
 
     def __call__(self):
         catalog = api.portal.get_tool('portal_catalog')
-        brains = catalog.unrestrictedSearchResults(object_provides=ICountableTab.__identifier__)
+        brains = catalog(object_provides=ICountableTab.__identifier__)
         return json.dumps({'urls': [brain.getURL() for brain in brains]})

@@ -51,7 +51,7 @@ function update_tabs_count() {
     $.getJSON($("body").data("baseUrl") + "/@@json_list_countable_tabs", function (data) {
         data.urls.forEach(function(url) {
             $.get(url + '/@@json_collections_count', function (response) {
-                var info = JSON.parse(response);
+                try {var info = JSON.parse(response);} catch (error) {return};
                 var element = $("#portal-globalnav a[href='" + url + "']");
                 var itemTotal = 0;
                 info.countByCollection.forEach(function (item) {

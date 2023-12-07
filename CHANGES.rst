@@ -4,8 +4,8 @@ Changelog
 0.21.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Update count only on viewable tabs. Be more resilient in js.
+  [sgeulette]
 
 0.21.1 (2023-09-08)
 -------------------

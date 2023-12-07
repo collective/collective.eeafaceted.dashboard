@@ -6,6 +6,8 @@ Changelog
 
 - Update count only on viewable tabs. Be more resilient in js.
   [sgeulette]
+- Pinned last py2 eea.facetednavigation version
+  [sgeulette]
 
 0.21.1 (2023-09-08)
 -------------------

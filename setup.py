@@ -11,7 +11,7 @@ long_description = (
 
 setup(
     name='collective.eeafaceted.dashboard',
-    version='0.21.2.dev0',
+    version='0.22.0',
     description="This package is the glue between different packages "
                 "offering a usable and integrated dashboard application",
     long_description=long_description,

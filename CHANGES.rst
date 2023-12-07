@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.21.2 (unreleased)
+0.22.0 (2023-12-07)
 -------------------
 
 - Update count only on viewable tabs. Be more resilient in js.

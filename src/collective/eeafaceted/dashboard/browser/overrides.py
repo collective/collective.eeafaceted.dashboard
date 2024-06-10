@@ -110,7 +110,7 @@ class DashboardDocumentGeneratorLinksViewlet(DocumentGeneratorLinksViewlet):
     def get_links_info(self):
         link_infos = super(DashboardDocumentGeneratorLinksViewlet, self).get_links_info()
 
-        for link_title, links in link_infos.items():
+        for link_title, links in list(link_infos.items()):
             for link in links:
                 template = link["template"]
                 link["max"] = template.max_objects

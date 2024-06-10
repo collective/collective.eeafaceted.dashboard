@@ -91,7 +91,7 @@ def getDashboardQueryResult(faceted_context):
     if not uids:
         if faceted_query:
             # put the facetedQuery criteria into the REQUEST.form
-            for k, v in json.JSONDecoder().decode(faceted_query).items():
+            for k, v in list(json.JSONDecoder().decode(faceted_query).items()):
                 # we receive list of elements, if we have only one elements, remove it from the list
                 if isinstance(v, list) and len(v) == 1:
                     v = v[0]
@@ -119,7 +119,7 @@ def _get_criterion_by_attr(faceted_context, attr_name, value_to_match):
         raise NoFacetedViewDefinedException(NO_FACETED_EXCEPTION_MSG)
 
     criterions = ICriteria(faceted_context)
-    for criterion in criterions.values():
+    for criterion in list(criterions.values()):
         if not hasattr(criterion, attr_name):
             continue
         else:

@@ -52,8 +52,8 @@ class TestViewlets(IntegrationTestCase):
         # clean memoize
         del IAnnotations(self.request)['plone.memoize']
         self.assertTrue(viewlet.available())
-        self.assertEquals(len(viewlet.get_generable_templates()), 1)
-        self.assertEquals(viewlet.get_generable_templates()[0].UID(),
+        self.assertEqual(len(viewlet.get_generable_templates()), 1)
+        self.assertEqual(viewlet.get_generable_templates()[0].UID(),
                           template.UID())
 
         # this viewlet will not be displayed if current context is a faceted
@@ -83,7 +83,7 @@ class TestViewlets(IntegrationTestCase):
             container=self.folder
         )
         self.request.form['c1[]'] = dashboardcoll.UID()
-        self.assertEquals(getCurrentCollection(self.folder), dashboardcoll)
+        self.assertEqual(getCurrentCollection(self.folder), dashboardcoll)
         viewlet = DashboardDocumentGeneratorLinksViewlet(self.folder,
                                                          self.request,
                                                          None,
@@ -111,8 +111,8 @@ class TestViewlets(IntegrationTestCase):
         # clean memoize
         del IAnnotations(self.request)['plone.memoize']
         self.assertTrue(viewlet.available())
-        self.assertEquals(len(viewlet.get_generable_templates()), 1)
-        self.assertEquals(viewlet.get_generable_templates()[0].UID(),
+        self.assertEqual(len(viewlet.get_generable_templates()), 1)
+        self.assertEqual(viewlet.get_generable_templates()[0].UID(),
                           dashtemplate.UID())
 
         # this viewlet will not be displayed if current context is not a faceted

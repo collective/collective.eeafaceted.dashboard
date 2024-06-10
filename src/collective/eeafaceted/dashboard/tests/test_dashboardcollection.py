@@ -34,9 +34,9 @@ class TestDashboardCollection(IntegrationTestCase):
         # test for presence of special metadata 'select_row'
         factory = queryUtility(IVocabularyFactory, u'plone.app.contenttypes.metadatafields')
         # classic Collection
-        self.assertFalse('select_row' in factory(self.collection).by_token.keys())
+        self.assertFalse('select_row' in list(factory(self.collection).by_token.keys()))
         # DashboardCollection
-        self.assertTrue('select_row' in factory(self.dashboardcollection).by_token.keys())
+        self.assertTrue('select_row' in list(factory(self.dashboardcollection).by_token.keys()))
 
     def test_enableFacetedDashboardFor_with_default_UID(self):
         """ """

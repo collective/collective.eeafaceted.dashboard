@@ -14,7 +14,7 @@ from plone.portlets.interfaces import IPortletDataProvider
 from Products.CMFPlone.utils import base_hasattr
 from Products.CMFPlone.utils import getFSVersionTuple
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from zope.interface import implements
+from zope.interface import implementer
 
 
 # in Plone5, portlet form is a z3c.form, in Plone4 it uses formlib
@@ -29,7 +29,7 @@ class IFacetedCollectionPortlet(IPortletDataProvider):
 
 
 class Assignment(base.Assignment):
-    implements(IFacetedCollectionPortlet)
+    implementer(IFacetedCollectionPortlet)
 
     @property
     def title(self):

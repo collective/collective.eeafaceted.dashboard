@@ -53,7 +53,7 @@ class Renderer(base.Renderer):
         criteriaHolder = self._criteriaHolder
         criteria = ICriteria(criteriaHolder)
         widgets = []
-        for criterion in criteria.values():
+        for criterion in list(criteria.values()):
             if criterion.widget != CollectionWidget.widget_type:
                 continue
             widget_cls = criteria.widget(wid=criterion.widget)
@@ -101,7 +101,7 @@ class Renderer(base.Renderer):
         """Build the URL that will be used in the href when portlet is displayed
            on a sub element of the container on which is defined the faceted."""
         default_criteria = []
-        for criterion in criteria.values():
+        for criterion in list(criteria.values()):
             # keep default of criteria in the "default" section omitting the collection widget
             if criterion.section == u'default' and \
                not criterion.widget == CollectionWidget.widget_type \

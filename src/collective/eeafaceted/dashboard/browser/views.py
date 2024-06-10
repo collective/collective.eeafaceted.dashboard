@@ -26,7 +26,7 @@ class RenderTermPortletView(BaseRenderTermView):
         pqi = api.portal.get_tool('portal_quickinstaller')
         if pqi.isProductInstalled('collective.querynextprev'):
             session = self.request.get('SESSION', {})
-            if session.has_key(CURRENT_CRITERION):  # noqa
+            if CURRENT_CRITERION in session:  # noqa
                 self.selected_term = session[CURRENT_CRITERION]
 
         return self.index()
@@ -53,7 +53,7 @@ class JSONCollectionsCount(BrowserView):
             voc = widget._generate_vocabulary()
             info = []
             portal = api.portal.get()
-            for category in voc.itervalues():
+            for category in voc.values():
                 for term in category['collections']:
                     collection = portal.unrestrictedTraverse(term.value)
                     if IDashboardCollection.providedBy(collection) \

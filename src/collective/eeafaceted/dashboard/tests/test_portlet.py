@@ -91,7 +91,7 @@ class TestPortlet(IntegrationTestCase):
         collcriterion = getCollectionLinkCriterion(self.renderer._criteriaHolder)
         ICriteria(self.renderer._criteriaHolder).delete(collcriterion.getId())
         # by defaut no collection-link widget so nothing is rendered
-        self.assertTrue(not [criterion for criterion in criteria.values()
+        self.assertTrue(not [criterion for criterion in list(criteria.values())
                              if criterion.widget == CollectionWidget.widget_type])
         with self.assertRaises(NoCollectionWidgetDefinedException):
             getCollectionLinkCriterion(self.renderer._criteriaHolder)
@@ -152,7 +152,7 @@ class TestPortlet(IntegrationTestCase):
         a_tag = li_tag.getchildren()[0]
         # the URL is generated and contains every default values and relevant collection UID
         url = "http://nohost/plone/folder#c3=20&c1={0}".format(collection.UID())
-        self.assertEquals(a_tag.attrib['href'], url)
+        self.assertEqual(a_tag.attrib['href'], url)
 
     def test_portlet_render(self):
         """The portlet will be rendered without a fieldset and will contains rendered widgets."""

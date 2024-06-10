@@ -30,16 +30,16 @@ class TestConditionAwareVocabulary(IntegrationTestCase):
         """This will return every DashboardCollections of the portal."""
         # one DashboardCollection
         factory = DashboardCollectionsVocabulary()
-        self.assertEquals(len(factory(self.portal)), 1)
+        self.assertEqual(len(factory(self.portal)), 1)
         term = factory(self.portal).getTerm(self.dashboardcollection.UID())
-        self.assertEquals(term.token, term.value, self.dashboardcollection.UID())
-        self.assertEquals(term.title, self.dashboardcollection.Title())
+        self.assertEqual(term.token, term.value, self.dashboardcollection.UID())
+        self.assertEqual(term.title, self.dashboardcollection.Title())
 
     def test_categorycollectionsvocabulary(self):
         """This will return every DashboardCollections of the portal prefixed by categories."""
         factory = queryUtility(IVocabularyFactory, u'collective.eeafaceted.dashboard.dashboardcollectionsvocabulary')
         # one DashboardCollection
-        self.assertEquals(len(factory(self.portal)), 1)
+        self.assertEqual(len(factory(self.portal)), 1)
         term = factory(self.portal).getTerm(self.dashboardcollection.UID())
-        self.assertEquals(term.token, term.value, self.dashboardcollection.UID())
-        self.assertEquals(term.title, '%s - %s' % (self.folder.Title(), self.dashboardcollection.Title()))
+        self.assertEqual(term.token, term.value, self.dashboardcollection.UID())
+        self.assertEqual(term.title, '%s - %s' % (self.folder.Title(), self.dashboardcollection.Title()))

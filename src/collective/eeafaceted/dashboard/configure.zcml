@@ -57,8 +57,9 @@
         factory=".adapters.DashboardGenerablePODTemplatesAdapter"/>
 
     <!-- Vocabularies -->
-    <utility component=".vocabulary.DashboardCategoryCollectionsVocabularyFactory"
+    <!-- <utility component=".vocabulary.DashboardCategoryCollectionsVocabularyFactory"
              name="collective.eeafaceted.dashboard.dashboardcollectionsvocabulary" />
+             MIGRATION-PLONE6 -->
 
     <!-- Overrides unconfigured here above -->
     <utility

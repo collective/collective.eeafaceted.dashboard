@@ -9,10 +9,10 @@
 
 from plone import api
 from plone.indexer import indexer
-from Products.ATContentTypes.interfaces import IATFolder
+# from Products.ATContentTypes.interfaces import IATFolder  # MIGRATION-PLONE6
 
 
-@indexer(IATFolder)
+# @indexer(IATFolder)  # MIGRATION-PLONE6
 def contained_types_and_states(folder):
     """
       Index the portal_type and review_state of contained objects like :

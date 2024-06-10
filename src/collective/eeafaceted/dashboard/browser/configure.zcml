@@ -39,12 +39,12 @@
 
     <!-- collective.eeafaceted.z3ctable -->
     <configure package="collective.eeafaceted.z3ctable">
-        <browser:view
+        <!-- <browser:view
             for="Products.ATContentTypes.interfaces.folder.IATFolder"
             name="faceted-table-view"
             class="collective.eeafaceted.dashboard.browser.overrides.DashboardFacetedTableView"
             permission="zope2.View"
-        />
+        />  MIGRATION-PLONE6 -->
         <browser:view
             for="plone.app.contenttypes.interfaces.ICollection"
             name="faceted-table-view"

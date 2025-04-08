@@ -10,7 +10,7 @@ from plone.autoform import directives as form
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from z3c.form.browser.radio import RadioFieldWidget
 from zope import schema
-from zope.interface import implements
+from zope.interface import implementer
 
 import logging
 
@@ -52,12 +52,11 @@ class IDashboardPODTemplate(IConfigurablePODTemplate):
     form.omitted('pod_portal_types')
 
 
+@implementer(IDashboardPODTemplate)
 class DashboardPODTemplate(ConfigurablePODTemplate):
     """
     DashboardPODTemplate dexterity class.
     """
-
-    implements(IDashboardPODTemplate)
 
 
 class DashboardPODTemplateCondition(ConfigurablePODTemplateCondition):

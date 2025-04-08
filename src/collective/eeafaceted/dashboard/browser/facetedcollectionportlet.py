@@ -14,8 +14,7 @@ from plone.portlets.interfaces import IPortletDataProvider
 from Products.CMFPlone.utils import base_hasattr
 from Products.CMFPlone.utils import getFSVersionTuple
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from zope.interface import implements
-
+from zope.interface import implementer
 
 # in Plone5, portlet form is a z3c.form, in Plone4 it uses formlib
 HAS_PLONE5 = bool(getFSVersionTuple()[0] >= 5)
@@ -28,8 +27,8 @@ class IFacetedCollectionPortlet(IPortletDataProvider):
     """ A portlet that shows controls for faceted with collections """
 
 
+@implementer(IFacetedCollectionPortlet)
 class Assignment(base.Assignment):
-    implements(IFacetedCollectionPortlet)
 
     @property
     def title(self):

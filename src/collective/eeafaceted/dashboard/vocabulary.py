@@ -9,12 +9,11 @@ from plone.app.contenttypes.behaviors.collection import MetaDataFieldsVocabulary
 from plone.app.uuid.utils import uuidToCatalogBrain
 from zope.globalrequest import getRequest
 from zope.interface import implementer
-from zope.interface import implements
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
-
+@implementer(IVocabularyFactory)
 class DashboardCollectionsVocabulary(object):
     """
     Vocabulary factory for 'dashboard_collections' field of DashboardPODTemplate.
@@ -22,8 +21,6 @@ class DashboardCollectionsVocabulary(object):
     NOT USED BY DEFAULT, but there to be registered as
     "collective.eeafaceted.dashboard.dashboardcollectionsvocabulary" if necessary.
     """
-
-    implements(IVocabularyFactory)
 
     def _render_term_title(self, brain):
         return brain.Title
@@ -40,13 +37,12 @@ class DashboardCollectionsVocabulary(object):
 DashboardCollectionsVocabularyFactory = DashboardCollectionsVocabulary()
 
 
+@implementer(IVocabularyFactory)
 class DashboardCategoryCollectionsVocabulary(object):
     """
     Vocabulary factory for 'dashboard_collections' field of DashboardPODTemplate.
     Displays the parent categories until the faceted container in the term.
     """
-
-    implements(IVocabularyFactory)
 
     def _getParents(self, obj):
         ret = []

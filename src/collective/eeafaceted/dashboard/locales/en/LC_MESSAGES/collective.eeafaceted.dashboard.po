@@ -40,7 +40,7 @@ msgid "Edit Collection Criteria Portlet"
 msgstr ""
 
 #: ./content/pod_template.py:47
-msgid "Enter the maximum amount of brains allowed in the generation context."
+msgid "Enter the maximum amount of brains allowed in the generation context. Enter 0 for no limit."
 msgstr ""
 
 #: ./profiles.zcml:29

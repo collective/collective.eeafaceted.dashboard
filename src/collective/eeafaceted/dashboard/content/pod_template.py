@@ -43,10 +43,10 @@ class IDashboardPODTemplate(IConfigurablePODTemplate):
 
     max_objects = schema.Int(
         title=_(u'Maximum amount of objects to print'),
-        description=_(u'Enter the maximum amount of brains allowed in the generation context.'),
+        description=_(u'Enter the maximum amount of brains allowed in the generation context. Enter 0 for no limit.'),
         required=True,
         default=500,
-        min=1,
+        min=0,
     )
 
     form.omitted('pod_portal_types')

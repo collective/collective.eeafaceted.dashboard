@@ -1,12 +1,11 @@
 Changelog
 =========
 
-0.22.1 (unreleased)
+0.23.0 (2026-01-15)
 -------------------
 
 - Allowed Dashboard POD template to have no max objects.
   [chris-adam]
-
 
 0.22.0 (2023-12-07)
 -------------------

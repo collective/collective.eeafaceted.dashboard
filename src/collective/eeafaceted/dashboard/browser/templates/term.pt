@@ -7,7 +7,7 @@
             term_label python:term.title[0];
             term_label python:widget.translate(term_label);
             redirect_to python:term.title[1];
-            default_class python:term_id == view.selected_term and 'faceted-tag-selected' or '';"
+            default_class python:context.id + (term_id == widget.default and ' faceted-tag-selected' or '');"
             tal:attributes="
             class python: not category and default_class + ' no-category-tag' or default_class;
             value python:term_id;

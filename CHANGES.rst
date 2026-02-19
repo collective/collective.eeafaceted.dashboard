@@ -4,8 +4,8 @@ Changelog
 0.23.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Added collection ID as class in collection widget term template.
+  [chris-adam]
 
 0.23.0 (2026-01-15)
 -------------------

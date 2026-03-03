@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.23.2 (unreleased)
+0.23.2 (2026-03-03)
 -------------------
 
 - Adapted CSS class used on terms ti fix behavior with currently selected

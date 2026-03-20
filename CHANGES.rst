@@ -10,9 +10,9 @@ Changelog
 0.23.2 (2026-03-03)
 -------------------
 
-- Adapted CSS class used on terms ti fix behavior with currently selected
+- Adapted CSS class used on terms to fix behavior with currently selected
   elements that must not be highlighted when outside faceted, and to adapt
-  CSS class name to make sure it it unique.
+  CSS class name to make sure it is unique.
   [gbastien]
 
 0.23.1 (2026-02-19)

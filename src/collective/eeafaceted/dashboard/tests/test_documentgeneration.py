@@ -74,7 +74,7 @@ class TestDocumentGeneration(IntegrationTestCase):
         self.assertEquals(len(gen_context['uids']), 3)
         self.assertEquals(len(gen_context['brains']), 3)
 
-        self.assertEqual(gen_context['details'], '1')
+        self.assertEqual(gen_context['details'], 1)
         # brains are sorted according to uids list
         self.assertEquals(gen_context['uids'],
                           [brain.UID for brain in gen_context['brains']])

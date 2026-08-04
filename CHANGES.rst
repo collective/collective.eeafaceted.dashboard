@@ -9,6 +9,9 @@ Changelog
   This also could fix a problem with `Adobe Acrobat browser plugin` no more
   able to open generated pdf documents.
   [gbastien]
+- Fixed tests regarding POD template context variables that are now evaluated
+  so `"1"` is `1` and no more `"1"`.
+  [gbastien]
 
 0.23.2 (2026-03-03)
 -------------------

@@ -4,8 +4,11 @@ Changelog
 0.23.3 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Use `GET` instead `POST` for generating a document (`@@document-generation`)
+  so parameters are passed thru the `URL` and can be shared.
+  This also could fix a problem with `Adobe Acrobat browser plugin` no more
+  able to open generated pdf documents.
+  [gbastien]
 
 0.23.2 (2026-03-03)
 -------------------

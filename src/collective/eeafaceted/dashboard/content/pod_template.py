@@ -52,12 +52,11 @@ class IDashboardPODTemplate(IConfigurablePODTemplate):
     form.omitted('pod_portal_types')
 
 
+@implementer(IDashboardPODTemplate)
 class DashboardPODTemplate(ConfigurablePODTemplate):
     """
     DashboardPODTemplate dexterity class.
     """
-
-    implementer(IDashboardPODTemplate)
 
 
 class DashboardPODTemplateCondition(ConfigurablePODTemplateCondition):

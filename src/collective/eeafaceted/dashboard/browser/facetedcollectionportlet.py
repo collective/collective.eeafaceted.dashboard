@@ -28,8 +28,8 @@ class IFacetedCollectionPortlet(IPortletDataProvider):
     """ A portlet that shows controls for faceted with collections """
 
 
+@implementer(IFacetedCollectionPortlet)
 class Assignment(base.Assignment):
-    implementer(IFacetedCollectionPortlet)
 
     @property
     def title(self):

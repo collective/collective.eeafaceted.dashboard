@@ -5,16 +5,21 @@ from collective.eeafaceted.dashboard.interfaces import ICustomViewFieldsVocabula
 from eea.facetednavigation.interfaces import IFacetedNavigable
 from operator import attrgetter
 from plone import api
-from plone.app.vocabularies.metadatafields import MetaDataFieldsVocabulary
 from plone.app.uuid.utils import uuidToCatalogBrain
 from zope.globalrequest import getRequest
-from zope.interface import implementer
 from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
 
+try:
+    from plone.app.vocabularies.metadatafields import MetaDataFieldsVocabulary
+except ImportError:  # Plone 4
+    from plone.app.contenttypes.behaviors.collection import MetaDataFieldsVocabulary
+
+
+@implementer(IVocabularyFactory)
 class DashboardCollectionsVocabulary(object):
     """
     Vocabulary factory for 'dashboard_collections' field of DashboardPODTemplate.
@@ -22,8 +27,6 @@ class DashboardCollectionsVocabulary(object):
     NOT USED BY DEFAULT, but there to be registered as
     "collective.eeafaceted.dashboard.dashboardcollectionsvocabulary" if necessary.
     """
-
-    implementer(IVocabularyFactory)
 
     def _render_term_title(self, brain):
         return brain.Title
@@ -40,13 +43,12 @@ class DashboardCollectionsVocabulary(object):
 DashboardCollectionsVocabularyFactory = DashboardCollectionsVocabulary()
 
 
+@implementer(IVocabularyFactory)
 class DashboardCategoryCollectionsVocabulary(object):
     """
     Vocabulary factory for 'dashboard_collections' field of DashboardPODTemplate.
     Displays the parent categories until the faceted container in the term.
     """
-
-    implementer(IVocabularyFactory)
 
     def _getParents(self, obj):
         ret = []

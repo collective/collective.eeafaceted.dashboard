@@ -27,7 +27,7 @@ class TestDocumentGeneration(IntegrationTestCase):
             type='DashboardPODTemplate',
             title='Dashboard template',
             enabled=True,
-            context_variables=[{'name': 'details', 'value': '1'}],
+            context_variables=[{'name': 'details', 'value': 'yes'}],
             container=self.folder2,
         )
         self.view = self.folder.restrictedTraverse('@@document-generation')
@@ -74,7 +74,7 @@ class TestDocumentGeneration(IntegrationTestCase):
         self.assertEqual(len(gen_context['uids']), 3)
         self.assertEqual(len(gen_context['brains']), 3)
 
-        self.assertEqual(gen_context['details'], '1')
+        self.assertEqual(gen_context['details'], 'yes')
         # brains are sorted according to uids list
         self.assertEqual(gen_context['uids'],
                           [brain.UID for brain in gen_context['brains']])

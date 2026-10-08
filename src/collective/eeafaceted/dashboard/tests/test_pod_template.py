@@ -8,6 +8,8 @@ from plone import api
 from zope.annotation import IAnnotations
 from zope.component import queryMultiAdapter
 
+import lxml.html
+
 
 class TestDashboardPODTemplate(IntegrationTestCase):
     """The part that changed is the fact that we use another condition
@@ -22,6 +24,32 @@ class TestDashboardPODTemplate(IntegrationTestCase):
                                                     type='DashboardPODTemplate',
                                                     title='Dashboard template',
                                                     container=self.folder)
+
+    def test_add_form(self):
+        """The add form renders the dashboard fields (dashboard_collections vocabulary registered)
+           and max_objects accepts 0 (no limit)."""
+        dc = api.content.create(
+            id='dc1', type='DashboardCollection', title='Dashboard collection 1', container=self.folder)
+        html = lxml.html.fromstring(self.folder.restrictedTraverse('++add++DashboardPODTemplate')())
+        self.assertEqual(html.xpath('//input[@name="form.widgets.max_objects"]/@value'), ['500'])
+        self.assertEqual(len(html.xpath('//input[@name="form.widgets.use_objects"][@type="radio"]')), 2)
+        checkbox = html.xpath('//input[@name="form.widgets.dashboard_collections:list"][@type="checkbox"]')
+        self.assertEqual([c.get('value') for c in checkbox], [dc.UID()])
+        self.assertEqual(html.xpath('normalize-space(//label[@for="{0}"])'.format(checkbox[0].get('id'))),
+                         'Folder - Dashboard collection 1')
+
+        def max_objects_errors(value):
+            self.request.form['form.widgets.max_objects'] = value
+            # the request copies its form in 'other', read first by z3c.form
+            self.request.set('form.widgets.max_objects', value)
+            add_form = self.folder.restrictedTraverse('++add++DashboardPODTemplate').form_instance
+            add_form.update()
+            errors = add_form.extractData()[1]
+            return [e for e in errors if e.widget is not None and e.widget.__name__ == 'max_objects']
+
+        self.assertEqual(max_objects_errors(u'0'), [])
+        self.assertEqual(max_objects_errors(u'7'), [])
+        self.assertEqual(len(max_objects_errors(u'-1')), 1)
 
     def test_generation_condition_registration(self):
         """ """

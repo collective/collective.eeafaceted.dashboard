@@ -74,6 +74,12 @@ class TestDocumentGeneration(IntegrationTestCase):
         self.assertEqual(len(gen_context['uids']), 3)
         self.assertEqual(len(gen_context['brains']), 3)
 
+        # 0 means no limit
+        self.dashboardtemplate.max_objects = 0
+        gen_context = self.view._get_generation_context(self.helper, self.dashboardtemplate)
+        self.assertEqual(len(gen_context['uids']), 3)
+        self.assertEqual(len(gen_context['brains']), 3)
+
         self.assertEqual(gen_context['details'], 'yes')
         # brains are sorted according to uids list
         self.assertEqual(gen_context['uids'],

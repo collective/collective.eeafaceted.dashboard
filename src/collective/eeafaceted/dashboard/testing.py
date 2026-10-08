@@ -88,9 +88,16 @@ FUNCTIONAL = FunctionalTesting(
 )
 
 
+try:  # Plone 5.2+
+    from plone.testing.zope import WSGI_SERVER_FIXTURE as SERVER_FIXTURE
+except ImportError:  # Plone 4
+    SERVER_FIXTURE = z2.ZSERVER_FIXTURE
+
+
+# robot scenarios (tests/robot): demo dashboard, served over HTTP
 ACCEPTANCE = FunctionalTesting(bases=(DEMO_FIXTURE,
                                       REMOTE_LIBRARY_BUNDLE_FIXTURE,
-                                      z2.ZSERVER_FIXTURE),
+                                      SERVER_FIXTURE),
                                name="ACCEPTANCE")
 
 

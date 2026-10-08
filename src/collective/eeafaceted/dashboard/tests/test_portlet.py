@@ -7,13 +7,16 @@ from collective.eeafaceted.dashboard.config import DEFAULT_PORTLET_TITLE
 from collective.eeafaceted.dashboard.testing import IntegrationTestCase
 from eea.facetednavigation.criteria.interfaces import ICriteria
 from plone import api
+from plone.portlets.interfaces import IPortletDataProvider
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
+from plone.portlets.interfaces import IPortletType
 from zope.annotation import IAnnotations
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 
 import lxml
+import lxml.html
 
 
 class TestPortlet(IntegrationTestCase):
@@ -165,3 +168,26 @@ class TestPortlet(IntegrationTestCase):
     def test_portlet_title(self):
         """ """
         self.assertTrue(self.assignment.title == DEFAULT_PORTLET_TITLE)
+
+    def test_portlet_assignment(self):
+        """The assignment provides the portlet interface (renderer and add/edit forms lookup)."""
+        self.assertTrue(portlet.IFacetedCollectionPortlet.providedBy(self.assignment))
+        self.assertTrue(IPortletDataProvider.providedBy(self.assignment))
+
+    def test_portlet_add_form(self):
+        """The add form renders (no field) and adds an Assignment to the portlet manager."""
+        portlet_type = getUtility(IPortletType, name='FacetedCollectionPortlet')
+        mapping = self.portal.restrictedTraverse('++contextportlets++plone.leftcolumn')
+        for key in list(mapping.keys()):
+            del mapping[key]
+        addview = mapping.restrictedTraverse('+/' + portlet_type.addview)
+        self.assertIsInstance(addview, portlet.AddForm)
+        html = lxml.html.fromstring(addview())
+        self.assertEqual(html.xpath('normalize-space(//h1[contains(@class, "documentFirstHeading")])'),
+                         'Add Collection Criteria Portlet')
+        # Plone 4: formlib buttons (z3c.form 'form.buttons.add' on Plone 5+)
+        self.assertEqual(html.xpath('//form[.//input[@name="form.actions.save"]]//input[@type="submit"]/@name'),
+                         ['form.actions.save', 'form.actions.cancel'])
+        addview.createAndAdd(data={})
+        self.assertEqual(len(mapping), 1)
+        self.assertIsInstance(list(mapping.values())[0], portlet.Assignment)

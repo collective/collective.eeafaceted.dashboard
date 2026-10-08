@@ -9,6 +9,8 @@ from eea.facetednavigation.interfaces import IFacetedNavigable
 from plone import api
 from zope.annotation import IAnnotations
 
+import lxml.html
+
 
 class TestViewlets(IntegrationTestCase):
 
@@ -134,3 +136,58 @@ class TestViewlets(IntegrationTestCase):
         self.assertFalse(viewlet.available())
         # no matter there are pod templates
         self.assertTrue(viewlet.get_generable_templates())
+
+    def _get_generation_links_viewlet(self):
+        api.content.create(id='dashtemplate', type='DashboardPODTemplate', title='Dashboard template',
+                           container=self.portal, pod_formats=['odt', 'pdf'])
+        viewlet = self._get_viewlet(context=self.folder, manager_name='collective.eeafaceted.z3ctable.topabovenav',
+                                    viewlet_name='dashboard-document-generation-link')
+        viewlet.update()
+        return viewlet
+
+    def test_get_links_info(self):
+        viewlet = self._get_generation_links_viewlet()
+        links = viewlet.get_links_info()
+        self.assertEqual(list(links.keys()), ['Dashboard template'])
+        self.assertEqual([link['output_format'] for link in links['Dashboard template']], ['odt', 'pdf'])
+        for link in links['Dashboard template']:
+            self.assertEqual(link['max'], 500)
+            self.assertEqual(link['description'], u'Only the first ${nb} items will be generated')
+            self.assertEqual(link['description'].domain, 'collective.eeafaceted.dashboard')
+            self.assertEqual(link['description'].mapping, {u'nb': 500})
+        # no limit
+        self.portal.dashtemplate.max_objects = 0
+        self.assertEqual([link['max'] for link in viewlet.get_links_info()['Dashboard template']], [0, 0])
+
+    def test_render(self):
+        """generationlinks.pt: the POST form filled by generatePodDocument and a link by format."""
+        viewlet = self._get_generation_links_viewlet()
+        template_uid = self.portal.dashtemplate.UID()
+        html = lxml.html.fromstring(viewlet.render())
+        self.assertEqual(html.get('id'), 'doc-generation-view')
+        form = html.xpath('form[@name="podTemplateForm"]')[0]
+        self.assertEqual(form.get('action'), 'http://nohost/plone/folder/document-generation')
+        self.assertEqual(form.get('method'), 'POST')
+        self.assertEqual(form.get('target'), '_blank')
+        self.assertEqual(form.xpath('input[@type="hidden"]/@name'),
+                         ['template_uid', 'output_format', 'uids', 'facetedQuery'])
+        self.assertEqual(form.xpath('.//li[@class="template-link"]/span[@class="template-link-title"]/text()'),
+                         ['Dashboard template'])
+        links = form.xpath('.//li[@class="template-link"]//a')
+        self.assertEqual(
+            [a.get('onclick') for a in links],
+            ["event.preventDefault();javascript:generatePodDocument('{0}','{1}', this)".format(template_uid, fmt)
+             for fmt in ('odt', 'pdf')])
+        self.assertEqual([a.get('title') for a in links], ['Only the first 500 items will be generated'] * 2)
+        self.assertEqual(
+            [a.xpath('img[@class="svg-icon"]/@src')[0] for a in links],
+            ['http://nohost/plone/++resource++collective.documentgenerator/odt.svg',
+             'http://nohost/plone/++resource++collective.documentgenerator/pdf.svg'])
+        self.assertEqual([a.xpath('img/@alt')[0] for a in links], ['Dashboard template ODT', 'Dashboard template PDF'])
+        self.assertEqual([a.xpath('normalize-space(.//span[@class="highlightValue"])') for a in links],
+                         ['500 max', '500 max'])
+        # no limit: no max displayed
+        self.portal.dashtemplate.max_objects = 0
+        html = lxml.html.fromstring(viewlet.render())
+        self.assertEqual(len(html.xpath('.//li[@class="template-link"]//a')), 2)
+        self.assertEqual(html.xpath('.//span[@class="highlightValue"]'), [])

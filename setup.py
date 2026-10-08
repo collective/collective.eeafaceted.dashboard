@@ -10,7 +10,7 @@ long_description = open("README.rst").read() + "\n" + open("CHANGES.rst").read()
 
 setup(
     name="collective.eeafaceted.dashboard",
-    version="0.23.3.dev0",
+    version="1.0.0.dev0",
     description="This package is the glue between different packages "
     "offering a usable and integrated dashboard application",
     long_description=long_description,

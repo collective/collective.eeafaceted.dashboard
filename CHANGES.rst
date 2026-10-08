@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.23.3 (unreleased)
--------------------
+1.0.0 (unreleased)
+------------------
 
 - Migrated to Plone 6.2 and Python 3: single default profile with a bundle, uninstall profile, Plone 4 code removed.
   [chris-adam]

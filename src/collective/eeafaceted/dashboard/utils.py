@@ -65,8 +65,10 @@ def _enableFacetedDashboardFor(obj,
         noLongerProvides(obj, IHidePloneLeftColumn)
     # import configuration
     if xmlpath:
-        obj.unrestrictedTraverse('@@faceted_exportimport').import_xml(
-            import_file=open(xmlpath))
+        # bytes: eea's _import_xml checks a bytes XML declaration on Python 3
+        with open(xmlpath, 'rb') as import_file:
+            obj.unrestrictedTraverse('@@faceted_exportimport').import_xml(
+                import_file=import_file)
     # define default collection UID
     if default_UID:
         _updateDefaultCollectionFor(obj, default_UID)

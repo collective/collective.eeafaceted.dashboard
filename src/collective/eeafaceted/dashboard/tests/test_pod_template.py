@@ -16,7 +16,8 @@ import lxml.html
 class TestDashboardPODTemplate(IntegrationTestCase):
     """The part that changed is the fact that we use another condition
     based on the 'dashboard_collections' field, so test this.
-    Call same tests than in collective.documentgenerator TestConfigurablePODTemplateIntegration."""
+    Call same tests than in collective.documentgenerator TestConfigurablePODTemplateIntegration.
+    """
 
     def setUp(self):
         """ """
@@ -74,9 +75,9 @@ class TestDashboardPODTemplate(IntegrationTestCase):
                 if e.widget is not None and e.widget.__name__ == "max_objects"
             ]
 
-        self.assertEqual(max_objects_errors(u"0"), [])
-        self.assertEqual(max_objects_errors(u"7"), [])
-        self.assertEqual(len(max_objects_errors(u"-1")), 1)
+        self.assertEqual(max_objects_errors("0"), [])
+        self.assertEqual(max_objects_errors("7"), [])
+        self.assertEqual(len(max_objects_errors("-1")), 1)
 
     def test_generation_condition_registration(self):
         """ """

@@ -6,27 +6,24 @@ from collective.eeafaceted.dashboard.testing import IntegrationTestCase
 from eea.facetednavigation.interfaces import IFacetedLayout
 from eea.facetednavigation.interfaces import IFacetedNavigable
 from eea.facetednavigation.interfaces import IHidePloneLeftColumn
-from plone import api
 from plone.app.portlets.interfaces import IColumn
 from plone.app.portlets.interfaces import IDashboard
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from plone.base.interfaces import IBundleRegistry
+from plone.base.utils import get_installer
 from plone.behavior.interfaces import IBehavior
 from plone.portlets.interfaces import IPortletType
-from Products.CMFPlone.utils import getFSVersionTuple
+from plone.registry.interfaces import IRegistry
+from zope.component import getUtility
 from zope.component import queryUtility
 from zope.i18n import translate
 
 
-def registered_resources(portal):
-    """Ids of the CSS and JS resources registered in the site."""
-    if getFSVersionTuple()[0] < 5:
-        return (
-            portal.portal_css.getResourceIds()
-            + portal.portal_javascripts.getResourceIds()
-        )
-    raise NotImplementedError(
-        "Plone 6: read the resource registry (MIGRATION.md phase 7)"
+def registered_bundles():
+    """Resource registry bundles, by name."""
+    return getUtility(IRegistry).collectionOfInterface(
+        IBundleRegistry, prefix="plone.bundles", check=False
     )
 
 
@@ -36,20 +33,25 @@ class TestInstall(IntegrationTestCase):
     def setUp(self):
         """Custom shared utility setup for tests."""
         self.portal = self.layer["portal"]
-        self.installer = api.portal.get_tool("portal_quickinstaller")
+        self.installer = get_installer(self.portal, self.layer["request"])
 
     def test_product_installed(self):
-        """Test if collective.eeafaceted.dashboard is installed with portal_quickinstaller."""
+        """Test if collective.eeafaceted.dashboard is installed."""
         self.assertTrue(
-            self.installer.isProductInstalled("collective.eeafaceted.dashboard")
+            self.installer.is_product_installed("collective.eeafaceted.dashboard")
         )
 
     def test_uninstall(self):
         """Test if collective.eeafaceted.dashboard is cleanly uninstalled."""
-        self.installer.uninstallProducts(["collective.eeafaceted.dashboard"])
+        from collective.eeafaceted.dashboard.interfaces import IFacetedDashboardLayer
+        from plone.browserlayer import utils
+
+        self.installer.uninstall_product("collective.eeafaceted.dashboard")
         self.assertFalse(
-            self.installer.isProductInstalled("collective.eeafaceted.dashboard")
+            self.installer.is_product_installed("collective.eeafaceted.dashboard")
         )
+        self.assertNotIn(IFacetedDashboardLayer, utils.registered_layers())
+        self.assertNotIn("faceted-dashboard", registered_bundles())
 
     # browserlayer.xml
     def test_browserlayer(self):
@@ -105,27 +107,39 @@ class TestInstall(IntegrationTestCase):
         self.assertEqual(portlet_type.title, "Collection widget portlet")
         self.assertEqual(list(portlet_type.for_), [IColumn, IDashboard])
 
-    # cssregistry.xml, jsregistry.xml
+    # registry.xml
     def test_resources(self):
-        resources = registered_resources(self.portal)
-        for resource in (
-            "++resource++collective.eeafaceted.dashboard/collective.eeafaceted.dashboard.css",
-            "++resource++collective.eeafaceted.dashboard/collective.eeafaceted.dashboard.js",
-        ):
-            self.assertIn(resource, resources)
+        bundles = registered_bundles()
+        bundle = bundles["faceted-dashboard"]
+        self.assertTrue(bundle.enabled)
+        self.assertEqual(
+            (bundle.jscompilation, bundle.csscompilation),
+            (
+                "++resource++collective.eeafaceted.dashboard/collective.eeafaceted.dashboard.js",
+                "++resource++collective.eeafaceted.dashboard/collective.eeafaceted.dashboard.css",
+            ),
+        )
+        # loaded after the eea.facetednavigation bundle it uses (Faceted.Events), deferred as it is
+        self.assertEqual(bundle.depends, "faceted.view")
+        self.assertIn(bundle.depends, bundles)
+        self.assertTrue(bundle.load_defer)
+        self.assertFalse(bundle.load_async)
+        # every resource exists
+        self.portal.restrictedTraverse(bundle.jscompilation)
+        self.portal.restrictedTraverse(bundle.csscompilation)
 
     # locales
     def test_translations(self):
         self.assertEqual(
             translate(_("DashboardPODTemplate"), target_language="fr"),
-            u"Modèle de document POD pour tableau de bord",
+            "Modèle de document POD pour tableau de bord",
         )
         self.assertEqual(
             translate(
                 _("Only the first ${nb} items will be generated", mapping={"nb": 500}),
                 target_language="fr",
             ),
-            u"Seuls les 500 premiers éléments seront pris en compte",
+            "Seuls les 500 premiers éléments seront pris en compte",
         )
         self.assertEqual(
             translate(
@@ -133,10 +147,10 @@ class TestInstall(IntegrationTestCase):
                 domain="collective.eeafaceted.z3ctable",
                 target_language="fr",
             ),
-            u"Titre (lien)",
+            "Titre (lien)",
         )
         self.assertEqual(
-            translate("Searches", domain="eea", target_language="fr"), u"Recherches"
+            translate("Searches", domain="eea", target_language="fr"), "Recherches"
         )
 
 
@@ -148,12 +162,12 @@ class TestInstallDemo(IntegrationTestCase):
     def setUp(self):
         """Custom shared utility setup for tests."""
         self.portal = self.layer["portal"]
-        self.installer = api.portal.get_tool("portal_quickinstaller")
+        self.installer = get_installer(self.portal, self.layer["request"])
 
     def test_demo_profile_installed(self):
-        """Test if collective.eeafaceted.dashboard is installed with portal_quickinstaller."""
+        """Test if collective.eeafaceted.dashboard is installed."""
         self.assertTrue(
-            self.installer.isProductInstalled("collective.eeafaceted.dashboard")
+            self.installer.is_product_installed("collective.eeafaceted.dashboard")
         )
         self.assertEqual(
             self.portal.dashboard.objectIds(),
@@ -180,11 +194,11 @@ class TestInstallDemo(IntegrationTestCase):
         self.assertEqual(
             dashboard["my-elements"].customViewFields,
             [
-                u"pretty_link",
-                u"Creator",
-                u"CreationDate",
-                u"ModificationDate",
-                u"review_state",
-                u"select_row",
+                "pretty_link",
+                "Creator",
+                "CreationDate",
+                "ModificationDate",
+                "review_state",
+                "select_row",
             ],
         )

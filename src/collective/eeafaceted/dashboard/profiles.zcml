@@ -1,31 +1,20 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    xmlns:five="http://namespaces.zope.org/five"
     i18n_domain="collective.eeafaceted.dashboard">
 
     <genericsetup:registerProfile
-        zcml:condition="have plone-5"
         name="default"
-        directory="profiles/plone5"
+        directory="profiles/default"
         title="collective.eeafaceted.dashboard"
         description="Extension profile for collective.eeafaceted.dashboard."
         provides="Products.GenericSetup.interfaces.EXTENSION" />
-  
+
     <genericsetup:registerProfile
-        zcml:condition="not-have plone-5"
-        name="default"
-        directory="profiles/plone4"
-        title="collective.eeafaceted.dashboard"
-        description="Extension profile for collective.eeafaceted.dashboard."
-        provides="Products.GenericSetup.interfaces.EXTENSION" />
-  
-    <genericsetup:registerProfile
-        name="universal"
-        directory="profiles/common"
-        title="collective.eeafaceted.dashboard Common Configuration"
-        description="Extension profile for collective.eeafaceted.dashboard settings that aren't version dependent."
+        name="uninstall"
+        directory="profiles/uninstall"
+        title="collective.eeafaceted.dashboard (uninstall)"
+        description="Uninstall profile for collective.eeafaceted.dashboard."
         provides="Products.GenericSetup.interfaces.EXTENSION" />
 
     <genericsetup:registerProfile

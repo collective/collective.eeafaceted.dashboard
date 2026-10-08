@@ -16,8 +16,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - python: 2.7.18
-            plone: 4.3
+          - python: 3.13.1
+            plone: "6.2"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -54,8 +54,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - python: 2.7.18
-            plone: 4.3
+          - python: 3.13.1
+            plone: "6.2"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -71,7 +71,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r requirements-${{matrix.plone}}.txt
-          pip install coverage==5.3.1
+          pip install -U coveralls coverage
       - name: Cache eggs
         uses: actions/cache@v4
         env:
@@ -89,15 +89,6 @@ jobs:
       - name: test coverage
         run: |
           coverage run bin/test -t !robot
-      # coveralls needs Python 3: publish with a separate interpreter
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.8
-      - name: Install Coveralls
-        run: |
-          pip3 install -U pip setuptools --no-cache-dir
-          pip3 install -U "coveralls<4.0.0" coverage==5.3.1 --no-cache-dir
       - name: Publish to Coveralls
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

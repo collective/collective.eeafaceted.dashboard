@@ -33,7 +33,7 @@ class TestDashboardCollection(IntegrationTestCase):
         defined columns, but for classic Collections, the normal behaviour persists."""
         # test for presence of special metadata 'select_row'
         factory = queryUtility(
-            IVocabularyFactory, u"plone.app.contenttypes.metadatafields"
+            IVocabularyFactory, "plone.app.vocabularies.MetadataFields"
         )
         # classic Collection
         self.assertFalse("select_row" in list(factory(self.collection).by_token.keys()))

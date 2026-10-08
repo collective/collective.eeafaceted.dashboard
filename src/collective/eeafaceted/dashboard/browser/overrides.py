@@ -58,7 +58,8 @@ class DashboardFacetedTableView(FacetedTableView):
 
 class DashboardDocumentGenerationView(DocumentGenerationView):
     """Override the 'get_generation_context' properly so 'get_base_generation_context'
-    is available for sub-packages that want to extend the template generation context."""
+    is available for sub-packages that want to extend the template generation context.
+    """
 
     def _get_generation_context(self, helper_view, pod_template):
         """Include brains/uids if we are on a dashboard."""
@@ -125,6 +126,6 @@ class DashboardDocumentGeneratorLinksViewlet(DocumentGeneratorLinksViewlet):
                 link["max"] = template.max_objects
                 link["description"] = _(
                     "Only the first ${nb} items will be generated",
-                    mapping={u"nb": template.max_objects},
+                    mapping={"nb": template.max_objects},
                 )
         return link_infos

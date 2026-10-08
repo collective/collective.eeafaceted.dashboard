@@ -34,15 +34,15 @@ class TestDashboardFacetedTableView(IntegrationTestCase):
             query=[],
             sort_on="",
             sort_reversed=False,
-            tal_condition=u"",
+            tal_condition="",
             roles_bypassing_talcondition=[],
-            customViewFields=[u"select_row", u"pretty_link", u"review_state"],
+            customViewFields=["select_row", "pretty_link", "review_state"],
         )
         self.request.form["c1[]"] = dc.UID()
         view = self.folder.restrictedTraverse("faceted-table-view")
         self.assertEqual(view.collection, dc)
         self.assertEqual(
-            view._getViewFields(), [u"select_row", u"pretty_link", u"review_state"]
+            view._getViewFields(), ["select_row", "pretty_link", "review_state"]
         )
         # on a faceted collection (Collection type made faceted navigable): its own columns
         del self.request.form["c1[]"]
@@ -55,10 +55,10 @@ class TestDashboardFacetedTableView(IntegrationTestCase):
             type="Collection",
             title="Collection 1",
             container=self.portal,
-            customViewFields=[u"Title", u"Creator"],
+            customViewFields=["Title", "Creator"],
         )
         collection.unrestrictedTraverse("@@faceted_subtyper").enable()
         view = collection.restrictedTraverse("faceted-table-view")
         self.assertIsInstance(view, DashboardFacetedTableView)
         self.assertEqual(view.collection, collection)
-        self.assertEqual(view._getViewFields(), [u"Title", u"Creator"])
+        self.assertEqual(view._getViewFields(), ["Title", "Creator"])

@@ -142,7 +142,7 @@ class TestViewlets(IntegrationTestCase):
         self.assertTrue(viewlet.available())
         criteria = ICriteria(self.folder).criteria
         index = [
-            i for i, crit in enumerate(criteria) if crit.widget == u"collection-link"
+            i for i, crit in enumerate(criteria) if crit.widget == "collection-link"
         ][0]
         del criteria[index]  # we remove collectionwidget criterion
         self.assertFalse(viewlet.available())
@@ -176,12 +176,12 @@ class TestViewlets(IntegrationTestCase):
         for link in links["Dashboard template"]:
             self.assertEqual(link["max"], 500)
             self.assertEqual(
-                link["description"], u"Only the first ${nb} items will be generated"
+                link["description"], "Only the first ${nb} items will be generated"
             )
             self.assertEqual(
                 link["description"].domain, "collective.eeafaceted.dashboard"
             )
-            self.assertEqual(link["description"].mapping, {u"nb": 500})
+            self.assertEqual(link["description"].mapping, {"nb": 500})
         # no limit
         self.portal.dashtemplate.max_objects = 0
         self.assertEqual(

@@ -19,7 +19,7 @@ This package does the glue between :
 - `collective.compoundcriterion <https://github.com/collective/collective.compoundcriterion>`_
 - `collective.documentgenerator <https://github.com/collective/collective.documentgenerator>`_
 
-This build a useable eea.facetednavigation based dashboard (works on both Plone 4.3.x and Plone 5.x).  Use the demo profile to easily check what it does :
+This build a useable eea.facetednavigation based dashboard (Plone 6.2, Classic UI).  Use the demo profile to easily check what it does :
 
 .. image:: https://github.com/IMIO/collective.eeafaceted.dashboard/blob/master/doc/screenshots/application.png
 

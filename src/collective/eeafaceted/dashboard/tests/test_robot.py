@@ -4,6 +4,7 @@
 ROBOT_PLONE_MAJOR (4 or 6) selects the UI keywords: robotsuite passes the
 ROBOT_* environment variables to the suites as robot variables.
 """
+
 from collective.eeafaceted.dashboard.testing import ACCEPTANCE
 from plone.testing import layered
 

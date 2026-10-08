@@ -6,17 +6,12 @@ from eea.facetednavigation.interfaces import IFacetedNavigable
 from operator import attrgetter
 from plone import api
 from plone.app.uuid.utils import uuidToCatalogBrain
+from plone.app.vocabularies.metadatafields import MetaDataFieldsVocabulary
 from zope.globalrequest import getRequest
 from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-
-
-try:
-    from plone.app.vocabularies.metadatafields import MetaDataFieldsVocabulary
-except ImportError:  # Plone 4
-    from plone.app.contenttypes.behaviors.collection import MetaDataFieldsVocabulary
 
 
 @implementer(IVocabularyFactory)

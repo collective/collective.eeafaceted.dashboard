@@ -9,6 +9,7 @@ from collective.eeafaceted.dashboard.config import CURRENT_CRITERION
 from collective.eeafaceted.dashboard.interfaces import ICountableTab
 from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
 from plone import api
+from plone.base.utils import get_installer
 from Products.Five.browser import BrowserView
 from zope.globalrequest import getRequest
 
@@ -25,8 +26,8 @@ class RenderTermPortletView(BaseRenderTermView):
         self.term = term
         self.category = category
         self.widget = widget
-        pqi = api.portal.get_tool("portal_quickinstaller")
-        if pqi.isProductInstalled("collective.querynextprev"):
+        installer = get_installer(api.portal.get(), self.request)
+        if installer.is_product_installed("collective.querynextprev"):
             session = self.request.get("SESSION", {})
             if CURRENT_CRITERION in session:  # noqa
                 self.selected_term = session[CURRENT_CRITERION]
@@ -35,7 +36,6 @@ class RenderTermPortletView(BaseRenderTermView):
 
 
 class JSONCollectionsCount(BrowserView):
-
     """Produce json to update counts."""
 
     def get_context(self, faceted_context):
@@ -75,7 +75,6 @@ class JSONCollectionsCount(BrowserView):
 
 
 class JSONListCountableTabs(BrowserView):
-
     """Produce json to list all portal tabs that require a counter of items to take care of."""
 
     def __call__(self):

@@ -37,7 +37,7 @@ class TestPortlet(IntegrationTestCase):
         self.assignment = portlet.Assignment()
         self.renderer = self._get_portlet_renderer()
         self.subtyper = getMultiAdapter(
-            (self.folder, self.request), name=u"faceted_subtyper"
+            (self.folder, self.request), name="faceted_subtyper"
         )
 
     def _get_portlet_renderer(self):
@@ -62,7 +62,7 @@ class TestPortlet(IntegrationTestCase):
         on which the faceted nav is applied but the _criteriaHolder will always be
         the folder on which the faceted is really applied."""
         # faceted not applied, _criteriaHolder returns None
-        self.assertTrue(not self.subtyper.is_faceted)
+        self.assertTrue(not self.subtyper.is_faceted())
         self.assertTrue(self.renderer._criteriaHolder is None)
         # enable faceted, now the folder will be found
         self.subtyper.enable()
@@ -119,7 +119,7 @@ class TestPortlet(IntegrationTestCase):
             sort_on="",
             sort_reversed=False,
             showNumberOfItems=True,
-            tal_condition=u"",
+            tal_condition="",
             roles_bypassing_talcondition=[],
         )
         # clean memoize for widget.categories,
@@ -192,12 +192,12 @@ class TestPortlet(IntegrationTestCase):
             ),
             "Add Collection Criteria Portlet",
         )
-        # Plone 4: formlib buttons (z3c.form 'form.buttons.add' on Plone 5+)
+        # z3c.form buttons of plone.app.portlets' AddForm
         self.assertEqual(
             html.xpath(
-                '//form[.//input[@name="form.actions.save"]]//input[@type="submit"]/@name'
+                '//form[.//*[@name="form.buttons.add"]]//*[@type="submit"]/@name'
             ),
-            ["form.actions.save", "form.actions.cancel"],
+            ["form.buttons.add", "form.buttons.cancel_add"],
         )
         addview.createAndAdd(data={})
         self.assertEqual(len(mapping), 1)

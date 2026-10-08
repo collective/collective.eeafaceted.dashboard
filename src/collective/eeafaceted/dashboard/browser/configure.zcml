@@ -2,7 +2,6 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
-    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="collective.eeafaceted.dashboard">
 
     <!-- Publish static files -->
@@ -40,21 +39,7 @@
     <!-- collective.eeafaceted.z3ctable -->
     <configure package="collective.eeafaceted.z3ctable">
         <browser:view
-            zcml:condition="installed Products.ATContentTypes"
-            for="Products.ATContentTypes.interfaces.folder.IATFolder"
-            name="faceted-table-view"
-            class="collective.eeafaceted.dashboard.browser.overrides.DashboardFacetedTableView"
-            permission="zope2.View"
-        />
-        <browser:view
             for="plone.app.contenttypes.interfaces.ICollection"
-            name="faceted-table-view"
-            class="collective.eeafaceted.dashboard.browser.overrides.DashboardFacetedTableView"
-            permission="zope2.View"
-        />
-        <browser:view
-            zcml:condition="installed plone.app.collection"
-            for="plone.app.collection.interfaces.ICollection"
             name="faceted-table-view"
             class="collective.eeafaceted.dashboard.browser.overrides.DashboardFacetedTableView"
             permission="zope2.View"

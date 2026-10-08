@@ -54,7 +54,10 @@ class TestDocumentGeneration(IntegrationTestCase):
         # make sure self.folder created is really older than self.folder2
         self.folder.creation_date = DateTime("2015/01/01 12:00")
         self.folder.reindexObject()
-        self.assertEqual(ICriteria(self.folder).get("c0").widget, u"sorting")
+        # the site root is cataloged too (Plone 5.2+), make it the oldest element
+        self.portal.creation_date = DateTime("2014/01/01 12:00")
+        self.portal.reindexObject()
+        self.assertEqual(ICriteria(self.folder).get("c0").widget, "sorting")
         self.request.form["c0[]"] = "created"
 
         self.assertEqual(self.dashboardtemplate.max_objects, 500)
@@ -62,9 +65,9 @@ class TestDocumentGeneration(IntegrationTestCase):
             self.helper, self.dashboardtemplate
         )
         self.assertTrue("uids" in gen_context)
-        self.assertEqual(len(gen_context["uids"]), 3)
+        self.assertEqual(len(gen_context["uids"]), 4)
         self.assertTrue("brains" in gen_context)
-        self.assertEqual(len(gen_context["brains"]), 3)
+        self.assertEqual(len(gen_context["brains"]), 4)
 
         self.dashboardtemplate.max_objects = 2
         gen_context = self.view._get_generation_context(
@@ -85,8 +88,8 @@ class TestDocumentGeneration(IntegrationTestCase):
         gen_context = self.view._get_generation_context(
             self.helper, self.dashboardtemplate
         )
-        self.assertEqual(len(gen_context["uids"]), 3)
-        self.assertEqual(len(gen_context["brains"]), 3)
+        self.assertEqual(len(gen_context["uids"]), 4)
+        self.assertEqual(len(gen_context["brains"]), 4)
 
         self.assertEqual(gen_context["details"], "yes")
         # brains are sorted according to uids list
@@ -94,9 +97,10 @@ class TestDocumentGeneration(IntegrationTestCase):
             gen_context["uids"], [brain.UID for brain in gen_context["brains"]]
         )
 
-        # we have 3 elements in the dashboard : self.folder and self.folder2
+        # we have 4 elements in the dashboard : self.folder, self.folder2,
+        # the template and the site root (cataloged since Plone 5.2)
         self.assertListEqual(
-            ["Folder", "Folder 2", "Dashboard template"],
+            ["Plone site", "Folder", "Folder 2", "Dashboard template"],
             [brain.Title for brain in gen_context["brains"]],
         )
 
@@ -106,7 +110,7 @@ class TestDocumentGeneration(IntegrationTestCase):
             self.helper, self.dashboardtemplate
         )
         self.assertListEqual(
-            ["Dashboard template", "Folder 2", "Folder"],
+            ["Dashboard template", "Folder 2", "Folder", "Plone site"],
             [brain.Title for brain in gen_context["brains"]],
         )
 
@@ -116,10 +120,10 @@ class TestDocumentGeneration(IntegrationTestCase):
         in the dashboard are correctly given to the template.
         """
         faceted_query = self.folder.restrictedTraverse("@@faceted_query")
-        # for now 3 elements
-        self.assertEqual(len(faceted_query.query()), 3)
+        # for now 4 elements
+        self.assertEqual(len(faceted_query.query()), 4)
         # filter on text, 'Folder 2'
-        self.assertEqual(ICriteria(self.folder).get("c2").index, u"SearchableText")
+        self.assertEqual(ICriteria(self.folder).get("c2").index, "SearchableText")
         self.request.form["c2[]"] = "Folder 2"
         self.assertEqual(len(faceted_query.query()), 1)
         # generation context respect query
@@ -130,14 +134,14 @@ class TestDocumentGeneration(IntegrationTestCase):
         self.assertEqual(len(gen_context["uids"]), 1)
 
         # facetedQuery is passed to the generation context as json
-        # reset query, back to 3 elements found
+        # reset query, back to 4 elements found
         self.request.form = {}
-        self.assertEqual(len(faceted_query.query()), 3)
+        self.assertEqual(len(faceted_query.query()), 4)
         self.request.form["facetedQuery"] = ""
         gen_context = self.view._get_generation_context(
             self.helper, self.dashboardtemplate
         )
-        self.assertEqual(len(gen_context["uids"]), 3)
+        self.assertEqual(len(gen_context["uids"]), 4)
         # 'facetedQuery' is received as a serialized JSON of query criteria
         self.request.form["facetedQuery"] = '{"c2":"Folder 2"}'
         gen_context = self.view._get_generation_context(
@@ -152,8 +156,8 @@ class TestDocumentGeneration(IntegrationTestCase):
         gen_context = self.view._get_generation_context(
             self.helper, self.dashboardtemplate
         )
-        self.assertEqual(len(gen_context["uids"]), 3)
-        self.assertEqual(len(gen_context["brains"]), 3)
+        self.assertEqual(len(gen_context["uids"]), 4)
+        self.assertEqual(len(gen_context["brains"]), 4)
         self.request.form["uids"] = self.folder.UID()
         gen_context = self.view._get_generation_context(
             self.helper, self.dashboardtemplate
@@ -175,8 +179,8 @@ class TestDocumentGeneration(IntegrationTestCase):
         gen_context = self.view._get_generation_context(
             self.helper, self.dashboardtemplate
         )
-        self.assertEqual(len(gen_context["objects"]), 3)
-        self.assertEqual(len(gen_context["all"]), 3)
+        self.assertEqual(len(gen_context["objects"]), 4)
+        self.assertEqual(len(gen_context["all"]), 4)
 
         objs = [b.getObject() for b in gen_context["brains"]]
         for proxy_obj, helper in gen_context["objects"]:

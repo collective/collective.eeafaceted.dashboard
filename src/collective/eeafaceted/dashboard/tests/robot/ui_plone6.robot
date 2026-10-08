@@ -128,10 +128,13 @@ Select the query value
 
 Add the portlet
     [Documentation]  Portlet added to the left column of the content at ${path} (@@manage-portlets), by its title.
-    ...              Its add form (z3c.form) is saved as it is. NOT CHECKED YET on Plone 6
+    ...              Its add form (z3c.form) is saved as it is. The select opens the add form through mockup JS
+    ...              (no add button appears on the page): go to the add view of the selected option instead
     [Arguments]  ${path}  ${title}
     Go to  ${PLONE_URL}/${path}/@@manage-portlets
-    Select from list by label  css=#portletmanager-plone-leftcolumn select[name=":action"]  ${title}
-    Wait until page contains element  css=#form-buttons-add
+    ${addview}=  Get element attribute
+    ...  xpath=//*[@id="portletmanager-plone-leftcolumn"]//select[@name=":action"]/option[normalize-space()="${title}"]  value
+    Go to  ${PLONE_URL}/${path}${addview}
     Click button  css=#form-buttons-add
+    Go to  ${PLONE_URL}/${path}/@@manage-portlets
     Wait until page contains element  css=#portletmanager-plone-leftcolumn .managedPortlet

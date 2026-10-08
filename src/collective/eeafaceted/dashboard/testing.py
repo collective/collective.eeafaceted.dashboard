@@ -2,7 +2,10 @@
 """Base module for unittesting."""
 
 from collective.eeafaceted.dashboard.utils import enableFacetedDashboardFor
+from plone.app.robotframework.content import Content
+from plone.app.robotframework.remote import RemoteLibraryLayer
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
+from plone.app.robotframework.utils import disableCSRFProtection
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
@@ -12,7 +15,7 @@ from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
-from plone.testing import z2
+from plone.testing import zope
 from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter
 from zope.viewlet.interfaces import IViewletManager
@@ -31,7 +34,7 @@ class FacetedDashboardLayer(PloneSandboxLayer):
         # Load ZCML
         self.loadZCML(package=collective.eeafaceted.dashboard, name="testing.zcml")
         for p in self.products:
-            z2.installProduct(app, p)
+            zope.installProduct(app, p)
 
     def setUpPloneSite(self, portal):
         """Set up Plone."""
@@ -52,7 +55,7 @@ class FacetedDashboardLayer(PloneSandboxLayer):
     def tearDownZope(self, app):
         """Tear down Zope."""
         for p in reversed(self.products):
-            z2.uninstallProduct(app, p)
+            zope.uninstallProduct(app, p)
 
 
 class DemoFacetedDashboardLayer(FacetedDashboardLayer):
@@ -75,15 +78,26 @@ DEMO_INTEGRATION = IntegrationTesting(bases=(DEMO_FIXTURE,), name="DEMO_INTEGRAT
 FUNCTIONAL = FunctionalTesting(bases=(FIXTURE,), name="FUNCTIONAL")
 
 
-try:  # Plone 5.2+
-    from plone.testing.zope import WSGI_SERVER_FIXTURE as SERVER_FIXTURE
-except ImportError:  # Plone 4
-    SERVER_FIXTURE = z2.ZSERVER_FIXTURE
+class SetFieldValue(Content):
+    def set_field_value(self, uid, field, value, field_type):
+        """plone.app.robotframework 3.0.0 doesn't disable the CSRF protection here (as
+        create_content does): plone.protect silently aborts the change (MIGRATION.md).
+        """
+        disableCSRFProtection()
+        return super().set_field_value(uid, field, value, field_type)
+
+
+# REMOTE_LIBRARY_BUNDLE_FIXTURE with the fixed "Set field value" keyword
+REMOTE_LIBRARY_FIXTURE = RemoteLibraryLayer(
+    bases=(PLONE_FIXTURE,),
+    libraries=(SetFieldValue,) + REMOTE_LIBRARY_BUNDLE_FIXTURE.libraryBases[1:],
+    name="DashboardRemoteLibrary:RobotRemote",
+)
 
 
 # robot scenarios (tests/robot): demo dashboard, served over HTTP
 ACCEPTANCE = FunctionalTesting(
-    bases=(DEMO_FIXTURE, REMOTE_LIBRARY_BUNDLE_FIXTURE, SERVER_FIXTURE),
+    bases=(DEMO_FIXTURE, REMOTE_LIBRARY_FIXTURE, zope.WSGI_SERVER_FIXTURE),
     name="ACCEPTANCE",
 )
 

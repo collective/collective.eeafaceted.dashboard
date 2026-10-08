@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!-- eea.facetednavigation 16 only enables the faceted navigation on types with this behavior -->
+<object name="Folder" meta_type="Dexterity FTI">
+  <property name="behaviors" purge="false">
+    <element value="eea.faceted.navigable" />
+  </property>
+</object>

@@ -41,7 +41,7 @@ class TestConditionAwareVocabulary(IntegrationTestCase):
         """This will return every DashboardCollections of the portal prefixed by categories."""
         factory = queryUtility(
             IVocabularyFactory,
-            u"collective.eeafaceted.dashboard.dashboardcollectionsvocabulary",
+            "collective.eeafaceted.dashboard.dashboardcollectionsvocabulary",
         )
         # one DashboardCollection
         self.assertEqual(len(factory(self.portal)), 1)

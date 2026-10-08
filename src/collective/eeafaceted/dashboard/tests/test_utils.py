@@ -79,7 +79,7 @@ class TestUtils(IntegrationTestCase):
     def test_getCriterionByTitle(self):
         """Test method returning criteria matching a given title."""
         sort_criterion = getCriterionByTitle(self.folder, "Sort on")
-        self.assertEqual(sort_criterion.title, u"Sort on")
+        self.assertEqual(sort_criterion.title, "Sort on")
 
         # calling it on a non faceted enabled folder will raise a NoFacetedViewDefinedException
         folder2_id = self.portal.invokeFactory("Folder", "folder2", title="Folder2")
@@ -92,7 +92,7 @@ class TestUtils(IntegrationTestCase):
     def test_getCriterionByIndex(self):
         """Test method returning criteria matching a given search index."""
         sort_criterion = getCriterionByIndex(self.folder, "review_state")
-        self.assertEqual(sort_criterion.index, u"review_state")
+        self.assertEqual(sort_criterion.index, "review_state")
 
         # calling it on a non faceted enabled folder will raise a NoFacetedViewDefinedException
         folder2_id = self.portal.invokeFactory("Folder", "folder2", title="Folder2")

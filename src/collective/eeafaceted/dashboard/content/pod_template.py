@@ -29,10 +29,10 @@ class IDashboardPODTemplate(IConfigurablePODTemplate):
 
     form.widget("use_objects", RadioFieldWidget)
     use_objects = schema.Bool(
-        title=_(u"Use objects as generation context"),
+        title=_("Use objects as generation context"),
         description=_(
-            u"If selelected, receive awoken objects wrapped into their "
-            u" helper view rather than brains as generation context"
+            "If selelected, receive awoken objects wrapped into their "
+            " helper view rather than brains as generation context"
         ),
         default=False,
         required=False,
@@ -42,10 +42,10 @@ class IDashboardPODTemplate(IConfigurablePODTemplate):
         "dashboard_collections", CheckBoxFieldWidget, multiple="multiple", size=15
     )
     dashboard_collections = schema.List(
-        title=_(u"Allowed dashboard collections"),
+        title=_("Allowed dashboard collections"),
         description=_(
-            u"Select for which dashboard collections the template will be available. "
-            u"If nothing is selected, the template will be available on every dashboards."
+            "Select for which dashboard collections the template will be available. "
+            "If nothing is selected, the template will be available on every dashboards."
         ),
         value_type=schema.Choice(
             source="collective.eeafaceted.dashboard.dashboardcollectionsvocabulary"
@@ -54,9 +54,9 @@ class IDashboardPODTemplate(IConfigurablePODTemplate):
     )
 
     max_objects = schema.Int(
-        title=_(u"Maximum amount of objects to print"),
+        title=_("Maximum amount of objects to print"),
         description=_(
-            u"Enter the maximum amount of brains allowed in the generation context. Enter 0 for no limit."
+            "Enter the maximum amount of brains allowed in the generation context. Enter 0 for no limit."
         ),
         required=True,
         default=500,

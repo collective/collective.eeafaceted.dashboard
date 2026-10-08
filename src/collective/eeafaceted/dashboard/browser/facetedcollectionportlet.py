@@ -12,18 +12,10 @@ from collective.eeafaceted.dashboard.config import DEFAULT_PORTLET_TITLE
 from eea.facetednavigation.criteria.interfaces import ICriteria
 from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
 from plone.app.portlets.portlets import base
+from plone.base.utils import base_hasattr
 from plone.portlets.interfaces import IPortletDataProvider
-from Products.CMFPlone.utils import base_hasattr
-from Products.CMFPlone.utils import getFSVersionTuple
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.interface import implementer
-
-
-# in Plone5, portlet form is a z3c.form, in Plone4 it uses formlib
-HAS_PLONE5 = bool(getFSVersionTuple()[0] >= 5)
-
-if not HAS_PLONE5:
-    from zope.formlib import form
 
 
 class IFacetedCollectionPortlet(IPortletDataProvider):
@@ -108,7 +100,7 @@ class Renderer(base.Renderer):
         for criterion in list(criteria.values()):
             # keep default of criteria in the "default" section omitting the collection widget
             if (
-                criterion.section == u"default"
+                criterion.section == "default"
                 and not criterion.widget == CollectionWidget.widget_type
                 and criterion.default
             ):
@@ -131,21 +123,15 @@ class Renderer(base.Renderer):
 
 
 class AddForm(base.AddForm):
-    if HAS_PLONE5:
-        schema = IFacetedCollectionPortlet
-    else:
-        form_fields = form.Fields(IFacetedCollectionPortlet)
-    label = _(u"Add Collection Criteria Portlet")
-    description = _(u"This portlet shows controls for faceted with collections.")
+    schema = IFacetedCollectionPortlet
+    label = _("Add Collection Criteria Portlet")
+    description = _("This portlet shows controls for faceted with collections.")
 
     def create(self, data):
         return Assignment(**data)
 
 
 class EditForm(base.EditForm):
-    if HAS_PLONE5:
-        schema = IFacetedCollectionPortlet
-    else:
-        form_fields = form.Fields(IFacetedCollectionPortlet)
-    label = _(u"Edit Collection Criteria Portlet")
-    description = _(u"This portlet shows controls for faceted with collections.")
+    schema = IFacetedCollectionPortlet
+    label = _("Edit Collection Criteria Portlet")
+    description = _("This portlet shows controls for faceted with collections.")

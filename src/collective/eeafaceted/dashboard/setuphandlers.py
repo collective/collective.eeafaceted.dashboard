@@ -17,12 +17,12 @@ def post_install(context):
 def add_demo_data(context):
     """ """
     CUSTOM_VIEW_FIELDS = [
-        u"pretty_link",
-        u"Creator",
-        u"CreationDate",
-        u"ModificationDate",
-        u"review_state",
-        u"select_row",
+        "pretty_link",
+        "Creator",
+        "CreationDate",
+        "ModificationDate",
+        "review_state",
+        "select_row",
     ]
     portal = context.getSite()
     # create container and searches
@@ -33,14 +33,14 @@ def add_demo_data(context):
         title="Every elements",
         query=[
             {
-                u"i": u"path",
-                u"o": u"plone.app.querystring.operation.string.path",
-                u"v": u"",
+                "i": "path",
+                "o": "plone.app.querystring.operation.string.path",
+                "v": "",
             }
         ],
         customViewFields=CUSTOM_VIEW_FIELDS,
         showNumberOfItems=False,
-        tal_condition=u"",
+        tal_condition="",
         roles_bypassing_talcondition=[],
         sort_on=None,
         sort_reversed=False,
@@ -51,19 +51,19 @@ def add_demo_data(context):
         title="My elements",
         query=[
             {
-                u"i": u"path",
-                u"o": u"plone.app.querystring.operation.string.path",
-                u"v": u"",
+                "i": "path",
+                "o": "plone.app.querystring.operation.string.path",
+                "v": "",
             },
             {
-                u"i": u"Creator",
-                u"o": u"plone.app.querystring.operation.string.currentUser",
-                u"v": u"",
+                "i": "Creator",
+                "o": "plone.app.querystring.operation.string.currentUser",
+                "v": "",
             },
         ],
         customViewFields=CUSTOM_VIEW_FIELDS,
         showNumberOfItems=False,
-        tal_condition=u"",
+        tal_condition="",
         roles_bypassing_talcondition=[],
         sort_on=None,
         sort_reversed=False,
@@ -74,14 +74,14 @@ def add_demo_data(context):
         title="Elements to review",
         query=[
             {
-                u"i": u"review_state",
-                u"o": u"plone.app.querystring.operation.selection.is",
-                u"v": u"pending",
+                "i": "review_state",
+                "o": "plone.app.querystring.operation.selection.is",
+                "v": "pending",
             }
         ],
         customViewFields=CUSTOM_VIEW_FIELDS,
         showNumberOfItems=True,
-        tal_condition=u"",
+        tal_condition="",
         roles_bypassing_talcondition=[],
         sort_on=None,
         sort_reversed=False,
@@ -92,14 +92,14 @@ def add_demo_data(context):
         title="Expired elements",
         query=[
             {
-                u"i": u"expires",
-                u"o": u"plone.app.querystring.operation.date.beforeToday",
-                u"v": u"",
+                "i": "expires",
+                "o": "plone.app.querystring.operation.date.beforeToday",
+                "v": "",
             }
         ],
         customViewFields=CUSTOM_VIEW_FIELDS,
         showNumberOfItems=True,
-        tal_condition=u"",
+        tal_condition="",
         roles_bypassing_talcondition=[],
         sort_on=None,
         sort_reversed=False,

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from collective.eeafaceted.collectionwidget.config import NO_FACETED_EXCEPTION_MSG
-from collective.eeafaceted.collectionwidget.interfaces import NoFacetedViewDefinedException
+from collective.eeafaceted.collectionwidget.interfaces import (
+    NoFacetedViewDefinedException,
+)
 from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
 from eea.facetednavigation.criteria.interfaces import ICriteria
 from eea.facetednavigation.interfaces import IHidePloneLeftColumn
@@ -14,37 +16,41 @@ import json
 import logging
 
 
-logger = logging.getLogger('collective.eeafaceted.dashboard: utils')
+logger = logging.getLogger("collective.eeafaceted.dashboard: utils")
 
 
-def enableFacetedDashboardFor(obj, xmlpath=None, show_left_column=True, default_UID=None):
+def enableFacetedDashboardFor(
+    obj, xmlpath=None, show_left_column=True, default_UID=None
+):
     """Mark in REQUEST that we are enabling a dashboard, sometimes useful for subprocesses."""
-    obj.REQUEST.set('enablingFacetedDashboard', True)
+    obj.REQUEST.set("enablingFacetedDashboard", True)
     _enableFacetedDashboardFor(obj, xmlpath, show_left_column, default_UID)
-    obj.REQUEST.set('enablingFacetedDashboard', False)
+    obj.REQUEST.set("enablingFacetedDashboard", False)
 
 
 def addFacetedCriteria(obj, xmlpath):
     """Helper to add extra faceted criteria to an already faceted enabled dashboard."""
-    _enableFacetedDashboardFor(obj,
-                               xmlpath,
-                               show_left_column=False,
-                               enable_faceted=False,
-                               update_layout=False)
+    _enableFacetedDashboardFor(
+        obj, xmlpath, show_left_column=False, enable_faceted=False, update_layout=False
+    )
 
 
-def _enableFacetedDashboardFor(obj,
-                               xmlpath=None,
-                               show_left_column=True,
-                               default_UID=None,
-                               enable_faceted=True,
-                               update_layout=True):
+def _enableFacetedDashboardFor(
+    obj,
+    xmlpath=None,
+    show_left_column=True,
+    default_UID=None,
+    enable_faceted=True,
+    update_layout=True,
+):
     """Enable a faceted view on obj and import a
-       specific xml if given p_xmlpath."""
+    specific xml if given p_xmlpath."""
     # already a faceted?
     if enable_faceted and IFacetedNavigable.providedBy(obj):
-        logger.error("Faceted navigation is already enabled for '%s'" %
-                     '/'.join(obj.getPhysicalPath()))
+        logger.error(
+            "Faceted navigation is already enabled for '%s'"
+            % "/".join(obj.getPhysicalPath())
+        )
         return
 
     # do not go further if xmlpath does not exist
@@ -53,28 +59,29 @@ def _enableFacetedDashboardFor(obj,
     # .enable() here under will redirect to enabled faceted
     # we cancel this, safe previous RESPONSE status and location
     response_status = obj.REQUEST.RESPONSE.getStatus()
-    response_location = obj.REQUEST.RESPONSE.getHeader('location')
+    response_location = obj.REQUEST.RESPONSE.getHeader("location")
     if enable_faceted:
-        obj.unrestrictedTraverse('@@faceted_subtyper').enable()
+        obj.unrestrictedTraverse("@@faceted_subtyper").enable()
 
     if update_layout:
         # use correct layout in the faceted
-        IFacetedLayout(obj).update_layout('faceted-table-items')
+        IFacetedLayout(obj).update_layout("faceted-table-items")
     # show the left portlets
     if show_left_column and IHidePloneLeftColumn.providedBy(obj):
         noLongerProvides(obj, IHidePloneLeftColumn)
     # import configuration
     if xmlpath:
         # bytes: eea's _import_xml checks a bytes XML declaration on Python 3
-        with open(xmlpath, 'rb') as import_file:
-            obj.unrestrictedTraverse('@@faceted_exportimport').import_xml(
-                import_file=import_file)
+        with open(xmlpath, "rb") as import_file:
+            obj.unrestrictedTraverse("@@faceted_exportimport").import_xml(
+                import_file=import_file
+            )
     # define default collection UID
     if default_UID:
         _updateDefaultCollectionFor(obj, default_UID)
     obj.reindexObject()
     obj.REQUEST.RESPONSE.status = response_status
-    obj.REQUEST.RESPONSE.setHeader('location', response_location or '')
+    obj.REQUEST.RESPONSE.setHeader("location", response_location or "")
 
 
 def getDashboardQueryResult(faceted_context):
@@ -85,8 +92,8 @@ def getDashboardQueryResult(faceted_context):
         raise NoFacetedViewDefinedException(NO_FACETED_EXCEPTION_MSG)
 
     request = faceted_context.REQUEST
-    uids = request.form.get('uids', '')
-    faceted_query = request.form.get('facetedQuery', None)
+    uids = request.form.get("uids", "")
+    faceted_query = request.form.get("facetedQuery", None)
 
     brains = []
     # maybe we have a facetedQuery? aka the meeting view was filtered and we want to print this result
@@ -97,26 +104,26 @@ def getDashboardQueryResult(faceted_context):
                 # we receive list of elements, if we have only one elements, remove it from the list
                 if isinstance(v, list) and len(v) == 1:
                     v = v[0]
-                request.form['{0}[]'.format(k)] = v
-        faceted = faceted_context.restrictedTraverse('@@faceted_query')
+                request.form["{0}[]".format(k)] = v
+        faceted = faceted_context.restrictedTraverse("@@faceted_query")
         brains = faceted.query(batch=False)
     # if we have uids, let 'brains' be directly available in the template context too
     # brains could already fetched, if it is the case, use it, get it otherwise
     elif uids:
-        uids = uids.split(',')
-        catalog = api.portal.get_tool('portal_catalog')
+        uids = uids.split(",")
+        catalog = api.portal.get_tool("portal_catalog")
         brains = catalog(UID=uids)
 
         # we need to sort found brains according to uids
         def getKey(item):
             return uids.index(item.UID)
+
         brains = sorted(brains, key=getKey)
     return brains
 
 
 def _get_criterion_by_attr(faceted_context, attr_name, value_to_match):
-    """
-    """
+    """ """
     if not IFacetedNavigable.providedBy(faceted_context):
         raise NoFacetedViewDefinedException(NO_FACETED_EXCEPTION_MSG)
 
@@ -126,7 +133,7 @@ def _get_criterion_by_attr(faceted_context, attr_name, value_to_match):
             continue
         else:
             attr = getattr(criterion, attr_name)
-            value = hasattr(attr, '__call__') and attr() or attr
+            value = hasattr(attr, "__call__") and attr() or attr
             if value == value_to_match:
                 return criterion
 
@@ -135,11 +142,11 @@ def getCriterionByTitle(faceted_context, title):
     """
     Return criterion with title 'title'.
     """
-    return _get_criterion_by_attr(faceted_context, 'title', title)
+    return _get_criterion_by_attr(faceted_context, "title", title)
 
 
 def getCriterionByIndex(faceted_context, index):
     """
     Return criterion with index named 'index'.
     """
-    return _get_criterion_by_attr(faceted_context, 'index', index)
+    return _get_criterion_by_attr(faceted_context, "index", index)

@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 from collective.documentgenerator.browser.generation_view import DocumentGenerationView
-from collective.documentgenerator.viewlets.generationlinks import DocumentGeneratorLinksViewlet
-from collective.eeafaceted.collectionwidget.interfaces import NotDashboardContextException
+from collective.documentgenerator.viewlets.generationlinks import (
+    DocumentGeneratorLinksViewlet,
+)
+from collective.eeafaceted.collectionwidget.interfaces import (
+    NotDashboardContextException,
+)
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.collectionwidget.utils import getCurrentCollection
 from collective.eeafaceted.dashboard import FacetedDashboardMessageFactory as _
@@ -31,8 +35,9 @@ class DashboardFacetedTableView(FacetedTableView):
         self.collection = self._set_collection()
 
     def _set_collection(self):
-        if ICollection.providedBy(self.context) or \
-           (HAS_PAC and pac_ICollection.providedBy(self.context)):
+        if ICollection.providedBy(self.context) or (
+            HAS_PAC and pac_ICollection.providedBy(self.context)
+        ):
             return self.context
         else:
             collection = getCurrentCollection(self.context)
@@ -53,38 +58,40 @@ class DashboardFacetedTableView(FacetedTableView):
 
 class DashboardDocumentGenerationView(DocumentGenerationView):
     """Override the 'get_generation_context' properly so 'get_base_generation_context'
-       is available for sub-packages that want to extend the template generation context."""
+    is available for sub-packages that want to extend the template generation context."""
 
     def _get_generation_context(self, helper_view, pod_template):
         """Include brains/uids if we are on a dashboard."""
         if not IFacetedNavigable.providedBy(self.context):
             return super(DashboardDocumentGenerationView, self)._get_generation_context(
-                helper_view, pod_template)
+                helper_view, pod_template
+            )
 
-        generation_context = {'brains': [],
-                              'uids': []}
+        generation_context = {"brains": [], "uids": []}
         brains = getDashboardQueryResult(self.context) or []
-        max_objects = getattr(pod_template, 'max_objects', None)
+        max_objects = getattr(pod_template, "max_objects", None)
         if max_objects:
             brains = brains[:max_objects]
-        generation_context['brains'] = brains
-        if getattr(pod_template, 'use_objects', False):
+        generation_context["brains"] = brains
+        if getattr(pod_template, "use_objects", False):
             wrapped_objects = []
             brain_and_objects = []
             for brain in brains:
-                generation_context['uids'].append(brain.UID)
+                generation_context["uids"].append(brain.UID)
                 obj = brain.getObject()
-                helper = obj.unrestrictedTraverse('@@document_generation_helper_view')
+                helper = obj.unrestrictedTraverse("@@document_generation_helper_view")
                 wrapped_objects.append((helper.context, helper))
                 brain_and_objects.append((brain, helper.context, helper))
-            generation_context['objects'] = wrapped_objects
-            generation_context['all'] = brain_and_objects
+            generation_context["objects"] = wrapped_objects
+            generation_context["all"] = brain_and_objects
         else:
-            generation_context['uids'] = [brain.UID for brain in brains]
+            generation_context["uids"] = [brain.UID for brain in brains]
 
         generation_context.update(
             super(DashboardDocumentGenerationView, self)._get_generation_context(
-                helper_view, pod_template))
+                helper_view, pod_template
+            )
+        )
         return generation_context
 
 
@@ -108,14 +115,16 @@ class DashboardDocumentGeneratorLinksViewlet(DocumentGeneratorLinksViewlet):
         return super(DashboardDocumentGeneratorLinksViewlet, self).available()
 
     def get_links_info(self):
-        link_infos = super(DashboardDocumentGeneratorLinksViewlet, self).get_links_info()
+        link_infos = super(
+            DashboardDocumentGeneratorLinksViewlet, self
+        ).get_links_info()
 
         for link_title, links in list(link_infos.items()):
             for link in links:
                 template = link["template"]
                 link["max"] = template.max_objects
-                link["description"] = _("Only the first ${nb} items will be generated",
-                                        mapping={
-                                            u"nb": template.max_objects
-                                        })
+                link["description"] = _(
+                    "Only the first ${nb} items will be generated",
+                    mapping={u"nb": template.max_objects},
+                )
         return link_infos

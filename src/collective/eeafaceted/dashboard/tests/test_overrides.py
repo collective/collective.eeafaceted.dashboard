@@ -8,35 +8,57 @@ from zope.component import getAdapters
 
 
 class TestDashboardFacetedTableView(IntegrationTestCase):
-
     def test__getViewFields(self):
         # faceted folder without current collection: every registered column
-        view = self.folder.restrictedTraverse('faceted-table-view')
+        view = self.folder.restrictedTraverse("faceted-table-view")
         self.assertIsInstance(view, DashboardFacetedTableView)
         self.assertIsNone(view.collection)
         fields = view._getViewFields()
-        self.assertEqual(sorted(fields),
-                         sorted(name for name, column in getAdapters((self.folder, self.request, view), IColumn)))
-        self.assertIn('pretty_link', fields)
-        self.assertIn('select_row', fields)
+        self.assertEqual(
+            sorted(fields),
+            sorted(
+                name
+                for name, column in getAdapters(
+                    (self.folder, self.request, view), IColumn
+                )
+            ),
+        )
+        self.assertIn("pretty_link", fields)
+        self.assertIn("select_row", fields)
         # faceted folder with a current collection: the columns selected on the collection, in its order
         dc = api.content.create(
-            id='dc1', type='DashboardCollection', title='Dashboard collection 1', container=self.folder,
-            query=[], sort_on='', sort_reversed=False, tal_condition=u'', roles_bypassing_talcondition=[],
-            customViewFields=[u'select_row', u'pretty_link', u'review_state'])
-        self.request.form['c1[]'] = dc.UID()
-        view = self.folder.restrictedTraverse('faceted-table-view')
+            id="dc1",
+            type="DashboardCollection",
+            title="Dashboard collection 1",
+            container=self.folder,
+            query=[],
+            sort_on="",
+            sort_reversed=False,
+            tal_condition=u"",
+            roles_bypassing_talcondition=[],
+            customViewFields=[u"select_row", u"pretty_link", u"review_state"],
+        )
+        self.request.form["c1[]"] = dc.UID()
+        view = self.folder.restrictedTraverse("faceted-table-view")
         self.assertEqual(view.collection, dc)
-        self.assertEqual(view._getViewFields(), [u'select_row', u'pretty_link', u'review_state'])
+        self.assertEqual(
+            view._getViewFields(), [u"select_row", u"pretty_link", u"review_state"]
+        )
         # on a faceted collection (Collection type made faceted navigable): its own columns
-        del self.request.form['c1[]']
+        del self.request.form["c1[]"]
         fti = self.portal.portal_types.Collection
-        fti._updateProperty('behaviors', fti.behaviors + (IPossibleFacetedNavigable.__identifier__, ))
+        fti._updateProperty(
+            "behaviors", fti.behaviors + (IPossibleFacetedNavigable.__identifier__,)
+        )
         collection = api.content.create(
-            id='c1', type='Collection', title='Collection 1', container=self.portal,
-            customViewFields=[u'Title', u'Creator'])
-        collection.unrestrictedTraverse('@@faceted_subtyper').enable()
-        view = collection.restrictedTraverse('faceted-table-view')
+            id="c1",
+            type="Collection",
+            title="Collection 1",
+            container=self.portal,
+            customViewFields=[u"Title", u"Creator"],
+        )
+        collection.unrestrictedTraverse("@@faceted_subtyper").enable()
+        view = collection.restrictedTraverse("faceted-table-view")
         self.assertIsInstance(view, DashboardFacetedTableView)
         self.assertEqual(view.collection, collection)
-        self.assertEqual(view._getViewFields(), [u'Title', u'Creator'])
+        self.assertEqual(view._getViewFields(), [u"Title", u"Creator"])

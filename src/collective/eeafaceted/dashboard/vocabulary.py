@@ -32,10 +32,13 @@ class DashboardCollectionsVocabulary(object):
         return brain.Title
 
     def __call__(self, context):
-        catalog = api.portal.get_tool('portal_catalog')
+        catalog = api.portal.get_tool("portal_catalog")
         collection_brains = catalog(object_provides=IDashboardCollection.__identifier__)
         vocabulary = SimpleVocabulary(
-            [SimpleTerm(b.UID, b.UID, self._render_term_title(b)) for b in collection_brains]
+            [
+                SimpleTerm(b.UID, b.UID, self._render_term_title(b))
+                for b in collection_brains
+            ]
         )
         return vocabulary
 
@@ -55,10 +58,10 @@ class DashboardCategoryCollectionsVocabulary(object):
         while IFacetedNavigable.providedBy(obj.aq_inner.aq_parent):
             obj = obj.aq_inner.aq_parent
             ret.append(obj.UID())
-        return ','.join(reversed(ret))
+        return ",".join(reversed(ret))
 
     def _brains(self):
-        catalog = api.portal.get_tool('portal_catalog')
+        catalog = api.portal.get_tool("portal_catalog")
         return catalog(object_provides=IDashboardCollection.__identifier__)
 
     def __call__(self, context):
@@ -71,10 +74,18 @@ class DashboardCategoryCollectionsVocabulary(object):
             collections[parents].append((brain.UID, brain.Title))
         terms = []
         for parents in collections:
-            prefix = ' - '.join([uuidToCatalogBrain(p).Title for p in parents.split(',') if p])
+            prefix = " - ".join(
+                [uuidToCatalogBrain(p).Title for p in parents.split(",") if p]
+            )
             for term in collections[parents]:
-                terms.append(SimpleTerm(term[0], term[0], prefix and "%s - %s" % (prefix, term[1]) or term[1]))
-        terms.sort(key=attrgetter('title'))
+                terms.append(
+                    SimpleTerm(
+                        term[0],
+                        term[0],
+                        prefix and "%s - %s" % (prefix, term[1]) or term[1],
+                    )
+                )
+        terms.sort(key=attrgetter("title"))
         return SimpleVocabulary(terms)
 
 
@@ -83,17 +94,23 @@ DashboardCategoryCollectionsVocabularyFactory = DashboardCategoryCollectionsVoca
 
 @implementer(IVocabularyFactory)
 class DashboardMetaDataFieldsVocabulary(MetaDataFieldsVocabulary):
-
     def _is_adding_new_dashboard_collection(self):
         """ """
         request = getRequest()
-        published = request.get('PUBLISHED')
-        if published and hasattr(published, '__name__') and published.__name__ == 'DashboardCollection':
+        published = request.get("PUBLISHED")
+        if (
+            published
+            and hasattr(published, "__name__")
+            and published.__name__ == "DashboardCollection"
+        ):
             return True
         return False
 
     def __call__(self, context):
-        if context.portal_type == 'DashboardCollection' or self._is_adding_new_dashboard_collection():
+        if (
+            context.portal_type == "DashboardCollection"
+            or self._is_adding_new_dashboard_collection()
+        ):
             return ICustomViewFieldsVocabulary(context)()
         else:
             # original behavior for plone.app.contenttypes Collection

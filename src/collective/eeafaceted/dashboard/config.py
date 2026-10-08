@@ -1,5 +1,5 @@
-PROJECTNAME = 'collective.eeafaceted.dashboard'
+PROJECTNAME = "collective.eeafaceted.dashboard"
 
-DEFAULT_PORTLET_TITLE = u'Collections'
+DEFAULT_PORTLET_TITLE = u"Collections"
 
-CURRENT_CRITERION = 'querynextprev.current_criterion'
+CURRENT_CRITERION = "querynextprev.current_criterion"

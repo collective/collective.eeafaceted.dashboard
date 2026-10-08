@@ -17,68 +17,93 @@ def post_install(context):
 def add_demo_data(context):
     """ """
     CUSTOM_VIEW_FIELDS = [
-        u'pretty_link', u'Creator', u'CreationDate',
-        u'ModificationDate', u'review_state', u'select_row']
+        u"pretty_link",
+        u"Creator",
+        u"CreationDate",
+        u"ModificationDate",
+        u"review_state",
+        u"select_row",
+    ]
     portal = context.getSite()
     # create container and searches
-    folder = api.content.create(
-        container=portal, type='Folder', title='Dashboard')
+    folder = api.content.create(container=portal, type="Folder", title="Dashboard")
     default_collection = api.content.create(
         container=folder,
-        type='DashboardCollection',
-        title='Every elements',
-        query=[{u'i': u'path',
-                u'o': u'plone.app.querystring.operation.string.path',
-                u'v': u''}],
-        customViewFields=CUSTOM_VIEW_FIELDS,
-        showNumberOfItems=False,
-        tal_condition=u'',
-        roles_bypassing_talcondition=[],
-        sort_on=None,
-        sort_reversed=False)
-    api.content.create(
-        container=folder,
-        type='DashboardCollection',
-        title='My elements',
+        type="DashboardCollection",
+        title="Every elements",
         query=[
-            {u'i': u'path',
-                u'o': u'plone.app.querystring.operation.string.path',
-                u'v': u''},
-            {u'i': u'Creator',
-             u'o': u'plone.app.querystring.operation.string.currentUser',
-             u'v': u''}],
+            {
+                u"i": u"path",
+                u"o": u"plone.app.querystring.operation.string.path",
+                u"v": u"",
+            }
+        ],
         customViewFields=CUSTOM_VIEW_FIELDS,
         showNumberOfItems=False,
-        tal_condition=u'',
+        tal_condition=u"",
         roles_bypassing_talcondition=[],
         sort_on=None,
-        sort_reversed=False)
+        sort_reversed=False,
+    )
     api.content.create(
         container=folder,
-        type='DashboardCollection',
-        title='Elements to review',
-        query=[{u'i': u'review_state',
-                u'o': u'plone.app.querystring.operation.selection.is',
-                u'v': u'pending'}],
+        type="DashboardCollection",
+        title="My elements",
+        query=[
+            {
+                u"i": u"path",
+                u"o": u"plone.app.querystring.operation.string.path",
+                u"v": u"",
+            },
+            {
+                u"i": u"Creator",
+                u"o": u"plone.app.querystring.operation.string.currentUser",
+                u"v": u"",
+            },
+        ],
         customViewFields=CUSTOM_VIEW_FIELDS,
-        showNumberOfItems=True,
-        tal_condition=u'',
+        showNumberOfItems=False,
+        tal_condition=u"",
         roles_bypassing_talcondition=[],
         sort_on=None,
-        sort_reversed=False)
+        sort_reversed=False,
+    )
     api.content.create(
         container=folder,
-        type='DashboardCollection',
-        title='Expired elements',
-        query=[{u'i': u'expires',
-                u'o': u'plone.app.querystring.operation.date.beforeToday',
-                u'v': u''}],
+        type="DashboardCollection",
+        title="Elements to review",
+        query=[
+            {
+                u"i": u"review_state",
+                u"o": u"plone.app.querystring.operation.selection.is",
+                u"v": u"pending",
+            }
+        ],
         customViewFields=CUSTOM_VIEW_FIELDS,
         showNumberOfItems=True,
-        tal_condition=u'',
+        tal_condition=u"",
         roles_bypassing_talcondition=[],
         sort_on=None,
-        sort_reversed=False)
+        sort_reversed=False,
+    )
+    api.content.create(
+        container=folder,
+        type="DashboardCollection",
+        title="Expired elements",
+        query=[
+            {
+                u"i": u"expires",
+                u"o": u"plone.app.querystring.operation.date.beforeToday",
+                u"v": u"",
+            }
+        ],
+        customViewFields=CUSTOM_VIEW_FIELDS,
+        showNumberOfItems=True,
+        tal_condition=u"",
+        roles_bypassing_talcondition=[],
+        sort_on=None,
+        sort_reversed=False,
+    )
     # enable faceted and configure
     enableFacetedDashboardFor(folder, show_left_column=False)
     _updateDefaultCollectionFor(folder, default_collection.UID())

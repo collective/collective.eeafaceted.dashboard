@@ -25,17 +25,25 @@ except ImportError:  # Python 2
 SUITE_LAYERS = {}
 # scenarios failing because of a known Plone 4 bug (MIGRATION.md Known issues): reported, not failing on
 # Robot Framework 3 (Plone 4.3); Robot Framework 4+ (Plone 6) has no criticality, they must pass there
-NONCRITICAL_TAGS = ['plone4-bug']
+NONCRITICAL_TAGS = ["plone4-bug"]
 
 
 def test_suite():
-    os.environ.setdefault('ROBOT_PLONE_MAJOR', version('Products.CMFPlone').split('.')[0])
+    os.environ.setdefault(
+        "ROBOT_PLONE_MAJOR", version("Products.CMFPlone").split(".")[0]
+    )
     suite = unittest.TestSuite()
-    robot_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'robot')
+    robot_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "robot")
     for name in sorted(os.listdir(robot_dir)):
-        if name.startswith('test_') and name.endswith('.robot'):
-            suite.addTests([
-                layered(robotsuite.RobotTestSuite(os.path.join('robot', name), noncritical=NONCRITICAL_TAGS),
-                        layer=SUITE_LAYERS.get(name, ACCEPTANCE)),
-            ])
+        if name.startswith("test_") and name.endswith(".robot"):
+            suite.addTests(
+                [
+                    layered(
+                        robotsuite.RobotTestSuite(
+                            os.path.join("robot", name), noncritical=NONCRITICAL_TAGS
+                        ),
+                        layer=SUITE_LAYERS.get(name, ACCEPTANCE),
+                    ),
+                ]
+            )
     return suite

@@ -13,16 +13,18 @@ class TestConditionAwareVocabulary(IntegrationTestCase):
 
     def setUp(self):
         """Custom shared utility setup for tests."""
-        self.portal = self.layer['portal']
+        self.portal = self.layer["portal"]
         # make sure we have a default workflow
         self.wfTool = self.portal.portal_workflow
-        self.wfTool.setDefaultChain('simple_publication_workflow')
-        self.folder = api.content.create(id='f', type='Folder', title='My category', container=self.portal)
+        self.wfTool.setDefaultChain("simple_publication_workflow")
+        self.folder = api.content.create(
+            id="f", type="Folder", title="My category", container=self.portal
+        )
         self.dashboardcollection = api.content.create(
-            id='dc1',
-            type='DashboardCollection',
-            title='Dashboard collection 1',
-            container=self.folder
+            id="dc1",
+            type="DashboardCollection",
+            title="Dashboard collection 1",
+            container=self.folder,
         )
         alsoProvides(self.folder, IFacetedNavigable)
 
@@ -37,9 +39,15 @@ class TestConditionAwareVocabulary(IntegrationTestCase):
 
     def test_categorycollectionsvocabulary(self):
         """This will return every DashboardCollections of the portal prefixed by categories."""
-        factory = queryUtility(IVocabularyFactory, u'collective.eeafaceted.dashboard.dashboardcollectionsvocabulary')
+        factory = queryUtility(
+            IVocabularyFactory,
+            u"collective.eeafaceted.dashboard.dashboardcollectionsvocabulary",
+        )
         # one DashboardCollection
         self.assertEqual(len(factory(self.portal)), 1)
         term = factory(self.portal).getTerm(self.dashboardcollection.UID())
         self.assertEqual(term.token, term.value, self.dashboardcollection.UID())
-        self.assertEqual(term.title, '%s - %s' % (self.folder.Title(), self.dashboardcollection.Title()))
+        self.assertEqual(
+            term.title,
+            "%s - %s" % (self.folder.Title(), self.dashboardcollection.Title()),
+        )

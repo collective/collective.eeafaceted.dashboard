@@ -15,8 +15,8 @@ from Products.ATContentTypes.interfaces import IATFolder
 @indexer(IATFolder)
 def contained_types_and_states(folder):
     """
-      Index the portal_type and review_state of contained objects like :
-      ['Document_private', 'Document_published', 'Image_private'].
+    Index the portal_type and review_state of contained objects like :
+    ['Document_private', 'Document_published', 'Image_private'].
     """
     res = []
     for obj in folder.objectValues():
@@ -27,7 +27,7 @@ def contained_types_and_states(folder):
         if api.content.get_state(obj) not in res:
             res.append(api.content.get_state(obj))
         # then add the combined value
-        value = obj.portal_type + '__' + api.content.get_state(obj)
+        value = obj.portal_type + "__" + api.content.get_state(obj)
         if value not in res:
             res.append(value)
     res.sort()

@@ -10,13 +10,13 @@ class IFacetedDashboardLayer(IDefaultBrowserLayer):
 
 class ICustomViewFieldsVocabulary(Interface):
     """
-      Adapter interface that manage override of the
-      plone.app.collection Collection.customViewFields vocabulary.
+    Adapter interface that manage override of the
+    plone.app.collection Collection.customViewFields vocabulary.
     """
 
     def listMetaDataFields(self, exclude=True):
         """
-          Get every IFacetedColumn z3c.table columns.
+        Get every IFacetedColumn z3c.table columns.
         """
 
 

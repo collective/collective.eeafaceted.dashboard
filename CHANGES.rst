@@ -4,6 +4,9 @@ Changelog
 1.0.0 (unreleased)
 ------------------
 
+- Migrated to Plone 6.2 / Python 3, based on the work started by @laulaz and
+  @fngaha on `python3`.
+  [laulaz, fngaha, chris-adam]
 - Migrated to Plone 6.2 and Python 3: single default profile with a bundle, uninstall profile, Plone 4 code removed.
   [chris-adam]
 - Fix ModuleNotFoundError, uses `plone.app.vocabularies.metadatafields.MetaDataFieldsVocabulary` instead of

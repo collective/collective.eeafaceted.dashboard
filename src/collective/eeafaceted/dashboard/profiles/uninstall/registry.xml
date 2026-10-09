@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<registry>
+  <records interface="plone.base.interfaces.IBundleRegistry"
+           prefix="plone.bundles/faceted-dashboard"
+           remove="True" />
+</registry>

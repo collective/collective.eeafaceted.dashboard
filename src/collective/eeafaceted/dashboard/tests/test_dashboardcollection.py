@@ -14,32 +14,38 @@ class TestDashboardCollection(IntegrationTestCase):
 
     def setUp(self):
         """Custom shared utility setup for tests."""
-        self.portal = self.layer['portal']
+        self.portal = self.layer["portal"]
         self.collection = api.content.create(
-            id='c1',
-            type='Collection',
-            title='Collection 1',
-            container=self.portal.folder
+            id="c1",
+            type="Collection",
+            title="Collection 1",
+            container=self.portal.folder,
         )
         self.dashboardcollection = api.content.create(
-            id='dc1',
-            type='DashboardCollection',
-            title='Dashboard collection 1',
-            container=self.portal.folder
+            id="dc1",
+            type="DashboardCollection",
+            title="Dashboard collection 1",
+            container=self.portal.folder,
         )
 
     def test_MetaDataFieldsVocabulary(self):
         """For DashboardCollection, vocabulary is available collective.eeafaceted.z3ctable
-           defined columns, but for classic Collections, the normal behaviour persists."""
+        defined columns, but for classic Collections, the normal behaviour persists."""
         # test for presence of special metadata 'select_row'
-        factory = queryUtility(IVocabularyFactory, u'plone.app.contenttypes.metadatafields')
+        factory = queryUtility(
+            IVocabularyFactory, "plone.app.vocabularies.MetadataFields"
+        )
         # classic Collection
-        self.assertFalse('select_row' in factory(self.collection).by_token.keys())
+        self.assertFalse("select_row" in list(factory(self.collection).by_token.keys()))
         # DashboardCollection
-        self.assertTrue('select_row' in factory(self.dashboardcollection).by_token.keys())
+        self.assertTrue(
+            "select_row" in list(factory(self.dashboardcollection).by_token.keys())
+        )
 
     def test_enableFacetedDashboardFor_with_default_UID(self):
         """ """
         collection_uid = self.collection.UID()
         enableFacetedDashboardFor(self.portal.folder, default_UID=collection_uid)
-        self.assertEqual(getCollectionLinkCriterion(self.portal.folder).default, collection_uid)
+        self.assertEqual(
+            getCollectionLinkCriterion(self.portal.folder).default, collection_uid
+        )

@@ -1,8 +1,8 @@
 .. image:: https://github.com/collective/collective.eeafaceted.dashboard/actions/workflows/main.yml/badge.svg?branch=master
     :target: https://github.com/collective/collective.eeafaceted.dashboard/actions/workflows/main.yml
 
-.. image:: https://coveralls.io/repos/collective/collective.eeafaceted.dashboard/badge.svg?branch=master
-   :target: https://coveralls.io/r/collective/collective.eeafaceted.dashboard?branch=master
+.. image:: https://coveralls.io/repos/github/collective/collective.eeafaceted.dashboard/badge.svg
+    :target: https://coveralls.io/github/collective/collective.eeafaceted.dashboard
 
 .. image:: https://img.shields.io/pypi/v/collective.eeafaceted.dashboard.svg
    :alt: PyPI badge
@@ -19,7 +19,7 @@ This package does the glue between :
 - `collective.compoundcriterion <https://github.com/collective/collective.compoundcriterion>`_
 - `collective.documentgenerator <https://github.com/collective/collective.documentgenerator>`_
 
-This build a useable eea.facetednavigation based dashboard (works on both Plone 4.3.x and Plone 5.x).  Use the demo profile to easily check what it does :
+This build a useable eea.facetednavigation based dashboard (Plone 6.2, Classic UI).  Use the demo profile to easily check what it does :
 
 .. image:: https://github.com/IMIO/collective.eeafaceted.dashboard/blob/master/doc/screenshots/application.png
 

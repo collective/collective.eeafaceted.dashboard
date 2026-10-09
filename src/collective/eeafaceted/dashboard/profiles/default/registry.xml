@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<registry>
+
+  <!-- after eea.facetednavigation's faceted.view bundle, deferred as it is -->
+  <records interface="plone.base.interfaces.IBundleRegistry"
+           prefix="plone.bundles/faceted-dashboard">
+    <value key="enabled">True</value>
+    <value key="jscompilation">++resource++collective.eeafaceted.dashboard/collective.eeafaceted.dashboard.js</value>
+    <value key="csscompilation">++resource++collective.eeafaceted.dashboard/collective.eeafaceted.dashboard.css</value>
+    <value key="expression"></value>
+    <value key="depends">faceted.view</value>
+    <value key="load_async">False</value>
+    <value key="load_defer">True</value>
+  </records>
+
+</registry>

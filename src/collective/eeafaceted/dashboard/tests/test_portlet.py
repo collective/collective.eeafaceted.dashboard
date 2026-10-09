@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from collective.eeafaceted.collectionwidget.interfaces import NoCollectionWidgetDefinedException
+from collective.eeafaceted.collectionwidget.interfaces import (
+    NoCollectionWidgetDefinedException,
+)
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.collectionwidget.widgets.widget import CollectionWidget
 from collective.eeafaceted.dashboard.browser import facetedcollectionportlet as portlet
@@ -7,13 +9,16 @@ from collective.eeafaceted.dashboard.config import DEFAULT_PORTLET_TITLE
 from collective.eeafaceted.dashboard.testing import IntegrationTestCase
 from eea.facetednavigation.criteria.interfaces import ICriteria
 from plone import api
+from plone.portlets.interfaces import IPortletDataProvider
 from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
+from plone.portlets.interfaces import IPortletType
 from zope.annotation import IAnnotations
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 
 import lxml
+import lxml.html
 
 
 class TestPortlet(IntegrationTestCase):
@@ -21,26 +26,26 @@ class TestPortlet(IntegrationTestCase):
 
     def setUp(self):
         """Custom shared utility setup for tests."""
-        self.portal = self.layer['portal']
+        self.portal = self.layer["portal"]
         self.folder = self.portal.folder
         self.request = self.portal.REQUEST
         self.request.SESSION = {}
-        self.view = self.portal.restrictedTraverse('@@plone')
-        self.manager = getUtility(IPortletManager,
-                                  name='plone.leftcolumn',
-                                  context=self.portal)
+        self.view = self.portal.restrictedTraverse("@@plone")
+        self.manager = getUtility(
+            IPortletManager, name="plone.leftcolumn", context=self.portal
+        )
         self.assignment = portlet.Assignment()
         self.renderer = self._get_portlet_renderer()
-        self.subtyper = getMultiAdapter((self.folder, self.request), name=u'faceted_subtyper')
+        self.subtyper = getMultiAdapter(
+            (self.folder, self.request), name="faceted_subtyper"
+        )
 
     def _get_portlet_renderer(self):
         """ """
         renderer = getMultiAdapter(
-            (self.folder,
-             self.request,
-             self.view,
-             self.manager,
-             self.assignment), IPortletRenderer)
+            (self.folder, self.request, self.view, self.manager, self.assignment),
+            IPortletRenderer,
+        )
         return renderer
 
     def test_portlet_available_when_faceted_enabled(self):
@@ -54,69 +59,72 @@ class TestPortlet(IntegrationTestCase):
 
     def test_portlet_criteriaHolder(self):
         """The portlet will be displayed in folders contained by the folder
-           on which the faceted nav is applied but the _criteriaHolder will always be
-           the folder on which the faceted is really applied."""
+        on which the faceted nav is applied but the _criteriaHolder will always be
+        the folder on which the faceted is really applied."""
         # faceted not applied, _criteriaHolder returns None
-        self.assertTrue(not self.subtyper.is_faceted)
+        self.assertTrue(not self.subtyper.is_faceted())
         self.assertTrue(self.renderer._criteriaHolder is None)
         # enable faceted, now the folder will be found
         self.subtyper.enable()
         self.assertTrue(self.renderer._criteriaHolder == self.folder)
         # if we add a sub folder, the _criteriaHolder will still be self.folder
         subfolder = api.content.create(
-            id='subfolder',
-            type='Folder',
-            title='Subfolder',
-            container=self.folder
+            id="subfolder", type="Folder", title="Subfolder", container=self.folder
         )
-        renderer = getMultiAdapter((subfolder,
-                                    self.request,
-                                    self.view,
-                                    self.manager,
-                                    self.assignment),
-                                   IPortletRenderer)
+        renderer = getMultiAdapter(
+            (subfolder, self.request, self.view, self.manager, self.assignment),
+            IPortletRenderer,
+        )
         self.assertTrue(renderer._criteriaHolder == self.folder)
 
     def test_portlet_widget_render(self):
         """The portlet will render collection-link widgets defined
-           on the faceted config.  This portlet has 2 behaviours :
-           - classic faceted widget behaviour when displayed directly on the folder
-             on which the faceted is applied : it uses the faceted js onclick to update the faceted;
-           - 'fake' widget displayed as the real widget but instead of controlling the faceted
-             it has a link on every disiplayed collection that will move to the faceted
-             correctly initialized."""
+        on the faceted config.  This portlet has 2 behaviours :
+        - classic faceted widget behaviour when displayed directly on the folder
+          on which the faceted is applied : it uses the faceted js onclick to update the faceted;
+        - 'fake' widget displayed as the real widget but instead of controlling the faceted
+          it has a link on every disiplayed collection that will move to the faceted
+          correctly initialized."""
         self.subtyper.enable()
         criteria = ICriteria(self.renderer._criteriaHolder)
         # remove the collection-link widget
         collcriterion = getCollectionLinkCriterion(self.renderer._criteriaHolder)
         ICriteria(self.renderer._criteriaHolder).delete(collcriterion.getId())
         # by defaut no collection-link widget so nothing is rendered
-        self.assertTrue(not [criterion for criterion in criteria.values()
-                             if criterion.widget == CollectionWidget.widget_type])
+        self.assertTrue(
+            not [
+                criterion
+                for criterion in list(criteria.values())
+                if criterion.widget == CollectionWidget.widget_type
+            ]
+        )
         with self.assertRaises(NoCollectionWidgetDefinedException):
             getCollectionLinkCriterion(self.renderer._criteriaHolder)
         self.assertTrue(not self.renderer.widget_render)
         # add a collection-link widget
-        data = {'vocabulary': 'collective.eeafaceted.collectionwidget.collectionvocabulary',
-                'hidealloption': True}
-        ICriteria(self.folder).add('collection-link', 'top', **data)
+        data = {
+            "vocabulary": "collective.eeafaceted.collectionwidget.collectionvocabulary",
+            "hidealloption": True,
+        }
+        ICriteria(self.folder).add("collection-link", "top", **data)
         # still displaying nothing as the collection widget does not find any collection
         self.assertTrue(not self.renderer.widget_render.strip())
         # add a DashboardCollection in self.folder
         collection = api.content.create(
-            id='dashboardcollection1',
-            type='DashboardCollection',
-            title='Dashboard collection 1',
+            id="dashboardcollection1",
+            type="DashboardCollection",
+            title="Dashboard collection 1",
             container=self.folder,
-            query='',
-            sort_on='',
+            query="",
+            sort_on="",
             sort_reversed=False,
             showNumberOfItems=True,
-            tal_condition=u'',
-            roles_bypassing_talcondition=[])
+            tal_condition="",
+            roles_bypassing_talcondition=[],
+        )
         # clean memoize for widget.categories,
         # it was memoized when calling _generate_vocabulary here above
-        del IAnnotations(self.request)['plone.memoize']
+        del IAnnotations(self.request)["plone.memoize"]
         # now it is displayed and as we are on the faceted, it behaves like the collection widget
         # a <form> with an action
         # get the '<ul>' displaying collections
@@ -128,31 +136,29 @@ class TestPortlet(IntegrationTestCase):
         self.assertTrue(len(ul_tag.getchildren()) == 1)
         div_tag = ul_tag.getchildren()[0]
         li_tag = div_tag.getchildren()[0]
-        self.assertTrue(li_tag.attrib['value'] == collection.UID())
+        self.assertTrue(li_tag.attrib["value"] == collection.UID())
         self.assertTrue(len(li_tag.getchildren()) == 1)
         a_tag = li_tag.getchildren()[0]
-        self.assertTrue(a_tag.attrib['href'] == 'javascript:;')
+        self.assertTrue(a_tag.attrib["href"] == "javascript:;")
 
         # now get the portlet from a sub element so it behaves differently
         # it is no more a faceted widget but and the href will redirect to the faceted with default parameters
-        subrenderer = getMultiAdapter((collection,
-                                       self.request,
-                                       self.view,
-                                       self.manager,
-                                       self.assignment),
-                                      IPortletRenderer)
+        subrenderer = getMultiAdapter(
+            (collection, self.request, self.view, self.manager, self.assignment),
+            IPortletRenderer,
+        )
         # no more <form> this time
         self.assertTrue("<form" not in subrenderer.widget_render)
         ul_tag = lxml.html.fromstring(subrenderer.widget_render)[0]
         # only 1 children, the collection and the href is a link back to the href with correct default parameters
         self.assertTrue(len(ul_tag.getchildren()) == 1)
         li_tag = ul_tag.getchildren()[0]
-        self.assertTrue(li_tag.attrib['value'] == collection.UID())
+        self.assertTrue(li_tag.attrib["value"] == collection.UID())
         self.assertTrue(len(li_tag.getchildren()) == 1)
         a_tag = li_tag.getchildren()[0]
         # the URL is generated and contains every default values and relevant collection UID
         url = "http://nohost/plone/folder#c3=20&c1={0}".format(collection.UID())
-        self.assertEquals(a_tag.attrib['href'], url)
+        self.assertEqual(a_tag.attrib["href"], url)
 
     def test_portlet_render(self):
         """The portlet will be rendered without a fieldset and will contains rendered widgets."""
@@ -165,3 +171,34 @@ class TestPortlet(IntegrationTestCase):
     def test_portlet_title(self):
         """ """
         self.assertTrue(self.assignment.title == DEFAULT_PORTLET_TITLE)
+
+    def test_portlet_assignment(self):
+        """The assignment provides the portlet interface (renderer and add/edit forms lookup)."""
+        self.assertTrue(portlet.IFacetedCollectionPortlet.providedBy(self.assignment))
+        self.assertTrue(IPortletDataProvider.providedBy(self.assignment))
+
+    def test_portlet_add_form(self):
+        """The add form renders (no field) and adds an Assignment to the portlet manager."""
+        portlet_type = getUtility(IPortletType, name="FacetedCollectionPortlet")
+        mapping = self.portal.restrictedTraverse("++contextportlets++plone.leftcolumn")
+        for key in list(mapping.keys()):
+            del mapping[key]
+        addview = mapping.restrictedTraverse("+/" + portlet_type.addview)
+        self.assertIsInstance(addview, portlet.AddForm)
+        html = lxml.html.fromstring(addview())
+        self.assertEqual(
+            html.xpath(
+                'normalize-space(//h1[contains(@class, "documentFirstHeading")])'
+            ),
+            "Add Collection Criteria Portlet",
+        )
+        # z3c.form buttons of plone.app.portlets' AddForm
+        self.assertEqual(
+            html.xpath(
+                '//form[.//*[@name="form.buttons.add"]]//*[@type="submit"]/@name'
+            ),
+            ["form.buttons.add", "form.buttons.cancel_add"],
+        )
+        addview.createAndAdd(data={})
+        self.assertEqual(len(mapping), 1)
+        self.assertIsInstance(list(mapping.values())[0], portlet.Assignment)

@@ -1,35 +1,68 @@
 <div id="doc-generation-view"
+     tal:define="
+       infos view/get_links_info;
+       titles python:infos.keys();
+     "
      tal:condition="view/available"
-     tal:define="infos view/get_links_info;
-         titles python:infos.keys();"
-     i18n:domain="collective.documentgenerator">
+     i18n:domain="collective.documentgenerator"
+>
 
-  <form name="podTemplateForm"
-    method="POST"
-    target='_blank'
-    tal:attributes="action string:${context/absolute_url}/document-generation;">
-    <input type="hidden" name="template_uid"/>
-    <input type="hidden" name="output_format"/>
-    <input type="hidden" name="uids" value=""/>
-    <input type="hidden" name="facetedQuery" value=""/>
+  <form method="POST"
+        name="podTemplateForm"
+        target="_blank"
+        tal:attributes="
+          action string:${context/absolute_url}/document-generation;
+        "
+  >
+    <input name="template_uid"
+           type="hidden"
+    />
+    <input name="output_format"
+           type="hidden"
+    />
+    <input name="uids"
+           type="hidden"
+           value=""
+    />
+    <input name="facetedQuery"
+           type="hidden"
+           value=""
+    />
 
     <ul class="pod-template">
-      <li tal:repeat="title titles" class="template-link">
-        <span class="template-link-title" tal:content="title">Template title</span>
+      <li class="template-link"
+          tal:repeat="title titles"
+      >
+        <span class="template-link-title"
+              tal:content="title"
+        >Template title</span>
         <span class="template-link-after-title"></span>
         <span class="template-link-before-link"
-              tal:repeat="link python: infos[title]">
+              tal:repeat="link python: infos[title]"
+        >
           <a href="#"
-             tal:attributes="onclick string:event.preventDefault();;javascript:generatePodDocument('${link/template_uid}','${link/output_format}', this);
-                             title link/description"
-             style="cursor: pointer">
-              <img src="#" class="svg-icon"
-               tal:define="alt python: '{} {}'.format(link['title'], link['output_format'].upper());"
-               tal:attributes="src string:${view/portal_url}/++resource++collective.documentgenerator/${link/output_format}.svg;
-                               alt alt;
-                               title link/output_format_title;" />
+             style="cursor: pointer"
+             tal:attributes="
+               onclick string:event.preventDefault();;javascript:generatePodDocument('${link/template_uid}','${link/output_format}', this);
+               title link/description;
+             "
+          >
+            <img class="svg-icon"
+                 src="#"
+                 tal:define="
+                   alt python: '{} {}'.format(link['title'], link['output_format'].upper());
+                 "
+                 tal:attributes="
+                   src string:${view/portal_url}/++resource++collective.documentgenerator/${link/output_format}.svg;
+                   alt alt;
+                   title link/output_format_title;
+                 "
+            />
             <span tal:condition="link/max">
-              (<span class="highlightValue"><span tal:replace="link/max">500</span> max</span>)
+              (<span class="highlightValue"
+                    i18n:ignore=""
+              ><span tal:replace="link/max">500</span>
+                max</span>)
             </span>
           </a>
         </span>

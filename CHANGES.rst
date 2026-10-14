@@ -11,6 +11,8 @@ Changelog
   [chris-adam]
 - Fix ModuleNotFoundError, uses `plone.app.vocabularies.metadatafields.MetaDataFieldsVocabulary` instead of
   `plone.app.contenttypes.behaviors.collection.MetaDataFieldsVocabulary`
+- Added plone.meta configuration (tox, pre-commit, GitHub Actions).
+  [chris-adam]
 
 0.23.2 (2026-03-03)
 -------------------
@@ -119,7 +121,7 @@ Changelog
 0.13.2 (2020-08-18)
 -------------------
 
-- Fixed IndexError when generating a dashboardpotemplte whith empty elements.
+- Fixed IndexError when generating a dashboardpotemplte with empty elements.
   [odelaere]
 
 0.13.1 (2020-06-25)
@@ -171,7 +173,7 @@ Changelog
 - Added function utils.addFacetedCriteria to ease applying a faceted conf xml
   that adds extra faceted criteria to an existing dashboard.
   [gbastien]
-- Improved template evaluate method to avoid getting collection and criterias
+- Improved template evaluate method to avoid getting collection and criteria
   if not necessary
   [sgeulette]
 - Display dashboard-document-generation-link only on IFacetedNavigable
@@ -224,7 +226,7 @@ Changelog
 0.3 (2018-11-20)
 ----------------
 
-- Make sure overrided vocabulary `plone.app.contenttypes.metadatafields` is
+- Make sure overridden vocabulary `plone.app.contenttypes.metadatafields` is
   also used when adding a new DashboardCollection, so when current context is
   not a DashboardCollection but the parent.
   [gbastien]

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.eeafaceted.dashboard.browser.overrides import DashboardFacetedTableView
 from collective.eeafaceted.dashboard.testing import IntegrationTestCase
 from eea.facetednavigation.interfaces import IPossibleFacetedNavigable

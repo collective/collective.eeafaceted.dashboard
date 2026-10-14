@@ -1,7 +1,6 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <layers>
-  <layer
-    name="collective.eeafaceted.dashboard"
-    interface="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
+  <layer interface="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
+         name="collective.eeafaceted.dashboard"
   />
 </layers>

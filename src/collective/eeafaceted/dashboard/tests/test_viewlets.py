@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from collective.documentgenerator.viewlets.generationlinks import (
     DocumentGeneratorLinksViewlet,
 )
@@ -18,7 +16,7 @@ import lxml.html
 
 class TestViewlets(IntegrationTestCase):
     def setUp(self):
-        super(TestViewlets, self).setUp()
+        super().setUp()
         # add a non faceted folder
         self.folder2 = api.content.create(
             id="folder2",
@@ -215,7 +213,7 @@ class TestViewlets(IntegrationTestCase):
         self.assertEqual(
             [a.get("onclick") for a in links],
             [
-                "event.preventDefault();javascript:generatePodDocument('{0}','{1}', this)".format(
+                "event.preventDefault();javascript:generatePodDocument('{}','{}', this)".format(
                     template_uid, fmt
                 )
                 for fmt in ("odt", "pdf")

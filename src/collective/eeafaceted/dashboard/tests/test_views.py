@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Test views."""
 
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
@@ -45,14 +44,14 @@ class TestRenderTermPortletView(IntegrationTestCase):
 
         li = render()
         self.assertEqual(li.tag, "li")
-        self.assertEqual(li.get("id"), "c1{0}".format(dc.UID()))
+        self.assertEqual(li.get("id"), f"c1{dc.UID()}")
         self.assertEqual(li.get("value"), dc.UID())
         self.assertEqual(li.get("title"), "Dashboard collection 1")
         # collective.querynextprev not installed: the term of the SESSION is not selected
         self.assertEqual(li.get("class"), "folder-dc1 no-category-tag")
         self.assertEqual(
             li.xpath("a/@href"),
-            ["http://nohost/plone/folder#c3=20&c1={0}".format(dc.UID())],
+            [f"http://nohost/plone/folder#c3=20&c1={dc.UID()}"],
         )
         self.assertEqual(
             li.xpath('a/span[@class="term-label"]/text()'), ["Dashboard collection 1"]
@@ -102,7 +101,7 @@ class TestJSONListCountableTabs(IntegrationTestCase):
 
 class TestJSONCollectionsCount(IntegrationTestCase):
     def setUp(self):
-        super(TestJSONCollectionsCount, self).setUp()
+        super().setUp()
         self.view = self.folder.unrestrictedTraverse("@@json_collections_count")
 
     def test_folder_empty(self):

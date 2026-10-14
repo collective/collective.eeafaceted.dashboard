@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.eeafaceted.collectionwidget.interfaces import (
     NoCollectionWidgetDefinedException,
 )
@@ -90,7 +89,7 @@ class TestPortlet(IntegrationTestCase):
         # remove the collection-link widget
         collcriterion = getCollectionLinkCriterion(self.renderer._criteriaHolder)
         ICriteria(self.renderer._criteriaHolder).delete(collcriterion.getId())
-        # by defaut no collection-link widget so nothing is rendered
+        # by default no collection-link widget so nothing is rendered
         self.assertTrue(
             not [
                 criterion
@@ -157,7 +156,7 @@ class TestPortlet(IntegrationTestCase):
         self.assertTrue(len(li_tag.getchildren()) == 1)
         a_tag = li_tag.getchildren()[0]
         # the URL is generated and contains every default values and relevant collection UID
-        url = "http://nohost/plone/folder#c3=20&c1={0}".format(collection.UID())
+        url = f"http://nohost/plone/folder#c3=20&c1={collection.UID()}"
         self.assertEqual(a_tag.attrib["href"], url)
 
     def test_portlet_render(self):

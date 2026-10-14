@@ -1,11 +1,11 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <metadata>
   <version>1</version>
   <dependencies>
-      <dependency>profile-plone.app.dexterity:default</dependency>
-      <dependency>profile-plone.app.contenttypes:default</dependency>
-      <dependency>profile-plone.app.relationfield:default</dependency>
-      <dependency>profile-collective.eeafaceted.dashboard:default</dependency>
-      <dependency>profile-imio.helpers:default</dependency>
+    <dependency>profile-plone.app.dexterity:default</dependency>
+    <dependency>profile-plone.app.contenttypes:default</dependency>
+    <dependency>profile-plone.app.relationfield:default</dependency>
+    <dependency>profile-collective.eeafaceted.dashboard:default</dependency>
+    <dependency>profile-imio.helpers:default</dependency>
   </dependencies>
 </metadata>

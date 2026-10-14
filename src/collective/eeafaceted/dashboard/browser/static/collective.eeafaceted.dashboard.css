@@ -32,7 +32,7 @@ div#center---default---widgets div.faceted-widget {
     margin-right: 0.2em;
     margin-top: 0.1em;
 }
-/* remove margin-left for select2 widgets to avoid gap between input and frop down,
+/* remove margin-left for select2 widgets to avoid gap between input and drop down,
    move the margin-left to the parent div */
 #content fieldset.widget-fieldset div.select2-container ul {
     margin-left: 0em;

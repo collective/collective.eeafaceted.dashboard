@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.documentgenerator.browser.generation_view import DocumentGenerationView
 from collective.documentgenerator.viewlets.generationlinks import (
     DocumentGeneratorLinksViewlet,
@@ -17,7 +16,6 @@ from plone.app.contenttypes.interfaces import ICollection
 from plone.memoize.view import memoize
 from zope.component import getAdapter
 
-
 # necessary for now for elements using ICollection from plone.app.collection
 HAS_PAC = True
 try:
@@ -31,7 +29,7 @@ class DashboardFacetedTableView(FacetedTableView):
     ignoreColumnWeight = True
 
     def __init__(self, context, request):
-        super(DashboardFacetedTableView, self).__init__(context, request)
+        super().__init__(context, request)
         self.collection = self._set_collection()
 
     def _set_collection(self):
@@ -53,7 +51,7 @@ class DashboardFacetedTableView(FacetedTableView):
             return [elt[0] for elt in selectedViewFields]
 
         # else get default column names
-        return super(DashboardFacetedTableView, self)._getViewFields()
+        return super()._getViewFields()
 
 
 class DashboardDocumentGenerationView(DocumentGenerationView):
@@ -64,9 +62,7 @@ class DashboardDocumentGenerationView(DocumentGenerationView):
     def _get_generation_context(self, helper_view, pod_template):
         """Include brains/uids if we are on a dashboard."""
         if not IFacetedNavigable.providedBy(self.context):
-            return super(DashboardDocumentGenerationView, self)._get_generation_context(
-                helper_view, pod_template
-            )
+            return super()._get_generation_context(helper_view, pod_template)
 
         generation_context = {"brains": [], "uids": []}
         brains = getDashboardQueryResult(self.context) or []
@@ -89,9 +85,7 @@ class DashboardDocumentGenerationView(DocumentGenerationView):
             generation_context["uids"] = [brain.UID for brain in brains]
 
         generation_context.update(
-            super(DashboardDocumentGenerationView, self)._get_generation_context(
-                helper_view, pod_template
-            )
+            super()._get_generation_context(helper_view, pod_template)
         )
         return generation_context
 
@@ -113,12 +107,10 @@ class DashboardDocumentGeneratorLinksViewlet(DocumentGeneratorLinksViewlet):
             getCollectionLinkCriterion(self.context)
         except NotDashboardContextException:
             return False
-        return super(DashboardDocumentGeneratorLinksViewlet, self).available()
+        return super().available()
 
     def get_links_info(self):
-        link_infos = super(
-            DashboardDocumentGeneratorLinksViewlet, self
-        ).get_links_info()
+        link_infos = super().get_links_info()
 
         for link_title, links in list(link_infos.items()):
             for link in links:

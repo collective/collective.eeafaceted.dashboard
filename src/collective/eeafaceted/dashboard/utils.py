@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.eeafaceted.collectionwidget.config import NO_FACETED_EXCEPTION_MSG
 from collective.eeafaceted.collectionwidget.interfaces import (
     NoFacetedViewDefinedException,
@@ -14,7 +13,6 @@ from zope.interface import noLongerProvides
 
 import json
 import logging
-
 
 logger = logging.getLogger("collective.eeafaceted.dashboard: utils")
 
@@ -104,7 +102,7 @@ def getDashboardQueryResult(faceted_context):
                 # we receive list of elements, if we have only one elements, remove it from the list
                 if isinstance(v, list) and len(v) == 1:
                     v = v[0]
-                request.form["{0}[]".format(k)] = v
+                request.form[f"{k}[]"] = v
         faceted = faceted_context.restrictedTraverse("@@faceted_query")
         brains = faceted.query(batch=False)
     # if we have uids, let 'brains' be directly available in the template context too

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from collective.documentgenerator.interfaces import IPODTemplateCondition
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.dashboard.content.pod_template import (
@@ -21,7 +19,7 @@ class TestDashboardPODTemplate(IntegrationTestCase):
 
     def setUp(self):
         """ """
-        super(TestDashboardPODTemplate, self).setUp()
+        super().setUp()
         # create a DashboardPODTemplate
         self.dashboardtemplate = api.content.create(
             id="dashboardtemplate",
@@ -55,7 +53,7 @@ class TestDashboardPODTemplate(IntegrationTestCase):
         self.assertEqual([c.get("value") for c in checkbox], [dc.UID()])
         self.assertEqual(
             html.xpath(
-                'normalize-space(//label[@for="{0}"])'.format(checkbox[0].get("id"))
+                'normalize-space(//label[@for="{}"])'.format(checkbox[0].get("id"))
             ),
             "Folder - Dashboard collection 1",
         )
@@ -107,16 +105,16 @@ class TestDashboardPODTemplate(IntegrationTestCase):
         )
 
         criterion_name = getCollectionLinkCriterion(self.folder).__name__
-        self.request.form["{0}[]".format(criterion_name)] = dashboardcollection1.UID()
+        self.request.form[f"{criterion_name}[]"] = dashboardcollection1.UID()
         self.assertTrue(self.dashboardtemplate.can_be_generated(self.folder))
 
         # now if restricted to dashboardcollection2, it is no more generable
         self.dashboardtemplate.dashboard_collections = [dashboardcollection2.UID()]
         self.assertFalse(self.dashboardtemplate.can_be_generated(self.folder))
         # except if it is the current collection
-        self.request.form["{0}[]".format(criterion_name)] = dashboardcollection2.UID()
+        self.request.form[f"{criterion_name}[]"] = dashboardcollection2.UID()
         # clear cache for collectionwidget.utils.getCurrentCollection
-        cache_key = "collectionwidget-utils-getCurrentCollection-{0}".format(
+        cache_key = "collectionwidget-utils-getCurrentCollection-{}".format(
             self.folder.UID()
         )
         del IAnnotations(self.request)[cache_key]

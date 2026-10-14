@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 from Acquisition import aq_inner
 from Acquisition import aq_parent
 from collective.eeafaceted.collectionwidget.interfaces import (
@@ -104,11 +102,9 @@ class Renderer(base.Renderer):
                 and not criterion.widget == CollectionWidget.widget_type
                 and criterion.default
             ):
-                default_criteria.append(
-                    "{0}={1}".format(criterion.__name__, criterion.default)
-                )
+                default_criteria.append(f"{criterion.__name__}={criterion.default}")
         base_query_url = "&".join(default_criteria)
-        return "{0}#{1}".format(self._criteriaHolder.absolute_url(), base_query_url)
+        return f"{self._criteriaHolder.absolute_url()}#{base_query_url}"
 
     @property
     def _criteriaHolder(self):

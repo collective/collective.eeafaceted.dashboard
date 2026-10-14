@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 from collective.eeafaceted.collectionwidget.interfaces import IDashboardCollection
 from collective.eeafaceted.dashboard.interfaces import ICustomViewFieldsVocabulary
 from eea.facetednavigation.interfaces import IFacetedNavigable
@@ -15,7 +13,7 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 
 @implementer(IVocabularyFactory)
-class DashboardCollectionsVocabulary(object):
+class DashboardCollectionsVocabulary:
     """
     Vocabulary factory for 'dashboard_collections' field of DashboardPODTemplate.
     Just displays the collection title in the term.
@@ -42,7 +40,7 @@ DashboardCollectionsVocabularyFactory = DashboardCollectionsVocabulary()
 
 
 @implementer(IVocabularyFactory)
-class DashboardCategoryCollectionsVocabulary(object):
+class DashboardCategoryCollectionsVocabulary:
     """
     Vocabulary factory for 'dashboard_collections' field of DashboardPODTemplate.
     Displays the parent categories until the faceted container in the term.
@@ -77,7 +75,7 @@ class DashboardCategoryCollectionsVocabulary(object):
                     SimpleTerm(
                         term[0],
                         term[0],
-                        prefix and "%s - %s" % (prefix, term[1]) or term[1],
+                        prefix and f"{prefix} - {term[1]}" or term[1],
                     )
                 )
         terms.sort(key=attrgetter("title"))
@@ -109,7 +107,7 @@ class DashboardMetaDataFieldsVocabulary(MetaDataFieldsVocabulary):
             return ICustomViewFieldsVocabulary(context)()
         else:
             # original behavior for plone.app.contenttypes Collection
-            return super(DashboardMetaDataFieldsVocabulary, self).__call__(context)
+            return super().__call__(context)
 
 
 DashboardMetaDataFieldsVocabularyFactory = DashboardMetaDataFieldsVocabulary()

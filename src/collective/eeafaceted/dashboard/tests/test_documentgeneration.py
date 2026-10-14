@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from collective.documentgenerator.helper.base import DisplayProxyObject
 from collective.documentgenerator.helper.base import DocumentGenerationHelperView
 from collective.eeafaceted.dashboard.testing import IntegrationTestCase
@@ -9,12 +7,12 @@ from plone import api
 
 
 class TestDocumentGeneration(IntegrationTestCase):
-    """Test the document-generation that has been overrided from
+    """Test the document-generation that has been overridden from
     collective.documentgenerator to be 'dashboard aware'."""
 
     def setUp(self):
         """ """
-        super(TestDocumentGeneration, self).setUp()
+        super().setUp()
         # create a folder2 that will be displayed in the dashboard
         self.folder2 = api.content.create(
             id="folder2", type="Folder", title="Folder 2", container=self.portal

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.dashboard import FacetedDashboardMessageFactory as _
 from collective.eeafaceted.dashboard.testing import DEMO_INTEGRATION
@@ -132,14 +131,14 @@ class TestInstall(IntegrationTestCase):
     def test_translations(self):
         self.assertEqual(
             translate(_("DashboardPODTemplate"), target_language="fr"),
-            "Modèle de document POD pour tableau de bord",
+            "Modèle de document POD pour tableau de bord",  # codespell:ignore bord
         )
         self.assertEqual(
             translate(
                 _("Only the first ${nb} items will be generated", mapping={"nb": 500}),
                 target_language="fr",
             ),
-            "Seuls les 500 premiers éléments seront pris en compte",
+            "Seuls les 500 premiers éléments seront pris en compte",  # codespell:ignore pris
         )
         self.assertEqual(
             translate(

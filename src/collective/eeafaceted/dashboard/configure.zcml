@@ -5,69 +5,83 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:zcml="http://namespaces.zope.org/zcml"
-    i18n_domain="collective.eeafaceted.dashboard">
+    i18n_domain="collective.eeafaceted.dashboard"
+    >
 
-    <i18n:registerTranslations directory="locales" />
+  <i18n:registerTranslations directory="locales" />
 
-    <include package="Products.CMFCore" file="permissions.zcml" />
-    <include package="collective.behavior.talcondition"/>
-    <include package="collective.compoundcriterion"/>
-    <include package="collective.documentgenerator"/>
-    <include package="collective.eeafaceted.collectionwidget"/>
-    <include package="collective.eeafaceted.z3ctable"/>
-    <include package="imio.prettylink" />
-    <include package="plone.app.contenttypes" />
-    <include package="plone.app.dexterity" />
-    <include package="plone.app.portlets" />
-    <include package="plone.locking" />
+  <include
+      package="Products.CMFCore"
+      file="permissions.zcml"
+      />
+  <include package="collective.behavior.talcondition" />
+  <include package="collective.compoundcriterion" />
+  <include package="collective.documentgenerator" />
+  <include package="collective.eeafaceted.collectionwidget" />
+  <include package="collective.eeafaceted.z3ctable" />
+  <include package="imio.prettylink" />
+  <include package="plone.app.contenttypes" />
+  <include package="plone.app.dexterity" />
+  <include package="plone.app.portlets" />
+  <include package="plone.locking" />
 
-    <include package=".browser" />
-    <include package=".columns" />
-    <include package=".content" />
+  <include package=".browser" />
+  <include package=".columns" />
+  <include package=".content" />
 
-    <include file="columns.zcml" />
-    <include file="profiles.zcml" />
-    <include file="upgrades.zcml" />
+  <include file="columns.zcml" />
+  <include file="profiles.zcml" />
+  <include file="upgrades.zcml" />
 
-    <include package="z3c.unconfigure" file="meta.zcml"/>
-    <unconfigure package="plone.app.vocabularies">
-        <utility
-            component=".metadatafields.MetaDataFieldsVocabularyFactory"
-            name="plone.app.vocabularies.MetadataFields" />
-    </unconfigure>
-    <unconfigure package="eea.facetednavigation">
-        <browser:page
-          for="eea.facetednavigation.interfaces.IPossibleFacetedNavigable"
-          name="default_widgets.xml"
-          template="browser/template/default.xml"
-          permission="eea.faceted.configure"
-          />
-    </unconfigure>
-
-    <adapter
-        for="*"
-        factory=".adapters.CustomViewFieldsVocabularyAdapter"
-        provides=".interfaces.ICustomViewFieldsVocabulary" />
-
-    <adapter
-        for="eea.facetednavigation.subtypes.interfaces.IFacetedNavigable"
-        provides="collective.eeafaceted.dashboard.interfaces.IDashboardGenerablePODTemplates"
-        factory=".adapters.DashboardGenerablePODTemplatesAdapter"/>
-
-    <!-- Vocabularies -->
-    <utility component=".vocabulary.DashboardCategoryCollectionsVocabularyFactory"
-             name="collective.eeafaceted.dashboard.dashboardcollectionsvocabulary" />
-
-    <!-- Overrides unconfigured here above -->
+  <include
+      package="z3c.unconfigure"
+      file="meta.zcml"
+      />
+  <unconfigure package="plone.app.vocabularies">
     <utility
-        component=".vocabulary.DashboardMetaDataFieldsVocabularyFactory"
-        name="plone.app.vocabularies.MetadataFields" />
-
+        name="plone.app.vocabularies.MetadataFields"
+        component=".metadatafields.MetaDataFieldsVocabularyFactory"
+        />
+  </unconfigure>
+  <unconfigure package="eea.facetednavigation">
     <browser:page
-        for="eea.facetednavigation.interfaces.IPossibleFacetedNavigable"
         name="default_widgets.xml"
-        template="default_widgets.xml"
-        permission="eea.faceted.configure" />
+        for="eea.facetednavigation.interfaces.IPossibleFacetedNavigable"
+        template="browser/template/default.xml"
+        permission="eea.faceted.configure"
+        />
+  </unconfigure>
+
+  <adapter
+      factory=".adapters.CustomViewFieldsVocabularyAdapter"
+      provides=".interfaces.ICustomViewFieldsVocabulary"
+      for="*"
+      />
+
+  <adapter
+      factory=".adapters.DashboardGenerablePODTemplatesAdapter"
+      provides="collective.eeafaceted.dashboard.interfaces.IDashboardGenerablePODTemplates"
+      for="eea.facetednavigation.subtypes.interfaces.IFacetedNavigable"
+      />
+
+  <!-- Vocabularies -->
+  <utility
+      name="collective.eeafaceted.dashboard.dashboardcollectionsvocabulary"
+      component=".vocabulary.DashboardCategoryCollectionsVocabularyFactory"
+      />
+
+  <!-- Overrides unconfigured here above -->
+  <utility
+      name="plone.app.vocabularies.MetadataFields"
+      component=".vocabulary.DashboardMetaDataFieldsVocabularyFactory"
+      />
+
+  <browser:page
+      name="default_widgets.xml"
+      for="eea.facetednavigation.interfaces.IPossibleFacetedNavigable"
+      template="default_widgets.xml"
+      permission="eea.faceted.configure"
+      />
 
 
 </configure>

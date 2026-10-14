@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
 from collective.eeafaceted.dashboard.utils import enableFacetedDashboardFor
 from plone import api

@@ -1,20 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<object name="searches" meta_type="ATFolder"
-        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-        i18n:domain="eea">
- <criteria>
+<?xml version="1.0" encoding="utf-8"?>
+<object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        meta_type="ATFolder"
+        name="searches"
+        i18n:domain="eea"
+>
+  <criteria>
 
-  <criterion name="c44" i18n:attributes="title">
-   <property name="widget">text</property>
-   <property name="title">Search</property>
-   <property name="position">center</property>
-   <property name="section">default</property>
-   <property name="hidden">0</property>
-   <property name="index">SearchableText</property>
-   <property name="default"/>
-   <property name="onlyallelements">1</property>
-   <property name="wildcard">1</property>
-  </criterion>
+    <criterion name="c44"
+               i18n:attributes="title"
+    >
+      <property name="widget">text</property>
+      <property name="title">Search</property>
+      <property name="position">center</property>
+      <property name="section">default</property>
+      <property name="hidden">0</property>
+      <property name="index">SearchableText</property>
+      <property name="default" />
+      <property name="onlyallelements">1</property>
+      <property name="wildcard">1</property>
+    </criterion>
 
- </criteria>
+  </criteria>
 </object>

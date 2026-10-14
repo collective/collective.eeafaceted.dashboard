@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Base module for unittesting."""
 
 from collective.eeafaceted.dashboard.utils import enableFacetedDashboardFor
@@ -63,7 +62,7 @@ class DemoFacetedDashboardLayer(FacetedDashboardLayer):
 
     def setUpPloneSite(self, portal):
         """Set up Plone."""
-        super(DemoFacetedDashboardLayer, self).setUpPloneSite(portal)
+        super().setUpPloneSite(portal)
         applyProfile(portal, "collective.eeafaceted.dashboard:demo")
 
 
@@ -108,7 +107,7 @@ class IntegrationTestCase(unittest.TestCase):
     layer = INTEGRATION
 
     def setUp(self):
-        super(IntegrationTestCase, self).setUp()
+        super().setUp()
         self.portal = self.layer["portal"]
         self.request = self.portal.REQUEST
         self.folder = self.portal.get("folder")

@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 from collective.documentgenerator.adapters import GenerablePODTemplatesAdapter
 from collective.eeafaceted.dashboard.content.pod_template import IDashboardPODTemplate
 from collective.eeafaceted.z3ctable.interfaces import IFacetedColumn
@@ -11,7 +9,7 @@ from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
 
-class CustomViewFieldsVocabularyAdapter(object):
+class CustomViewFieldsVocabularyAdapter:
     """Handles customViewFields for default plone.app.contenttypes collection."""
 
     def __init__(self, context):

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Setup/installation tests for this package."""
 
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion

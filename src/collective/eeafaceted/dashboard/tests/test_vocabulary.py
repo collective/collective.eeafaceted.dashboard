@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.eeafaceted.dashboard.testing import IntegrationTestCase
 from collective.eeafaceted.dashboard.vocabulary import DashboardCollectionsVocabulary
 from eea.facetednavigation.interfaces import IFacetedNavigable
@@ -49,5 +48,5 @@ class TestConditionAwareVocabulary(IntegrationTestCase):
         self.assertEqual(term.token, term.value, self.dashboardcollection.UID())
         self.assertEqual(
             term.title,
-            "%s - %s" % (self.folder.Title(), self.dashboardcollection.Title()),
+            f"{self.folder.Title()} - {self.dashboardcollection.Title()}",
         )

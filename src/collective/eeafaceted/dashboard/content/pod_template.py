@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from collective.documentgenerator.content.condition import (
     ConfigurablePODTemplateCondition,
 )
@@ -17,7 +15,6 @@ from zope import schema
 from zope.interface import implementer
 
 import logging
-
 
 logger = logging.getLogger("collective.eeafaceted.dashboard: DashboardPODTemplate")
 
@@ -95,4 +92,4 @@ class DashboardPODTemplateCondition(ConfigurablePODTemplateCondition):
             ):
                 return False
 
-        return super(DashboardPODTemplateCondition, self).evaluate()
+        return super().evaluate()

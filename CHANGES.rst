@@ -13,6 +13,8 @@ Changelog
   `plone.app.contenttypes.behaviors.collection.MetaDataFieldsVocabulary`
 - Added plone.meta configuration (tox, pre-commit, GitHub Actions).
   [chris-adam]
+- Switched to PEP 420 native namespace packages.
+  [chris-adam]
 
 0.23.2 (2026-03-03)
 -------------------

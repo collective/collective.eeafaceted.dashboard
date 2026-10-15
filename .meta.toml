@@ -1,0 +1,39 @@
+# Generated from:
+# https://github.com/plone/meta/tree/2.x/src/plone/meta/default
+# See the inline comments on how to expand/tweak this configuration file
+[meta]
+template = "default"
+commit-id = "2.11.1"
+
+[gitignore]
+extra_lines = """
+# buildout local dev (Makefile)
+.plone-version
+.python-version
+CACHEDIR.TAG
+src/*
+!src/collective
+htmlcov/
+*.log
+output.xml
+report.html
+.plone.versioncheck.tracked.json
+"""
+
+[tox]
+use_mxdev = true
+test_matrix = {"6.2" = ["*"]}
+test_environment_variables = """
+    zope_i18n_compile_mo_files=true
+    ROBOT_BROWSER=headlessfirefox
+"""
+test_deps_additional = """
+    horse-with-no-namespace
+    collective.compoundcriterion @ file://{toxinidir}/sources/collective.compoundcriterion
+    collective.eeafaceted.collectionwidget @ file://{toxinidir}/sources/collective.eeafaceted.collectionwidget
+    collective.eeafaceted.z3ctable @ file://{toxinidir}/sources/collective.eeafaceted.z3ctable
+    eea.facetednavigation @ file://{toxinidir}/sources/eea.facetednavigation
+"""
+
+[pyproject]
+dependencies_ignores = "['plone.app.collection', 'plone.app.relationfield']"

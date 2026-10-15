@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<portlets xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+          i18n:domain="plone"
+>
+
+  <!-- Portlet type registrations -->
+
+  <portlet addview="FacetedCollectionPortlet"
+           description="A portlet that renders the faceted collection widget"
+           title="Collection widget portlet"
+           i18n:attributes="title;                     description"
+  >
+    <for interface="plone.app.portlets.interfaces.IColumn" />
+    <for interface="plone.app.portlets.interfaces.IDashboard" />
+  </portlet>
+
+</portlets>

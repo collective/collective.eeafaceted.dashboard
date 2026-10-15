@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+  <version>1</version>
+  <dependencies>
+    <dependency>profile-collective.behavior.talcondition:default</dependency>
+    <dependency>profile-collective.compoundcriterion:default</dependency>
+    <dependency>profile-collective.documentgenerator:default</dependency>
+    <dependency>profile-collective.eeafaceted.collectionwidget:default</dependency>
+    <dependency>profile-collective.eeafaceted.z3ctable:default</dependency>
+  </dependencies>
+</metadata>

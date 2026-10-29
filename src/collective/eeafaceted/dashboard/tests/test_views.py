@@ -1,5 +1,7 @@
 """Test views."""
 
+from collective.beaker.interfaces import ISession
+from collective.beaker.testing import testingSession
 from collective.eeafaceted.collectionwidget.utils import getCollectionLinkCriterion
 from collective.eeafaceted.collectionwidget.widgets.widget import CollectionWidget
 from collective.eeafaceted.dashboard.config import CURRENT_CRITERION
@@ -7,7 +9,9 @@ from collective.eeafaceted.dashboard.interfaces import ICountableTab
 from collective.eeafaceted.dashboard.testing import IntegrationTestCase
 from plone import api
 from unittest import mock
+from zope.component import getGlobalSiteManager
 from zope.interface import alsoProvides
+from zope.publisher.interfaces.http import IHTTPRequest
 
 import json
 import lxml.html
@@ -33,7 +37,12 @@ class TestRenderTermPortletView(IntegrationTestCase):
         )
         widget.base_url = "http://nohost/plone/folder#c3=20"
         term = [t for t in widget.vocabulary() if t.token == dc.UID()][0]
-        self.request.set("SESSION", {CURRENT_CRITERION: dc.UID()})
+        gsm = getGlobalSiteManager()
+        gsm.registerAdapter(testingSession, (IHTTPRequest,), ISession)
+        self.addCleanup(
+            gsm.unregisterAdapter, testingSession, (IHTTPRequest,), ISession
+        )
+        ISession(self.request)[CURRENT_CRITERION] = dc.UID()
 
         def render():
             return lxml.html.fromstring(
@@ -47,7 +56,7 @@ class TestRenderTermPortletView(IntegrationTestCase):
         self.assertEqual(li.get("id"), f"c1{dc.UID()}")
         self.assertEqual(li.get("value"), dc.UID())
         self.assertEqual(li.get("title"), "Dashboard collection 1")
-        # collective.querynextprev not installed: the term of the SESSION is not selected
+        # collective.querynextprev not installed: the term of the session is not selected
         self.assertEqual(li.get("class"), "folder-dc1 no-category-tag")
         self.assertEqual(
             li.xpath("a/@href"),
@@ -59,7 +68,7 @@ class TestRenderTermPortletView(IntegrationTestCase):
         # the count is computed later by the JS (@@json_collections_count)
         self.assertEqual(li.xpath('a/span/span[@class="term-count"]/text()'), ["..."])
         # collective.querynextprev installed (it is not in the test env, mark it installed):
-        # the current criterion of the SESSION is selected
+        # the current criterion of the session is selected
         with mock.patch(
             "collective.eeafaceted.dashboard.browser.views.get_installer"
         ) as get_installer:

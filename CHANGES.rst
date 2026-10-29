@@ -15,6 +15,8 @@ Changelog
   [chris-adam]
 - Switched to PEP 420 native namespace packages.
   [chris-adam]
+- Read the current criterion of the portlet from the collective.querynextprev beaker session (no Zope session on Plone 6).
+  [chris-adam]
 
 0.23.2 (2026-03-03)
 -------------------

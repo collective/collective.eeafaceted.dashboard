@@ -29,6 +29,7 @@ test_environment_variables = """
 """
 test_deps_additional = """
     horse-with-no-namespace
+    collective.beaker @ file://{toxinidir}/sources/collective.beaker
     collective.compoundcriterion @ file://{toxinidir}/sources/collective.compoundcriterion
     collective.eeafaceted.collectionwidget @ file://{toxinidir}/sources/collective.eeafaceted.collectionwidget
     collective.eeafaceted.z3ctable @ file://{toxinidir}/sources/collective.eeafaceted.z3ctable

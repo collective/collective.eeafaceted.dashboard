@@ -35,6 +35,7 @@ setup(
     zip_safe=False,
     python_requires=">=3.10",
     install_requires=[
+        "collective.beaker",
         "collective.behavior.talcondition",
         "collective.compoundcriterion",
         "collective.documentgenerator>=4.0",

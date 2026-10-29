@@ -1,3 +1,4 @@
+from collective.beaker.interfaces import ISession
 from collective.eeafaceted.collectionwidget.browser.views import (
     RenderTermView as BaseRenderTermView,
 )
@@ -27,8 +28,9 @@ class RenderTermPortletView(BaseRenderTermView):
         self.widget = widget
         installer = get_installer(api.portal.get(), self.request)
         if installer.is_product_installed("collective.querynextprev"):
-            session = self.request.get("SESSION", {})
-            if CURRENT_CRITERION in session:  # noqa
+            # collective.querynextprev stores it in its beaker session
+            session = ISession(self.request, None)
+            if session is not None and CURRENT_CRITERION in session:
                 self.selected_term = session[CURRENT_CRITERION]
 
         return self.index()

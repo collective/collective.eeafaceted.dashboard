@@ -2,96 +2,83 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
-    xmlns:zcml="http://namespaces.zope.org/zcml"
-    i18n_domain="collective.eeafaceted.dashboard">
+    i18n_domain="collective.eeafaceted.dashboard"
+    >
 
-    <!-- Publish static files -->
-    <browser:resourceDirectory
-        name="collective.eeafaceted.dashboard"
-        directory="static"
-    />
+  <!-- Publish static files -->
+  <browser:resourceDirectory
+      name="collective.eeafaceted.dashboard"
+      directory="static"
+      />
 
-    <!-- Register the portlet -->
-    <plone:portlet
-        name="FacetedCollectionPortlet"
-        interface=".facetedcollectionportlet.IFacetedCollectionPortlet"
-        assignment=".facetedcollectionportlet.Assignment"
-        renderer=".facetedcollectionportlet.Renderer"
-        addview=".facetedcollectionportlet.AddForm"
-        editview=".facetedcollectionportlet.EditForm"
-    />
+  <!-- Register the portlet -->
+  <plone:portlet
+      name="FacetedCollectionPortlet"
+      interface=".facetedcollectionportlet.IFacetedCollectionPortlet"
+      assignment=".facetedcollectionportlet.Assignment"
+      renderer=".facetedcollectionportlet.Renderer"
+      addview=".facetedcollectionportlet.AddForm"
+      editview=".facetedcollectionportlet.EditForm"
+      />
 
-    <browser:page
-        for="*"
-        name="json_collections_count"
-        class=".views.JSONCollectionsCount"
-        layer="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
+  <browser:page
+      name="json_collections_count"
+      for="*"
+      class=".views.JSONCollectionsCount"
+      permission="zope2.View"
+      layer="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
+      />
+
+  <browser:page
+      name="json_list_countable_tabs"
+      for="*"
+      class=".views.JSONListCountableTabs"
+      permission="zope2.View"
+      layer="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
+      />
+
+  <!-- collective.eeafaceted.z3ctable -->
+  <configure package="collective.eeafaceted.z3ctable">
+    <browser:view
+        name="faceted-table-view"
+        for="plone.app.contenttypes.interfaces.ICollection"
+        class="collective.eeafaceted.dashboard.browser.overrides.DashboardFacetedTableView"
         permission="zope2.View"
         />
-
-    <browser:page
-        for="*"
-        name="json_list_countable_tabs"
-        class=".views.JSONListCountableTabs"
-        layer="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
+    <browser:view
+        name="faceted-table-view"
+        for="plone.dexterity.interfaces.IDexterityContainer"
+        class="collective.eeafaceted.dashboard.browser.overrides.DashboardFacetedTableView"
         permission="zope2.View"
         />
+  </configure>
 
-    <!-- collective.eeafaceted.z3ctable -->
-    <configure package="collective.eeafaceted.z3ctable">
-        <browser:view
-            for="Products.ATContentTypes.interfaces.folder.IATFolder"
-            name="faceted-table-view"
-            class="collective.eeafaceted.dashboard.browser.overrides.DashboardFacetedTableView"
-            permission="zope2.View"
-        />
-        <browser:view
-            for="plone.app.contenttypes.interfaces.ICollection"
-            name="faceted-table-view"
-            class="collective.eeafaceted.dashboard.browser.overrides.DashboardFacetedTableView"
-            permission="zope2.View"
-        />
-        <browser:view
-            zcml:condition="installed plone.app.collection"
-            for="plone.app.collection.interfaces.ICollection"
-            name="faceted-table-view"
-            class="collective.eeafaceted.dashboard.browser.overrides.DashboardFacetedTableView"
-            permission="zope2.View"
-        />
-        <browser:view
-            for="plone.dexterity.interfaces.IDexterityContainer"
-            name="faceted-table-view"
-            class="collective.eeafaceted.dashboard.browser.overrides.DashboardFacetedTableView"
-            permission="zope2.View"
-        />
-    </configure>
+  <!-- collective.eeafaceted.collectionwidget -->
+  <browser:page
+      name="render_collection_widget_term_portlet"
+      for="*"
+      class=".views.RenderTermPortletView"
+      template="templates/term.pt"
+      permission="zope2.View"
+      layer="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
+      />
 
-    <!-- collective.eeafaceted.collectionwidget -->
-    <browser:page
-        for="*"
-        name="render_collection_widget_term_portlet"
-        class=".views.RenderTermPortletView"
-        template="templates/term.pt"
-        layer="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
-        permission="zope2.View"
-        />
-
-    <!-- collective.documentgenerator -->
-    <browser:page
-        for="OFS.interfaces.IItem"
-        name="document-generation"
-        class="collective.eeafaceted.dashboard.browser.overrides.DashboardDocumentGenerationView"
-        layer="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
-        permission="zope2.View"
-        />
-    <browser:viewlet
-        for="eea.facetednavigation.subtypes.interfaces.IFacetedNavigable"
-        name="dashboard-document-generation-link"
-        manager="collective.eeafaceted.z3ctable.interfaces.ITopAboveNavManager"
-        class="collective.eeafaceted.dashboard.browser.overrides.DashboardDocumentGeneratorLinksViewlet"
-        template="templates/generationlinks.pt"
-        layer="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
-        permission="zope2.View"
-        />
+  <!-- collective.documentgenerator -->
+  <browser:page
+      name="document-generation"
+      for="OFS.interfaces.IItem"
+      class="collective.eeafaceted.dashboard.browser.overrides.DashboardDocumentGenerationView"
+      permission="zope2.View"
+      layer="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
+      />
+  <browser:viewlet
+      name="dashboard-document-generation-link"
+      for="eea.facetednavigation.subtypes.interfaces.IFacetedNavigable"
+      manager="collective.eeafaceted.z3ctable.interfaces.ITopAboveNavManager"
+      class="collective.eeafaceted.dashboard.browser.overrides.DashboardDocumentGeneratorLinksViewlet"
+      template="templates/generationlinks.pt"
+      permission="zope2.View"
+      layer="collective.eeafaceted.dashboard.interfaces.IFacetedDashboardLayer"
+      />
 
 </configure>

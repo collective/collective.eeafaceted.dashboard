@@ -1,45 +1,39 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    xmlns:five="http://namespaces.zope.org/five"
-    i18n_domain="collective.eeafaceted.dashboard">
+    i18n_domain="collective.eeafaceted.dashboard"
+    >
 
-    <genericsetup:registerProfile
-        zcml:condition="have plone-5"
-        name="default"
-        directory="profiles/plone5"
-        title="collective.eeafaceted.dashboard"
-        description="Extension profile for collective.eeafaceted.dashboard."
-        provides="Products.GenericSetup.interfaces.EXTENSION" />
-  
-    <genericsetup:registerProfile
-        zcml:condition="not-have plone-5"
-        name="default"
-        directory="profiles/plone4"
-        title="collective.eeafaceted.dashboard"
-        description="Extension profile for collective.eeafaceted.dashboard."
-        provides="Products.GenericSetup.interfaces.EXTENSION" />
-  
-    <genericsetup:registerProfile
-        name="universal"
-        directory="profiles/common"
-        title="collective.eeafaceted.dashboard Common Configuration"
-        description="Extension profile for collective.eeafaceted.dashboard settings that aren't version dependent."
-        provides="Products.GenericSetup.interfaces.EXTENSION" />
+  <genericsetup:registerProfile
+      name="default"
+      title="collective.eeafaceted.dashboard"
+      description="Extension profile for collective.eeafaceted.dashboard."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/default"
+      />
 
-    <genericsetup:registerProfile
-        name="demo"
-        directory="profiles/demo"
-        title="collective.eeafaceted.dashboard Demo profile"
-        description="Demo profile for collective.eeafaceted.dashboard adding and dashboard with preconfigured searches."
-        provides="Products.GenericSetup.interfaces.EXTENSION" />
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="collective.eeafaceted.dashboard (uninstall)"
+      description="Uninstall profile for collective.eeafaceted.dashboard."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/uninstall"
+      />
 
-    <genericsetup:importStep
-        name="collective.eeafaceted.dashboard-postInstall"
-        title="collective.eeafaceted.dashboard post_install import step"
-        description="Post install import step from collective.eeafaceted.dashboard"
-        handler=".setuphandlers.post_install">
+  <genericsetup:registerProfile
+      name="demo"
+      title="collective.eeafaceted.dashboard Demo profile"
+      description="Demo profile for collective.eeafaceted.dashboard adding and dashboard with preconfigured searches."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/demo"
+      />
+
+  <genericsetup:importStep
+      name="collective.eeafaceted.dashboard-postInstall"
+      title="collective.eeafaceted.dashboard post_install import step"
+      description="Post install import step from collective.eeafaceted.dashboard"
+      handler=".setuphandlers.post_install"
+      >
     </genericsetup:importStep>
 
 </configure>

@@ -1,16 +1,9 @@
 graft src/collective
 graft doc
 include LICENSE
-include *.cfg *.rst *.in
-include *.py
-include .coveragerc
-include .travis.yml
-include Makefile
-include requirements.txt
+include *.cfg *.rst *.in Makefile mx.ini requirements*.txt
+exclude *-mxdev.txt
+exclude .coveragerc
 exclude .installed.cfg
 exclude .mr.developer.cfg
-exclude buildout.d
-recursive-exclude buildout.d *.cfg
-recursive-include docs *.GPL
-recursive-include docs *.rst
 global-exclude *.pyc

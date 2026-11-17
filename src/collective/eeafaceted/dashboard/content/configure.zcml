@@ -1,13 +1,14 @@
 <configure
-    xmlns:plone="http://namespaces.plone.org/plone"
     xmlns="http://namespaces.zope.org/zope"
-    i18n_domain="collective.eeafaceted.dashboard">
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="collective.eeafaceted.dashboard"
+    >
 
-    <!-- collective.documentgenerator -->
-    <adapter
+  <!-- collective.documentgenerator -->
+  <adapter
+      factory=".pod_template.DashboardPODTemplateCondition"
       for="collective.eeafaceted.dashboard.content.pod_template.IDashboardPODTemplate
            zope.interface.Interface"
-      factory=".pod_template.DashboardPODTemplateCondition"
-    />
+      />
 
 </configure>

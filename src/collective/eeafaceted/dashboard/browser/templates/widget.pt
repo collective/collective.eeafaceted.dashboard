@@ -1,29 +1,41 @@
 <div class="faceted-widget faceted-tagscloud-collection-widget-portlet"
-     tal:define="wid python:view.data.getId();
-                 base_url string:${view/base_url};
-                 grouped_vocabulary view/grouped_vocabulary;"
-     i18n:domain="eea">
+     tal:define="
+       wid python:view.data.getId();
+       base_url string:${view/base_url};
+       grouped_vocabulary view/grouped_vocabulary;
+     "
+     i18n:domain="eea"
+>
   <ul>
-    <li tal:condition="python: not view.data.hidealloption or not grouped_vocabulary"
+    <li class="no-category-tag"
+        tal:condition="python: not view.data.hidealloption or not grouped_vocabulary"
         tal:attributes="
-        value string:'';
-        data-kept-criteria python:view.kept_criteria_as_json('all');
-        title string:All;
-        id string:${wid}all;"
-        class="no-category-tag"
-        i18n:attributes="title">
-        <a href="#"
-           tal:attributes="href string:${base_url}&${wid}=all;"
-           tal:content="string:All" i18n:translate="">All</a>
+          value string:'';
+          data-kept-criteria python:view.kept_criteria_as_json('all');
+          title string:All;
+          id string:${wid}all;
+        "
+        i18n:attributes="title"
+    >
+      <a href="#"
+         tal:content="string:All"
+         tal:attributes="
+           href string:${base_url}&${wid}=all;
+         "
+         i18n:translate=""
+      >All</a>
     </li>
     <tal:categories repeat="grouped_element python:grouped_vocabulary.items()">
-      <tal:category define="category python:grouped_element[0];
-                            category_term python:grouped_element[1].get('term', None) ;
-                            collection_terms python:grouped_element[1]['collections'];">
-        <tal:renderCategory condition="category"
-            replace="structure python: view.render_category(category_term)" />
+      <tal:category define="
+                      category python:grouped_element[0];
+                      category_term python:grouped_element[1].get('term', None);
+                      collection_terms python:grouped_element[1]['collections'];
+                    ">
+        <tal:rendercategory condition="category"
+                            replace="structure python: view.render_category(category_term)"
+        />
         <tal:items repeat="term collection_terms">
-          <tal:renderTerm replace="structure python: view.render_term(term, category, view_name='@@render_collection_widget_term_portlet')" />
+          <tal:renderterm replace="structure python: view.render_term(term, category, view_name='@@render_collection_widget_term_portlet')" />
         </tal:items>
       </tal:category>
     </tal:categories>

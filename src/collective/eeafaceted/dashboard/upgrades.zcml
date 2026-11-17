@@ -1,8 +1,12 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    i18n_domain="collective.eeafaceted.dashboard">
+    i18n_domain="collective.eeafaceted.dashboard"
+    >
 
-    <include package="Products.GenericSetup" file="meta.zcml" />
+  <include
+      package="Products.GenericSetup"
+      file="meta.zcml"
+      />
 
 </configure>

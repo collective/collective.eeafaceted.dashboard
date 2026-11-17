@@ -36,6 +36,7 @@ test_deps_additional = """
     collective.eeafaceted.collectionwidget @ file://{toxinidir}/sources/collective.eeafaceted.collectionwidget
     collective.eeafaceted.z3ctable @ file://{toxinidir}/sources/collective.eeafaceted.z3ctable
     eea.facetednavigation @ file://{toxinidir}/sources/eea.facetednavigation
+    imio.helpers @ file://{toxinidir}/sources/imio.helpers
 """
 
 [pyproject]

@@ -29,10 +29,14 @@ test_environment_variables = """
     # Playwright (rfbrowser init) does not know ubuntu-latest 26.04 yet
     PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64
 """
+# horse-with-no-namespace: the -nspkg.pth of collective.behavior.talcondition 1.1.3 and
+# collective.excelexport 2.0 (pkg_resources namespaces) bind "collective" to the pkgutil
+# __init__ of collective.eeafaceted.z3ctable at startup, hiding this editable package
 test_deps_additional = """
     horse-with-no-namespace
     collective.beaker @ file://{toxinidir}/sources/collective.beaker
     collective.compoundcriterion @ file://{toxinidir}/sources/collective.compoundcriterion
+    collective.documentgenerator @ file://{toxinidir}/sources/collective.documentgenerator
     collective.eeafaceted.collectionwidget @ file://{toxinidir}/sources/collective.eeafaceted.collectionwidget
     collective.eeafaceted.z3ctable @ file://{toxinidir}/sources/collective.eeafaceted.z3ctable
     collective.fingerpointing @ file://{toxinidir}/sources/collective.fingerpointing

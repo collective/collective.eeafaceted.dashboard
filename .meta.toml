@@ -35,6 +35,7 @@ test_deps_additional = """
     collective.compoundcriterion @ file://{toxinidir}/sources/collective.compoundcriterion
     collective.eeafaceted.collectionwidget @ file://{toxinidir}/sources/collective.eeafaceted.collectionwidget
     collective.eeafaceted.z3ctable @ file://{toxinidir}/sources/collective.eeafaceted.z3ctable
+    collective.fingerpointing @ file://{toxinidir}/sources/collective.fingerpointing
     eea.facetednavigation @ file://{toxinidir}/sources/eea.facetednavigation
     imio.helpers @ file://{toxinidir}/sources/imio.helpers
 """
